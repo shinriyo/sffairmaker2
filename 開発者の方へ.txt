@@ -1,0 +1,61 @@
+起動について
+=================
+sffairmakerフォルダとallfiles.py null.pyを
+pythonのlib\site-packagesに放り込んでから、
+
+python -m sffairmaker.main
+
+を実行してください。
+
+
+encodingについて
+=================
+本当は良くないが、airなどのencodingはshift-jis決めウチです。
+
+superについて
+==============
+*superは使わない！*
+なぜなら、スーパークラスのメソッドを呼び出す際に、
+superを使った方法と、通常のスーパークラスを明示的に指定する方法を、
+混ぜて使うと意図しない動作をする（メソッドが複数回呼ばれる）ことがある。
+
+構成について
+===============
+- data
+- model
+- view
+
+の３部分に分かれる。
+それぞれ、Data Model View というクラスが対応する。
+
+data
+----
+AIRやSFFのデータを直接保持する。
+
+viewはdataを直接には操作してはならない。
+
+modelはdataにアクセスできる。
+modelはDataクラスを通してしか操作してはならないし、
+Dataの中にあるSpr Animなどのデータは直接には保持しない。
+
+model側にはSprやAnimの"id"が渡され、
+必要に応じてDataからSprやAnimの実体を参照する。
+
+
+model
+-----
+『元に戻す』などのアプリレベルの操作を実装する。
+viewはmodelを通してのみ、AIRやSFFを操作できる。
+
+Modelが統括するが、個別のSprなどをModelで直接操作するのは煩雑なので、
+viewはSprProxyなどのへルパークラスを介して操作する。
+
+Proxyを通す事で、ViewはModelから発行されるidも触らずに済む。
+
+xmodelというメソッドは、このmodelを返すメソッド。
+Qtにもmodel/viewというものがあり、名前が被るため
+
+
+view
+-----
+GUI部分。あまり複雑なロジックはModelに任せるべし。

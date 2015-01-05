@@ -1,0 +1,25 @@
+Metadata-Version: 1.1
+Name: sffairmaker
+Version: 2.0.0
+Summary: Editor for MUGEN SFF and AIR
+Home-page: http://hc8.seikyou.ne.jp/home/doloop/index.html
+Author: doloop
+Author-email: doloopwhile@gmail.com
+License: UNKNOWN
+Download-URL: http://hc8.seikyou.ne.jp/home/doloop/index.html
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires: PIL.Image
+Requires: PIL.PcxImagePlugin
+Requires: PIL.JpegImagePlugin
+Requires: PIL.PngImagePlugin
+Requires: PIL.BmpImagePlugin
+Requires: PyQt4.QtCore
+Requires: PyQt4.QtGui
+Requires: enum
+Requires: mm
+Requires: sip
+Requires: win32com.shell
+Requires: win32con
+Requires: win32event
+Requires: win32file
