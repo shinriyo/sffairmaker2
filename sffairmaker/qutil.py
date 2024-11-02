@@ -1,5 +1,5 @@
 # coding: utf-8
-#�Ɨ�������܂ł��Ȃ��֐��E�N���X�̑��A
+#独立させるまでもない関数・クラスの巣窟
 
 from __future__ import division, with_statement, print_function
 #from PyQt4.QtCore import *
@@ -281,9 +281,7 @@ class SquareButton(QPushButton):
 
 
 class ValueMixin:
-    # exec def_alias("valueChanged", "toggled")
     exec(def_alias("valueChanged", "toggled"))
-    # exec def_alias("value", "isChecked")
     exec(def_alias("value", "isChecked"))
     def setValue(self, v):
         return self.setChecked(v)

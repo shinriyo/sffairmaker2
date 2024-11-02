@@ -37,11 +37,11 @@ class NoDragging(DraggingType):
         pass
     
     def mouseMove(self, event):
-        ##M    : �\���ʒu�ړ�
-        ##S-C-L: �\���ʒu�ړ�
-        ##S-L  : �摜�̈ړ��iPos�ύX�j
-        ##C-L  : CLSN�̈ړ��E���T�C�Y
-        ##L    : CLSN�ǉ� or �摜�̈ړ�
+        ##M    : 表示位置移動
+        ##S-C-L: 表示位置移動
+        ##S-L  : 画像の移動（Pos変更）
+        ##C-L  : CLSNの移動・リサイズ
+        ##L    : CLSN追加 or 画像の移動
         ctrl  = event.modifiers() & Qt.ControlModifier
         shift = event.modifiers() & Qt.ShiftModifier
         
@@ -175,11 +175,12 @@ class AirImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
         
         self.addActions([endAppendingClsn, focusNextRect, deleteRect])
     
-    exec def_xview()
-    exec def_xmodel()
-    
-    exec def_qgetter("clsnDragMode")
-    exec def_qgetter("elm")
+    exec(def_xview())
+    exec(def_xmodel())
+
+    exec(def_qgetter("clsnDragMode"))
+    exec(def_qgetter("elm"))
+
     
     def setAppendingClsn(self, *a, **kw):
         if ClsnImageViewMixin.setAppendingClsn(self, *a, **kw): 
@@ -253,7 +254,7 @@ class AirImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
             delta = QPoint(0, 0)
         self._drawAElm(painter, elm, delta, 255)
     
-    # ��������virtual���\�b�h
+    # ここからvirtualメソッド
     def _clsns(self, elm=None):
         if elm is None:
             elm = self.elm()
@@ -367,7 +368,7 @@ class PlayAnim(QObject):
         self._timer.timeout.connect(self._onTimeOut)
         self._anim = None
     
-    exec def_qgetter("animTime", "elm", "anim")
+    exec(def_qgetter("animTime", "elm", "anim"))
     
     def start(self, anim, interval=16):
         if not self._timer.isActive():

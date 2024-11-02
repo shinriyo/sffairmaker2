@@ -1,37 +1,44 @@
 # coding: utf-8
-from __future__ import division, print_function
-__metaclass__ = type 
-import os
-from win32com.shell import shell
-from win32com.shell.shellcon import FOF_NOCONFIRMATION, FOF_ALLOWUNDO, FOF_SILENT, FO_DELETE
+# MacおよびLinux用のモジュール
+import sys
+from send2trash import send2trash
 
-def trash(path , dlg=False):
+if sys.platform == "win32":
+    # Windows用のモジュール
+    from win32com.shell import shell
+    from win32com.shell.shellcon import FOF_NOCONFIRMATION, FOF_ALLOWUNDO, FOF_SILENT, FO_DELETE
+
+def trash(path, dlg=False):
     path = os.path.abspath(path)
-    path = unicode(path)
-    #��؂蕶���̓o�b�N�X���b�V��
-    path = path.replace("/", "\\")
     
-    #\�ŏI����Ă���ƍ폜�ł��Ȃ�
-    for i,c in enumerate(reversed(path)):
-        if c != u"\\":
-            if i==0:
-                pass
-            else:
-                path = path[0:-i]
-            break
-    if not dlg:
-        Flags = FOF_NOCONFIRMATION | FOF_ALLOWUNDO | FOF_SILENT
+    if sys.platform == "win32":
+        # Windows用処理
+        path = path.replace("/", "\\")
+        
+        # `\` で終わっていると削除できないので、不要なバックスラッシュを削除
+        for i, c in enumerate(reversed(path)):
+            if c != "\\":
+                if i > 0:
+                    path = path[:-i]
+                break
+        
+        if not dlg:
+            Flags = FOF_NOCONFIRMATION | FOF_ALLOWUNDO | FOF_SILENT
+        else:
+            Flags = FOF_NOCONFIRMATION | FOF_ALLOWUNDO
+
+        s = (
+            0,  # hwnd
+            FO_DELETE,  # operation
+            path,
+            "",  # unused
+            Flags
+        )
+        shell.SHFileOperation(s)
+
     else:
-        Flags = FOF_NOCONFIRMATION | FOF_ALLOWUNDO# �t���O
-    
-    s = (
-        0, # hwnd,
-        FO_DELETE, #operation
-        path,
-        u"",
-        Flags
-    )
-    shell.SHFileOperation(s)
+        # MacおよびLinux用処理
+        send2trash(path)
     
 
 def main():

@@ -221,7 +221,7 @@ class AbstractImageViewCore(QWidget):
         
         self._gridLinesMemo = {}
 
-    exec def_update_accessor(*"""
+    exec(def_update_accessor(*"""
         axisOrigin
         gridOption
         sprDisplayMode
@@ -229,9 +229,9 @@ class AbstractImageViewCore(QWidget):
         bgImage
         bgImageDelta
         bgImageTile
-    """.split())
+    """.split()))
     
-    exec def_qgetter("axisDelta")
+    exec(def_qgetter("axisDelta"))
 
     def axis(self):
         origin = {
@@ -257,7 +257,7 @@ class AbstractImageViewCore(QWidget):
     def setAxisDeltaY(self, y):
         self.setAxisDelta(QPoint(self.axisDelta().x(), y))
     
-    exec def_update_accessor(*"""
+    exec(def_update_accessor(*"""
         bgColor
         axisColor
         grid1Color
@@ -272,7 +272,7 @@ class AbstractImageViewCore(QWidget):
         transparent
         colorTable
         onion
-    """.split())
+    """.split()))
     
     def setColors(self, colors):
         self.setBgColor(colors.bg)
@@ -288,7 +288,7 @@ class AbstractImageViewCore(QWidget):
             grid2=self.grid2Color(),
         )
     
-    exec def_sff()
+    exec(def_sff())
     
     def _noDragging(self):
         return NoDragging(self)

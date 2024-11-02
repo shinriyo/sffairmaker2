@@ -1,5 +1,6 @@
 # coding: utf-8
 from __future__ import division, print_function
+import sys
 __metaclass__ = type 
 import ctypes
 
@@ -33,14 +34,37 @@ def cmp_to_key(cmpf):
     return K
 
 
-SHLWAPI = ctypes.windll.LoadLibrary("SHLWAPI.dll")
-StrCmpLogicalW = SHLWAPI.StrCmpLogicalW
+if sys.platform == "win32":
+    # Windowsの場合
+    SHLWAPI = ctypes.windll.LoadLibrary("SHLWAPI.dll")
+    StrCmpLogicalW = SHLWAPI.StrCmpLogicalW
+    SHLWAPI = None
 
-def cmp_path(f1, f2):
-    return StrCmpLogicalW(unicode(f1), unicode(f2))
+    def cmp_path(f1, f2):
+        return StrCmpLogicalW(str(f1), str(f2))
 
-def key_path(path):
-    return cmp_to_key(SHLWAPI.StrCmpLogicalW)(unicode(path))
+    def key_path(path):
+        return cmp_to_key(StrCmpLogicalW)(str(path))
+
+else:
+    # Macまたは他のOSの場合
+    def natural_keys(text):
+        return [int(chunk) if chunk.isdigit() else chunk.lower() for chunk in re.split(r'(\d+)', text)]
+
+    def cmp_path(f1, f2):
+        return (natural_keys(str(f1)) > natural_keys(str(f2))) - (natural_keys(str(f1)) < natural_keys(str(f2)))
+
+    def key_path(path):
+        return cmp_to_key(cmp_path)(str(path))
+# SHLWAPI = ctypes.windll.LoadLibrary("SHLWAPI.dll")
+# StrCmpLogicalW = SHLWAPI.StrCmpLogicalW
+# SHLWAPI = None
+
+# def cmp_path(f1, f2):
+#     return StrCmpLogicalW(str(f1), str(f2))
+
+# def key_path(path):
+#     return cmp_to_key(SHLWAPI.StrCmpLogicalW)(str(path))
 
 def main():
     import doctest

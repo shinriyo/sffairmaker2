@@ -46,7 +46,7 @@ class IntComboBox(QComboBox):
         with blockSignals(self):
             self.clear()
             for i in items:
-                self.addItem(unicode(i))
+                self.addItem(str(i))
         if items:
             self.setValue(items[0])
         else:
@@ -186,8 +186,8 @@ class SprSelector(GroupIndexSelector):
         self._spr = self.sprByValue(self.value())
         self.valueChanged.connect(lambda v:self.setSpr(self.sprByValue(v)))
     
-    exec def_qgetter("spr")
-    exec def_sff()
+    exec(def_qgetter("spr"))
+    exec(def_sff())
     
     def sprByValue(self, v):
         if v is not None:

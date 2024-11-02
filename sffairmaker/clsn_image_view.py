@@ -65,7 +65,8 @@ class NoDragging(DraggingType):
         return False
 
 from enum import Enum
-ClsnKeys = Enum("_0")
+# ClsnKeys = Enum("_0")
+ClsnKeys = Enum('ClsnKeys', ['_0'])  # リストで囲む必要がある
 
 class ClsnImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
     clsnChanged = pyqtSignal("PyQt_PyObject")
@@ -81,7 +82,7 @@ class ClsnImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
         
         self.setupShortcut()
         
-    exec def_qgetter("clsn", "spr")
+    exec(def_qgetter("clsn", "spr"))
 
     def setupShortcut(self):
         focusNextRect = QAction(self)

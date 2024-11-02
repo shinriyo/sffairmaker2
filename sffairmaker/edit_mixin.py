@@ -64,7 +64,7 @@ class ImageLabel(QLabel):
         self._target = model.Null()
         self._updateValue()
     
-    exec def_qgetter("target")
+    exec(def_qgetter("target"))
     
     def xmodel(self):
         return model.Model()

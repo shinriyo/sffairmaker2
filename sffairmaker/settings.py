@@ -2,51 +2,61 @@
 from __future__ import division, print_function
 __metaclass__ = type 
 
+import sys
 import os.path
 from contextlib import contextmanager
-from win32com.shell import shell
+# from win32com.shell import shell
 
 from sffairmaker.qutil import *
 from sffairmaker import const
-from PyQt5.QtCore import QString
+# from PyQt5.QtCore import QString
 
 def appdata_dir():
-    CSIDL_APPDATA = 0x1A
-    appdata= shell.SHGetSpecialFolderPath(0, CSIDL_APPDATA, 1)
-    return appdata
+    if sys.platform == "win32":
+        from win32com.shell import shell
+        CSIDL_APPDATA = 0x1A
+        return shell.SHGetSpecialFolderPath(0, CSIDL_APPDATA, 1)
+    else:
+        # MacおよびLinux環境ではユーザのApplication Supportディレクトリを返す
+        return os.path.expanduser("~/Library/Application Support")
+
+# def appdata_dir():
+#     CSIDL_APPDATA = 0x1A
+#     appdata= shell.SHGetSpecialFolderPath(0, CSIDL_APPDATA, 1)
+#     return appdata
 
 class _Settings(QSettings):
     def __init__(self):
         from os.path import join, expandvars 
         
         s = QSettings(join(os.getcwdu(), "inidir.ini"), QSettings.IniFormat)
-        iniPath = join(expandvars(unicode(s.value("iniDir", const.IniDir).toString())), const.IniName)
+        iniPath = join(expandvars(str(s.value("iniDir", const.IniDir).toString())), const.IniName)
         QSettings.__init__(self, iniPath, QSettings.IniFormat)
     
     def externalSprEditingCommand(self):
         v = self.value("ExternalSprEditingCommand")
         if v.isValid():
-            return unicode(v.toString())
+            return str(v.toString())
         else:
             return const.DefaultExternalSprEditingCommand
     
     def setExternalSprEditingCommand(self, command):
         self.setValue(
             "ExternalSprEditingCommand", 
-            QString(command)
+            str(command)
         )
     
     def externalAirEditingCommand(self):
         v = self.value("ExternalAirEditingCommand")
         if v.isValid():
-            return unicode(v.toString())
+            return str(v.toString())
         else:
             return const.DefaultExternalAirEditingCommand
     
     def setExternalAirEditingCommand(self, command):
         self.setValue(
             "ExternalAirEditingCommand", 
-            QString(command)
+            str(command)
         )
     
     def backupToRecycle(self):

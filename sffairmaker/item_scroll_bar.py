@@ -27,7 +27,7 @@ class ItemScrollBar(QScrollBar):
         self.setItems([])
         self.valueChanged.connect(self._onScrollChanged)
     
-    exec def_qgetter("currentItem", "items")
+    exec(def_qgetter("currentItem", "items"))
     
     def setCurrentItem(self, item):
         if self._currentItem == item:

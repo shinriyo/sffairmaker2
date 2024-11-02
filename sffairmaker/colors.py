@@ -5,8 +5,6 @@ from sffairmaker.qutil import *
 
 from collections import namedtuple, defaultdict
 import copy
-import cPickle as pickle
-
 import sip
 
 Colors = namedtuple("Colors", "bg axis grid1 grid2")
@@ -34,7 +32,7 @@ class ColorsHolder(QObject):
         self._colorList = [QColor(s) for s in "#fff #000 #3C3 #33C #C33 #883 #838 #388".split()]
         self._colorIndexes = ColorIndexes(bg=0, axis=1, grid1=2, grid2=3)
     
-    exec def_qgetter("colorList", "colorIndexes")
+    exec(def_qgetter("colorList", "colorIndexes"))
     
     def colorList(self):
         return copy.deepcopy(self._colorList)
@@ -87,7 +85,7 @@ class Rect(QWidget):
         self._selection = frozenset()
         self.setFixedSize(30, 30)
     
-    exec def_update_accessor("color", "selection")
+    exec(def_update_accessor("color", "selection"))
     
     def mousePressEvent(self, event):
         left= event.button() == Qt.LeftButton
@@ -135,7 +133,7 @@ class RectGroup(QObject):
         self._colorList = []
         self._rects = []
     
-    exec def_qgetter("rects")
+    exec(def_qgetter("rects"))
     
     def setColorList(self, colorList):
         self._colorList = list(colorList)
@@ -198,13 +196,13 @@ class ColorsSelector(QWidget):
         self._rectGroup.setColorIndexes(self._colors.colorIndexes())
         
 
-    exec def_delegate("_colors", *"""
+    exec(def_delegate("_colors", *"""
         colorList
         colorIndexes
         setColorList
         setColorIndexes
         colors
-        """.split())
+        """.split()))
 
 
 def main1():

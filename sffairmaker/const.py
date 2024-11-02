@@ -5,9 +5,9 @@ from sffairmaker.alpha import AlphaBlend
 from enum import Enum
 from collections import namedtuple
 
-Title = u"SFFAIRMaker2"
-IniName = u"SFFAIRMaker2.ini"
-IniDir  = u"%APPDATA%"
+Title = "SFFAIRMaker2"
+IniName = "SFFAIRMaker2.ini"
+IniDir  = "%APPDATA%"
 
 AlphaSourceRange = AlphaBlend.SourceRange
 AlphaDestRange = AlphaBlend.DestRange
@@ -20,11 +20,6 @@ ElmIndexRange = SprIndexRange = (-32767, 32767)
 SprXRange = SprYRange = (-32767, 32767)
 ElmXRange = ElmYRange = (-32767, 32767)
 
-# ClsnKeys = Enum("_1", "_2", "_1d", "_2d")
-# ClsnKeys._1.name = "clsn1"
-# ClsnKeys._2.name = "clsn2"
-# ClsnKeys._1d.name = "clsn1Default"
-# ClsnKeys._2d.name = "clsn2Default"
 class ClsnKeys(Enum):
     _1 = "clsn1"
     _2 = "clsn2"
@@ -34,7 +29,7 @@ class ClsnKeys(Enum):
 MaxRecentFiles = 10
 
 PictureFilter = u";;".join([
-    u"�摜�t�@�C��(*.bmp *.jpg *.jpeg *.jpe *.png *.pcx)",
+    u"画像ファイル(*.bmp *.jpg *.jpeg *.jpe *.png *.pcx)",
     u"BMP - Windows Bitmap(*.bmp)",
     u"PCX - Zsoft Paint Brush(*.pcx)",
     u"JPG - JPEG Format(*.jpg *.jpeg *.jpe)",
@@ -51,7 +46,7 @@ CsvSaveFilter = "CSV File(*.csv);;All File(*.*)"
 AirOpenFilter = AirSaveFilter = "MUGEN AIR File(*.air);;All File(*.*)"
 
 ActOpenFilter = u";;".join([
-    u"�p���b�g�ɗ��p�\�ȃt�@�C��(*.act *.bmp *.pcx *.png *.jpg *.jpeg *.jpe)",
+    u"パレットに利用可能なファイル(*.act *.bmp *.pcx *.png *.jpg *.jpeg *.jpe)",
     u"ACT - MUGEN Palete(*.act)",
     u"BMP - Windows Bitmap(*.bmp)",
     u"PCX - Zsoft Paint Brush(*.pcx)",
@@ -61,7 +56,7 @@ ActOpenFilter = u";;".join([
 ])
 
 ActSaveFilter = u";;".join([
-    u"�p���b�g��ۑ��\�ȃt�@�C��(*.act *.png *.bmp *.pcx)",
+    u"パレットを保存可能なファイル(*.act *.png *.bmp *.pcx)",
     u"ACT - MUGEN Palete(*.act)",
     u"BMP - Windows Bitmap(*.bmp)",
     u"PCX - Zsoft Paint Brush(*.pcx)",
@@ -70,7 +65,7 @@ ActSaveFilter = u";;".join([
 ])
 
 ExecutableFilter = u";;".join([
-    u"���s�t�@�C��(*.exe)",
+    u"実行ファイル(*.exe)",
     u"All Files(*.*)",
 ])
 
@@ -81,10 +76,17 @@ GifSaveFilter = u";;".join([
 ])
 
 
-CropType = Enum("NoCrop", "CropPosBefore", "CropPosAfter")
+class CropType(Enum):
+    NoCrop = 1
+    CropPosBefore = 2
+    CropPosAfter = 3
+
+class ImageZOrder(Enum):
+    Front = 1
+    Back = 2
+    Middle = 3
 
 GridOption = namedtuple("GridOption", "imageZOrder axis grid")
-ImageZOrder = Enum("ImageZOrder", "Front", "Back", "Middle")
 
 MaxCsvNameFormat = 5
 DefaultCsvNameFormats = [u"{name}\{group:04}-{index:04}"]
@@ -92,7 +94,7 @@ DefaultCsvNameFormats = [u"{name}\{group:04}-{index:04}"]
 def TitleFormat(type, filename, hasChanged):
     from os.path import abspath, basename
     if filename is None:
-        t = u"�V�K"
+        t = u"新規"
     else:
         t = u"{0}: {1}".format(
             basename(filename),
@@ -117,4 +119,3 @@ OpeningSffErrorInfo = sfflib.OpeningErrorInfo
 
 DefaultExternalSprEditingCommand = 'mspaint "%1"'
 DefaultExternalAirEditingCommand = 'notepad "%1"'
-

@@ -35,11 +35,11 @@ from sffairmaker.color_table_edit import (
 class ImageOpRadioGroup(RadioGroup):
     def __init__(self, imageView, parent=None):
         items = [
-            (ImageOpMode.Pos, u"�ړ�"),
-            (ImageOpMode.EraseRects, u"����"),
-            (ImageOpMode.EraseRectsColors, u"�F�̏���"),
+            (ImageOpMode.Pos, u"移動"),
+            (ImageOpMode.EraseRects, u"消去"),
+            (ImageOpMode.EraseRectsColors, u"色の除去"),
         ]
-        RadioGroup.__init__(self, u"�h���b�O���̑���", items, parent=parent)
+        RadioGroup.__init__(self, u"ドラッグ時の操作", items, parent=parent)
         
         imageView.setImageOpMode(self.value())
         self.valueChanged.connect(imageView.setImageOpMode)
@@ -50,19 +50,19 @@ class SprDisplayModeWidget(RadioGroup):
         items = [
             (spr_display.Mode.Act, u"Act"),
             (spr_display.Mode.Sff, u"Sff"),
-            (spr_display.Mode.Spr, u"�摜�ŗL"),
+            (spr_display.Mode.Spr, u"画像固有"),
         ]
-        RadioGroup.__init__(self, u"�\������p���b�g", items, parent=parent)
+        RadioGroup.__init__(self, u"表示するパレット", items, parent=parent)
         
         syncAttr(self, self.xview(), 
             ("value", "sprDisplayMode"))
-    exec def_xview()
+    exec(def_xview())
 
 
 
 class SffTab(QWidget):
-    labelChanged = pyqtSignal(unicode)
-    titleChanged = pyqtSignal(unicode)
+    labelChanged = pyqtSignal(str)
+    titleChanged = pyqtSignal(str)
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         self.xmodel().sff().updated.connect(lambda :self.labelChanged.emit(self.label()))
@@ -79,27 +79,27 @@ class SffTab(QWidget):
         scrollPos = SliderPositionWidget(self)
         scrollPos.setSlider(self._scroll)
         
-        @commandButton(u"����")
+        @commandButton(u"複製")
         def sprClone():
             if not self.spr().isValid():return
             self.spr().clone()
         
-        @commandButton(u"�폜")
+        @commandButton(u"削除")
         def sprDelete():
             if not self.spr().isValid():return
             self.spr().remove()
         
-        @commandButton(u"�ǉ�")
+        @commandButton(u"追加")
         def sprAdd():
             if not self.spr().isValid():return
             self.xmodel().sff().addSprs()
         
-        @commandButton(u"����")
+        @commandButton(u"入替")
         def sprSwap():
             if not self.spr().isValid():return
             self.spr().swap()
             
-        @commandButton(u"�ۑ�")
+        @commandButton(u"保存")
         def sprSave():
             if not self.spr().isValid():return
             self.spr().save()
@@ -152,7 +152,7 @@ class SffTab(QWidget):
         self._imageView.colorNumberSelected.connect(self._commonColorTable.setCurrentNumber)
                 
         
-        #���C�A�E�g��������
+        #レイアウトここから
         leftLayout = vBoxLayout(
             hBoxLayout(
                 self._jump,
@@ -172,8 +172,8 @@ class SffTab(QWidget):
                 ("stretch", 1),
             ),
             hBoxLayout(
-                hGroupBox(u"�ԍ�", self._group, self._index),
-                hGroupBox(u"�ʒu", self._x, self._y),
+                hGroupBox(u"番号", self._group, self._index),
+                hGroupBox(u"位置", self._x, self._y),
                 self._useAct,
                 size,
             ),
@@ -181,11 +181,11 @@ class SffTab(QWidget):
             sprDisplayMode,
             colorTableDragMode,
             hBoxLayout(
-                groupBoxV(u"SFF�S�̂̃p���b�g", 
+                groupBoxV(u"SFF全体のパレット", 
                     self._commonColorTable,
                     self._commonColorSlider,
                 ),
-                groupBoxV(u"�摜�ŗL�̃p���b�g", 
+                groupBoxV(u"画像固有のパレット", 
                     self._sprColorTable,
                     self._sprColorSlider,
                 ),
@@ -207,17 +207,17 @@ class SffTab(QWidget):
         self.setLayout(mainLayout)
     
     def label(self):
-        #tab�̃��x��
+        #tabのラベル
         sff = self.xmodel().sff()
         if sff.filename() is None:
-            path = u"�V�K"
+            path = u"新規"
         else:
             path = os.path.basename(sff.filename())
         
         size = len(sff.sprs())
         t = u"sff/{0}/({1})".format(path, size)
         if sff.hasChanged():
-            return t + u"(�X�V)"
+            return t + u"(更新)"
         else:
             return t
     

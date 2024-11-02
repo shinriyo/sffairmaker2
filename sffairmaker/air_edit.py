@@ -126,8 +126,8 @@ class AnimLoopEdit(LoopEdit, AirEditMixin):
         LoopEdit.__init__(self, parent)
         self.setup()
     
-    exec def_alias("anim", "target")
-    exec def_alias("setAnim", "setTarget")
+    exec(def_alias("anim", "target"))
+    exec(def_alias("setAnim", "setTarget"))
     
     def _updateValue(self):
         if not self.anim().isValid():return
@@ -178,8 +178,8 @@ class ElmEditSpinBox(EditSpinBox, AirEditMixin):
         self._range = eval("const.Elm{0}Range".format(self._field.title()))
         EditSpinBox.__init__(self,*a, **kw)
         self.setup()
-    exec def_alias("elm", "target")
-    exec def_alias("setElm", "setTarget")
+    exec(def_alias("elm", "target"))
+    exec(def_alias("setElm", "setTarget"))
     
 class ElmGroupSpinBox(ElmEditSpinBox):
     _field = "group"

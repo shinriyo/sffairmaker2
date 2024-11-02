@@ -5,7 +5,10 @@ from sffairmaker.qutil import *
 
 from enum import Enum
 
-Mode = Enum("Act", "Sff", "Spr")
+class Mode(Enum):
+    Act = "Act"
+    Sff = "Sff"
+    Spr = "Spr"
 
 def colorTable(spr, actColorTable, mode=Mode.Act):
     im = spr.image()

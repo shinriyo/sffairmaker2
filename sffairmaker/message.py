@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function, unicode_literals
 from sffairmaker.qutil import *
 from sffairmaker import (
@@ -28,60 +28,60 @@ class Message:
         
     def invaildImageFormatMsg(self, filename, parent=None):
         if os.path.isfile(filename):
-            text = u'"{0}"‚ğ“Ç‚İ‚ß‚Ü‚¹‚ñB‘Î‰‚µ‚Ä‚¢‚È‚¢‰æ‘œŒ`®‚Å‚·B'.format(filename)
+            text = u'"{0}"ã‚’èª­ã¿è¾¼ã‚ã¾ã›ã‚“ã€‚å¯¾å¿œã—ã¦ã„ãªã„ç”»åƒå½¢å¼ã§ã™ã€‚'.format(filename)
         else:
-            text = u'"{0}"‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB'.format(filename)
+            text = u'"{0}"ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚'.format(filename)
         return self.warningMsg(text, parent)
     
     def invaildFormatMsg(self, filename, parent=None):
         if os.path.isfile(filename):
-            text = u'"{0}"‚ğ“Ç‚İ‚ß‚Ü‚¹‚ñB‰ó‚ê‚Ä‚¢‚é‚©A‘Î‰‚µ‚Ä‚¢‚È‚¢Œ`®‚Å‚·B'.format(filename)
+            text = u'"{0}"ã‚’èª­ã¿è¾¼ã‚ã¾ã›ã‚“ã€‚å£Šã‚Œã¦ã„ã‚‹ã‹ã€å¯¾å¿œã—ã¦ã„ãªã„å½¢å¼ã§ã™ã€‚'.format(filename)
         else:
-            text = u'"{0}"‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB'.format(filename)
+            text = u'"{0}"ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚'.format(filename)
         return self.warningMsg(text, parent)
     
     def invalidSprIndexMsg(self, parent=None):
-        text = u"³‚µ‚¢‰æ‘œ”Ô†‚ğw’è‚µ‚Ä‚­‚¾‚³‚¢B"
+        text = u"æ­£ã—ã„ç”»åƒç•ªå·ã‚’æŒ‡å®šã—ã¦ãã ã•ã„ã€‚"
         return self.warningMsg(text, parent)
     
     def saveImageErrorMsg(self, filename, parent=None):
-        text = u'‰æ‘œ‚ğ"{0}"‚É•Û‘¶‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B'.format(filename)
+        text = u'ç”»åƒã‚’"{0}"ã«ä¿å­˜ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚'.format(filename)
         return self.warningMsg(text, parent)
     
     def saveErrorMsg(self, filename, parent=None):
-        text = u'"{0}"‚É•Û‘¶‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B'.format(filename)
+        text = u'"{0}"ã«ä¿å­˜ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚'.format(filename)
         return self.warningMsg(text, parent)
     
     def createDirErrorMsg(self, dirname, parent=None):
-        text = u'V‚µ‚­ƒtƒHƒ‹ƒ_"{0}"‚ğì‚é‚±‚Æ‚ªo—ˆ‚Ü‚¹‚ñ‚Å‚µ‚½B'.format(filename)
+        text = u'æ–°ã—ããƒ•ã‚©ãƒ«ãƒ€"{0}"ã‚’ä½œã‚‹ã“ã¨ãŒå‡ºæ¥ã¾ã›ã‚“ã§ã—ãŸã€‚'.format(filename)
         return self.warningMsg(text, parent)
     
     def actionParsingErrorMsg(self, lineno, line, parent=None):
-        text = u"s '{0}' ‚ğƒp[ƒX‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B".format(line)
+        text = u"è¡Œ '{0}' ã‚’ãƒ‘ãƒ¼ã‚¹ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚".format(line)
         return self.warningMsg(text, parent)
     
     def actionParsingSectionNameErrorMsg(self, section_name, parent=None):
-        text = u"ƒZƒNƒVƒ‡ƒ“–¼ '{0}' ‚ğƒp[ƒX‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B".format(section_name)
+        text = u"ã‚»ã‚¯ã‚·ãƒ§ãƒ³å '{0}' ã‚’ãƒ‘ãƒ¼ã‚¹ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚".format(section_name)
         return self.warningMsg(text, parent)
 
     def noUnusedColorMsg(self, parent=None):
-        text = u"–¢g—pF‚ª–³‚­A”wŒiF‚ğŠm•Û‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B"
+        text = u"æœªä½¿ç”¨è‰²ãŒç„¡ãã€èƒŒæ™¯è‰²ã‚’ç¢ºä¿ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚"
         return self.warningMsg(text, parent)
 
     def cannotOpenFileMsg(self, filename, parent=None):
         if os.path.isfile(filename):
-            text = u'"{0}"‚ğŠJ‚¯‚Ü‚¹‚ñB'.format(filename)
+            text = u'"{0}"ã‚’é–‹ã‘ã¾ã›ã‚“ã€‚'.format(filename)
         else:
-            text = u'"{0}"‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB'.format(filename)
+            text = u'"{0}"ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚'.format(filename)
         return self.warningMsg(text, parent)
     
     def cannotSaveFileMsg(self, filename, parent=None):
-        text = u'"{0}"‚É•Û‘¶‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B‘¼‚ÌƒvƒƒOƒ‰ƒ€‚©‚çg—p‚³‚ê‚Ä‚¢‚é‰Â”\«‚ª‚ ‚è‚Ü‚·B'.format(filename)
+        text = u'"{0}"ã«ä¿å­˜ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚ä»–ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‹ã‚‰ä½¿ç”¨ã•ã‚Œã¦ã„ã‚‹å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚'.format(filename)
         return self.warningMsg(text, parent)
     
     def askReloadModified(self, name, parent=None):
-        text = (u'{0}‚Í•ÏX‚³‚ê‚Ä‚¢‚Ü‚·B\n'
-                u'Ä“Ç‚İ‚İ‚·‚é‚Æ•ÏX‚µ‚½“à—e‚ª¸‚í‚ê‚Ü‚·‚ªA‚æ‚ë‚µ‚¢‚Å‚·‚©H').format(name)
+        text = (u'{0}ã¯å¤‰æ›´ã•ã‚Œã¦ã„ã¾ã™ã€‚\n'
+                u'å†èª­ã¿è¾¼ã¿ã™ã‚‹ã¨å¤‰æ›´ã—ãŸå†…å®¹ãŒå¤±ã‚ã‚Œã¾ã™ãŒã€ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ').format(name)
         return self.confirmMsg(text, parent)
     
     def aboutQtVersion(self):
@@ -101,8 +101,8 @@ class Message:
         msgBox.exec_()
 
     def cannotPopenMsg(self, cmd, parent=None):
-        text = (u"ŠO•”ƒvƒƒZƒX‚ğ‹N“®‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B\n"
-                u"ƒRƒ}ƒ“ƒh='{0}'".format(cmd))
+        text = (u"å¤–éƒ¨ãƒ—ãƒ­ã‚»ã‚¹ã‚’èµ·å‹•ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚\n"
+                u"ã‚³ãƒãƒ³ãƒ‰='{0}'".format(cmd))
         return self.warningMsg(text, parent)
 
 VersionInfoText = u"""

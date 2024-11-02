@@ -9,7 +9,7 @@ class SelectDialog(QDialog):
         self.setWindowTitle(caption)
         self._listWidget = QListWidget(parent=self)
         
-        strings = [unicode(s) for s in strings]
+        strings = [str(s) for s in strings]
         assert strings
         self._listWidget.addItems(strings)
         

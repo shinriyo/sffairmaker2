@@ -42,7 +42,7 @@ from sffairmaker.air_edit import (
 
 class DrawingAllClsnButton(ValueButton):
     def __init__(self, imageView, parent=None):
-        ValueButton.__init__(self, u"CLSN�S�\��", parent=parent)
+        ValueButton.__init__(self, u"CLSN全表示", parent=parent)
         self._imageView = imageView
         
         self.valueChanged.connect(self.onValueChanged)
@@ -64,7 +64,7 @@ class DrawingAllClsnButton(ValueButton):
 
 class AppendingClsnButton(ValueButton):
     def __init__(self, key, imageView, parent=None):
-        ValueButton.__init__(self, u"�ǉ�", parent=parent)
+        ValueButton.__init__(self, u"追加", parent=parent)
         self.setCheckable(True)
         self._key = key
         self._imageView = imageView
@@ -87,12 +87,12 @@ class AppendingClsnButton(ValueButton):
 class ClsnDragModeGroup(RadioGroup):
     def __init__(self, imageView, parent=None):
         items = [
-            (ClsnDragMode.Normal, u"��"),
-            (ClsnDragMode.Group, u"�O���[�v"),
-            (ClsnDragMode.All, u"���ׂē�����"),
-            (ClsnDragMode.AllPos, u"�摜�ʒu��������")
+            (ClsnDragMode.Normal, u"個別"),
+            (ClsnDragMode.Group, u"グループ"),
+            (ClsnDragMode.All, u"すべて同時に"),
+            (ClsnDragMode.AllPos, u"画像位置も同時に")
         ]
-        RadioGroup.__init__(self, u"CLSN�̈ړ����@", items, parent=parent)
+        RadioGroup.__init__(self, u"CLSNの移動方法", items, parent=parent)
         
         self.valueChanged.connect(imageView.setClsnDragMode)
         imageView.clsnDragModeChanged.connect(self.setValue)
@@ -104,17 +104,17 @@ class SprDisplayModeWidget(RadioGroup):
         items = [
             (spr_display.Mode.Act, u"Act"),
             (spr_display.Mode.Sff, u"Sff"),
-            (spr_display.Mode.Spr, u"�摜�ŗL"),
+            (spr_display.Mode.Spr, u"画像固有"),
         ]
-        RadioGroup.__init__(self, u"�\������p���b�g", items, parent=parent)
+        RadioGroup.__init__(self, u"表示するパレット", items, parent=parent)
         syncAttr(self, self.xview(), 
             ("value", "sprDisplayMode"))
-    exec def_xview()
+    exec(def_xview())
 
 
 class AirTab(QWidget):
-    labelChanged = pyqtSignal(unicode)
-    titleChanged = pyqtSignal(unicode)
+    labelChanged = pyqtSignal(str)
+    titleChanged = pyqtSignal(str)
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         self.air().updated.connect(lambda :self.labelChanged.emit(self.label()))
@@ -122,22 +122,22 @@ class AirTab(QWidget):
         
         self._scroll = AnimScrollBar(Qt.Horizontal, self)
         
-        @commandButton(u"�ǉ�")
+        @commandButton(u"追加")
         def animNew():
             if not self.anim().isValid():return
             self.setAnim(self.air().newAnim())
         
-        @commandButton(u"����")
+        @commandButton(u"複製")
         def animClone():
             if not self.anim().isValid():return
             self.anim().clone()
             
-        @commandButton(u"�폜")
+        @commandButton(u"削除")
         def animDelete():
             if not self.anim().isValid():return
             anim = self.anim().remove()
         
-        @commandButton(u"�e�L�X�g�ҏW")
+        @commandButton(u"テキスト編集")
         def animEdit():
             if not self.anim().isValid():return
             self.anim().textEdit()
@@ -146,22 +146,22 @@ class AirTab(QWidget):
         self._elmScrollPos = SliderPositionWidget()
         self._elmScrollPos.setSlider(self._elmScroll)
         
-        @commandButton(u"����")
+        @commandButton(u"複製")
         def elmClone():
             if not self.elm().isValid():return
             self.elm().clone()
             
-        @commandButton(u"�ړ�")
+        @commandButton(u"移動")
         def elmMove():
             if not self.elm().isValid():return
             self.elm().move()
         
-        @commandButton(u"�폜")
+        @commandButton(u"削除")
         def elmDelete():
             if not self.elm().isValid():return
             self.elm().remove()
         
-        @commandButton(u"�ǉ�")
+        @commandButton(u"追加")
         def elmAdd():
             if not self.elm().isValid():return
             self.elm().anim().newElm()
@@ -235,7 +235,7 @@ class AirTab(QWidget):
         imageView.wheelEvent = wheelEvent
         
         self._sprDisplayMode = SprDisplayModeWidget(parent=self)
-        #���C�A�E�g��������
+        #レイアウトここから
         items = [
             ("Clsn1", self._clsn1, const.ClsnKeys._1),
             ("Clsn2", self._clsn2, const.ClsnKeys._2),
@@ -276,7 +276,7 @@ class AirTab(QWidget):
                ("stretch", 1),
             ),
             hBoxLayout(
-               hGroupBox(u"�A�j���ԍ�", self._animIndex),
+               hGroupBox(u"アニメ番号", self._animIndex),
                hGroupBox(u"Loop", self._animLoop),
                ("stretch", 1),
             ),
@@ -296,17 +296,17 @@ class AirTab(QWidget):
                ("stretch", 1),
             ),
             hBoxLayout(
-                hGroupBox(u"�摜�ԍ�", self._group, self._index),
-                hGroupBox(u"�ʒu", self._x, self._y),
+                hGroupBox(u"画像番号", self._group, self._index),
+                hGroupBox(u"位置", self._x, self._y),
                 ("stretch", 1),
             ),
             hBoxLayout(
-                hGroupBox(u"�\������", self._time),
-                hGroupBox(u"���]", self._h, self._v),
+                hGroupBox(u"表示時間", self._time),
+                hGroupBox(u"反転", self._h, self._v),
                ("stretch", 1),
             ),
             hBoxLayout(
-                hGroupBox(u"����", self._alpha),
+                hGroupBox(u"透過", self._alpha),
                ("stretch", 1),
             ),
             self._drawingAllClsn,
@@ -330,14 +330,14 @@ class AirTab(QWidget):
     def label(self):
         air = self.air()
         if air.filename() is None:
-            path = u"�V�K"
+            path = u"新規"
         else:
             path = os.path.basename(air.filename())
         
         size = len(air.anims())
         t = u"air/{0}/({1})".format(path, size)
         if air.hasChanged():
-            return t + u"(�X�V)"
+            return t + u"(更新)"
         else:
             return t
     
@@ -360,7 +360,7 @@ class AirTab(QWidget):
         import sffairmaker.view
         return sffairmaker.view.View()
     
-    exec def_air()
+    exec(def_air())
     
         
 def main():

@@ -18,7 +18,7 @@ class SprListModelBase(QAbstractListModel):
         self.reset()
         self.sff().updated.connect(self.reset)
     
-    exec def_qgetter("sortingEnabled")
+    exec(def_qgetter("sortingEnabled"))
     def setSortingEnabled(self, v):
         self._sortingEnabled = v
         if self._sortingEnabled:
@@ -289,7 +289,7 @@ def main():
     from sffairmaker.model import Model
     from sffairmaker.image_op import Image256
     
-    Model().sff().open(ur"..\test_with_file\data\suwako.sff")
+    Model().sff().open(r"..\test_with_file\data\suwako.sff")
     print(len(Model().sff().sprs()))
     
     allSprs = AllSprListWidget()

@@ -46,7 +46,7 @@ class Main:
         )
         
         (opts, args) = parser.parse_args()
-        args = [unicode(f) for f in args]
+        args = [str(f) for f in args]
         
         app = QApplication(sys.argv)
         self.xview().showMainWindow()

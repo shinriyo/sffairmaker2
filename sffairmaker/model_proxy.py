@@ -81,7 +81,9 @@ class NullSignal:
 
 class NullProxy:
     __slots__ = ("_id",)
-    _id = None
+    
+    def __init__(self):
+        self._id = None
     
     @property
     def updated(self):
@@ -98,6 +100,7 @@ class NullProxy:
     
     def __getattr__(self, name):
         raise Error("this Proxy is Null")
+
     
 
 def main():

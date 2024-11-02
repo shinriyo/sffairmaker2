@@ -17,8 +17,8 @@ class ChoiceMenu(QMenu):
                 a.triggered.connect(lambda _, i=i:self.setValue(i))
                 i += 1
         self.addSeparator()
-        self.addAction(u"�L�����Z��")
-    exec def_qaccessor("value")
+        self.addAction(u"ƒLƒƒƒ“ƒZƒ‹")
+    exec(def_qaccessor("value"))
     
 def choiceMenu(values, pos, *a, **kw):
     m = ChoiceMenu(values, *a, **kw)
@@ -30,8 +30,8 @@ def main():
     
     class Test(QWidget):
         def mousePressEvent(self, evt):
-            v = choiceMenu(u"spam egg - ham".split(), evt.globalPos(), u"�I��", self)
-            QMessageBox.information(self, u"����", str(v))
+            v = choiceMenu(u"spam egg - ham".split(), evt.globalPos(), u"‘I‘ð", self)
+            QMessageBox.information(self, u"Œ‹‰Ê", str(v))
     
     t = Test()
     t.resize(200, 200)

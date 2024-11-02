@@ -21,7 +21,7 @@ class Onion(NeMixin):
     def __init__(self, count):
         self._count = count
     
-    exec def_qgetter("count")
+    exec(def_qgetter("count"))
     
     def __repr__(self):
         return "{0.__class__.__name__}({0._count})".format(self)
@@ -40,7 +40,7 @@ class FixedOnion(NeMixin):
     def __init__(self, group_index):
         self._group_index = group_index
     
-    exec def_qgetter("group_index")
+    exec(def_qgetter("group_index"))
     
     def __repr__(self):
         return "{0.__class__.__name__}({0._group_index})".format(self)
@@ -87,7 +87,7 @@ class GroupIndexWidget(QWidget):
     def xmodel(self):
         return model.Model()
         
-    exec def_delegate("_selector", "setValue", "value")
+    exec(def_delegate("_selector", "setValue", "value"))
 
 
 class OnionSlider(QWidget):
@@ -113,7 +113,7 @@ class OnionSlider(QWidget):
         L.addWidget(QLabel(u"0"), 1, 1, Qt.AlignBottom)
         self.setLayout(L)
     
-    exec def_delegate("_slider", "value", "setValue")
+    exec(def_delegate("_slider", "value", "setValue"))
 
 
 class OnionWidget(QWidget):
@@ -157,7 +157,7 @@ class OnionWidget(QWidget):
         else:
             return FixedOnion(self._group_index.value())
     
-    exec def_qgetter("value")
+    exec(def_qgetter("value"))
     
     @emitSetter
     def setValue(self):

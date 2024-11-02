@@ -46,7 +46,7 @@ class SffJumpDialog(QDialog):
             buttonBox,
         ))
     
-    exec def_delegate("_selector", "spr", "setSpr")
+    exec(def_delegate("_selector", "spr", "setSpr"))
     
     @classmethod
     def get(cls, spr, sprs, parent=None):

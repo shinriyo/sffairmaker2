@@ -181,7 +181,7 @@ class Spr(Proxy):
         if not filename:
             return
         
-        filename = unicode(filename)
+        filename = str(filename)
         try:
             image = Image256(filename)
         except (IOError, OSError):
@@ -295,7 +295,7 @@ class Spr(Proxy):
     
     def save(self, filename=None):
         filename = filename or self._submodel.askSprSavePath()
-        filename = unicode(filename)
+        filename = str(filename)
         if not filename:
             return False
         
@@ -316,7 +316,7 @@ class Spr(Proxy):
     
     def saveGroup(self, filename=None):
         filename = filename or self.askCsvSavePath()
-        filename = unicode(filename)
+        filename = str(filename)
         if not filename:
             return
         
@@ -430,7 +430,7 @@ class Anim(Proxy):
         s = self.textDialog(self.toString())
         if s.isNull():
             return
-        s = unicode(s)
+        s = str(s)
         
         try:
             self.changeFromString(s)
@@ -981,7 +981,7 @@ class SubModel(QObject):
         
     def getdir(self, filename):
         if filename is not None:
-            return os.path.dirname(unicode(filename))
+            return os.path.dirname(str(filename))
         else:
             return os.getcwdu()
     
@@ -1098,7 +1098,6 @@ class Sff(SubModel):
             self._dir = dir
             self.dirChanged.emit(self._dir)
     
-    # exec def_qgetter("isCharSff")
     exec(def_qgetter("isCharSff"))
     def setIsCharSff(self, v):
         if self.isCharSff() == v:

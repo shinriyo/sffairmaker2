@@ -12,7 +12,7 @@ class ImageSizeView(QLineEdit):
         self._spr.updated.connect(self._updateText)
         self._updateText()
     
-    exec def_qgetter("spr")
+    exec(def_qgetter("spr"))
     def setSpr(self, spr):
         if self._spr == spr:
             return

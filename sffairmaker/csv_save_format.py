@@ -25,7 +25,7 @@ class ImagePathPreview(QTextEdit):
         self._format = CsvSaveFormat("", "")
         self._updatePreview()
     
-    exec def_qgetter("isValid")
+    exec(def_qgetter("isValid"))
     
     def setCsvPath(self, csvPath):
         csvPath = normpath(abspath(csvPath))
@@ -60,20 +60,20 @@ class ImagePathPreview(QTextEdit):
                 if not spr.isValid():continue
                 name = self._format.imageBasename(self._csvPath, spr)
                 imageNames.append((name, spr))
-        except Exception as e:
+        except StandardError as e:
             self._isValid = False
             self.setHtml("<font color='red'>" + 
                 e.__class__.__name__ + ":" + str(e) + 
                 "</font>")
             return
         
-        #�d���̌��o
+        #重複の検出
         dup = self._findDuplicate(imageNames)
         if dup is not None:
             self._isValid = False
             name, sprs = dup
             self.setHtml("<font color='red'>" + 
-                u"�d��: " + "".join(str(s) for s in sprs) + 
+                u"重複: " + "".join(str(s) for s in sprs) + 
                 "->" + name +
                 "</font>")
         else:
@@ -86,7 +86,7 @@ class CsvSaveFormatDialog(QDialog):
     formatChanged = pyqtSignal(CsvSaveFormat)
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"�摜�̌`��")
+        self.setWindowTitle(u"画像の形式")
         
         self._name = QComboBox()
         self._name.setAutoCompletion(True)
@@ -109,13 +109,13 @@ class CsvSaveFormatDialog(QDialog):
         self._ext.editTextChanged.connect(setPreviewFormat)
         setPreviewFormat()
         
-        #���C�A�E�g��������
+        #レイアウトここから
         self.setLayout(vBoxLayout(
             hBoxLayout(
                 (self._name, 1),
                 self._ext
             ),
-            (groupBox(u"�v���r���[", self._preview), 1),
+            (groupBox(u"プレビュー", self._preview), 1),
             self._buttons,
         ))
         self.setMinimumWidth(300)
@@ -129,16 +129,16 @@ class CsvSaveFormatDialog(QDialog):
         self._buttons.okButton().setEnabled(self._preview.isValid())
         
     def name(self):
-        return unicode(self._name.currentText())
+        return str(self._name.currentText())
     
     def setName(self, s):
         self._name.setEditText(s)
     
     def ext(self):
-        return unicode(self._ext.currentText())
+        return str(self._ext.currentText())
     
     def setExt(self, s):
-        s = unicode(s)
+        s = str(s)
         if s in ExtValues:
             i = ExtValues.index(s)
         else:
@@ -146,7 +146,7 @@ class CsvSaveFormatDialog(QDialog):
         self._ext.setCurrentIndex(i)
     
     def names(self):
-        return [unicode(self._name.itemText(i))
+        return [str(self._name.itemText(i))
                 for i in xrange(self._name.count())]
     
     def setNames(self, names):

@@ -21,7 +21,7 @@ class DraggingClsnBase(DraggingType):
         self._dragTarget = dragTarget
         DraggingType.__init__(self, p)
     
-    exec def_qgetter("dragType", "dragTarget")
+    exec(def_qgetter("dragType", "dragTarget"))
     def type(self):
         return "clsn"
     
@@ -77,8 +77,8 @@ class ClsnImageViewMixin:
         self._appendingClsn = None
         self._drawingClsn = frozenset()
     
-    exec def_qgetter("drawingClsn", "appendingClsn", "clsnDragMode")
-    exec def_update_accessor("rectFocus")
+    exec(def_qgetter("drawingClsn", "appendingClsn", "clsnDragMode"))
+    exec(def_update_accessor("rectFocus"))
     
     def _draggedRect(self, rect, dragType, delta):
         delta /= self.scale()

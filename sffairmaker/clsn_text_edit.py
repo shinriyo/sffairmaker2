@@ -18,7 +18,7 @@ class ClsnTextEdit(QPlainTextEdit):
         self._value = Clsn()
         self.textChanged.connect(self._onTextChanged)
     
-    exec def_qgetter("value")
+    exec(def_qgetter("value"))
     
     @emitSetter
     def setValue(self):
@@ -36,7 +36,7 @@ class ClsnTextEdit(QPlainTextEdit):
     
     @classmethod
     def textToClsn(cls, text):
-        text = unicode(text)
+        text = str(text)
         lines = []
         for line in text.splitlines():
             line = line.split(";")[0]
@@ -64,8 +64,8 @@ class ClsnTextEdit(QPlainTextEdit):
         h = self.fontMetrics().height()
         return QSize(w, h)
     
-    exec def_alias("text", "toPlainText")
-    exec def_alias("setText", "setPlainText")
+    exec(def_alias("text", "toPlainText"))
+    exec(def_alias("setText", "setPlainText"))
 
 
 def main():

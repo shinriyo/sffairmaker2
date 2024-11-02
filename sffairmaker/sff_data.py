@@ -192,7 +192,7 @@ class Sff:
         with open(filename, "rb") as fp:
             for lineno, row in enumerate(csv.reader(fp), start=1):
                 try:
-                    row = [unicode(col.strip(), "mbcs") for col in row]
+                    row = [str(col.strip(), "mbcs") for col in row]
                     if len(row) < 7:
                         raise NextLine
                     
@@ -399,7 +399,7 @@ class SffData(QObject):
     
     @emitSetter
     def setFilename(self):
-        assert isinstance(self._filename, unicode) or self._filename is None, type(self._filename)
+        assert isinstance(self._filename, str) or self._filename is None, type(self._filename)
     
     def memento(self, *a):
         return (copy.copy(self._sff), self._source)

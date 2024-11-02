@@ -20,7 +20,7 @@ def pattern_to_filt(pat):
     
 def allfiles(root="./", pattern="*" , single_level=False , yield_folders=False):
     filt = pattern_to_filt(pattern)
-    root = os.path.abspath(unicode(root))
+    root = os.path.abspath(str(root))
     for path, subdirs, files in os.walk(root):
         if yield_folders:
             files.extend(subdirs)
@@ -36,7 +36,7 @@ def allfiles(root="./", pattern="*" , single_level=False , yield_folders=False):
 
 def alldirs(root="./", pattern="*", single_level=False):
     filt = pattern_to_filt(pattern)
-    root = os.path.abspath(unicode(root))
+    root = os.path.abspath(str(root))
     for path, subdirs, files in os.walk(root):
         for dir in subdirs:
             dirpath = os.path.abspath(os.path.join(path, dir))

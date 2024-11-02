@@ -16,7 +16,7 @@ class AnimIndexSelector(QComboBox):
         for a in self.xmodel().air().anims():
             indexes.add(a.index())
         for i in sorted(indexes):
-            self.addItem(unicode(i))
+            self.addItem(str(i))
         self._updateAnim()
         self.currentIndexChanged.connect(lambda _:self._updateAnim())
     
@@ -44,9 +44,9 @@ class AnimIndexSelector(QComboBox):
         with blockSignals(self):
             itemText = {}
             for i in xrange(self.count()):
-                t = unicode(self.itemText(i))
+                t = str(self.itemText(i))
                 itemText[t] = i
-            index = unicode(self._anim.index())
+            index = str(self._anim.index())
             self.setCurrentIndex(itemText[index])
     
 class AirJumpDialog(QDialog):
@@ -73,7 +73,7 @@ class AirJumpDialog(QDialog):
         mainLayout.addWidget(buttonBox)
         self.setLayout(mainLayout)
     
-    exec def_delegate("_selector", "anim", "setAnim")
+    exec(def_delegate("_selector", "anim", "setAnim"))
     
     @classmethod
     def get(cls, anim, parent=None):

@@ -5,16 +5,16 @@ from sffairmaker.qutil import *
 import string
 
 def textToColor(t):
-    t = unicode(t).lower()
+    t = str(t).lower()
     t = "".join(c for c in t if c in string.hexdigits)
     if len(t) == 3:
-        # #RGB �̌`�̏ꍇ
+        # #RGB ‚ÌŒ`‚Ìê‡
         r = t[0:1]
         g = t[1:2]
         b = t[2:3]
         return QColor(int(r*2, 16), int(g*2, 16), int(b*2, 16))
     if len(t) == 6:
-        # #RRGGBB �̌`�̏ꍇ
+        # #RRGGBB ‚ÌŒ`‚Ìê‡
         r = t[0:2]
         g = t[2:4]
         b = t[4:6]
@@ -67,7 +67,7 @@ class ColorLabel(QWidget):
         self._color = QColor()
         self._currentNumber = 0
         
-    exec def_update_accessor("color", "currentNumber")
+    exec(def_update_accessor("color", "currentNumber"))
     
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -124,8 +124,8 @@ class ColorSlider(QWidget):
             )
         )
     
-    exec def_delegate("_edit", "value", "setValue")
-    exec def_delegate("_label", "setCurrentNumber")
+    exec(def_delegate("_edit", "value", "setValue"))
+    exec(def_delegate("_label", "setCurrentNumber"))
     
 
 def main():

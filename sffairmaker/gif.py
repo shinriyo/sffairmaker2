@@ -1,10 +1,10 @@
 # coding: utf-8
 """
-gif�o�͂̂��߂̃��W���[��
-http://d.hatena.ne.jp/chikuchikugonzalez/20100627/1277648358�̃R�[�h��啪�Q�l�ɂ����Ă����������B
-gif�ɂ��ẮAhttp://www.tohoho-web.com/wwwgif.htm�Ȃǂ��Q�Ƃ̎�
+gif出力のためのモジュール
+http://d.hatena.ne.jp/chikuchikugonzalez/20100627/1277648358のコードを大分参考にさせていただいた。
+gifについては、http://www.tohoho-web.com/wwwgif.htmなどを参照の事
 """
-from __future__ import division, print_function, unicode_literals
+from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
 from sffairmaker.image_op import qcolortable_to_pilpalette

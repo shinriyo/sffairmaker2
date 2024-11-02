@@ -1,5 +1,5 @@
 # coding: utf-8
-from __future__ import division, print_function, unicode_literals
+from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
 from sffairmaker.lineedit_with_browse import LineEditWithBrowse
@@ -29,7 +29,7 @@ class CommandLineEdit(LineEditWithBrowse):
         sz = LineEditWithBrowse.sizeHint(self)
         w = self.fontMetrics().width("#" * 64)
         return QSize(max(w, sz.width()), sz.height())
-    exec def_xview()
+    exec(def_xview())
 
 
 class GridColorsTextEdit(QPlainTextEdit):
@@ -61,7 +61,7 @@ class GridColorsTextEdit(QPlainTextEdit):
     
     @classmethod
     def textToColors(cls, text):
-        text = unicode(text).strip()
+        text = str(text).strip()
         colors = []
         pat = r"#(?P<R>[0-9A-Z]{1,2})?(?P<G>[0-9A-Z]{1,2})?(?P<B>[0-9A-Z]{1,2})?"
         reRgb = re.compile(pat, re.I)
@@ -105,15 +105,15 @@ class GridColorsTextEdit(QPlainTextEdit):
         w = self.fontMetrics().width(t)
         h = self.fontMetrics().height() * 20
         return QSize(w, h)
-    exec def_alias("text", "toPlainText")
-    exec def_alias("setText", "setPlainText")
+    exec(def_alias("text", "toPlainText"))
+    exec(def_alias("setText", "setPlainText"))
     
 
 
 class BgImagePathLineEdit(LineEditWithBrowse):
     def browse(self):
         return self.xview().askBgImagePath()
-    exec def_xview()
+    exec(def_xview())
 
 from sffairmaker.image_view import (
     AbstractImageViewCore,
@@ -146,7 +146,7 @@ class BgImageViewCore(AbstractImageViewCore):
         syncAttrTo(self, self.xview(), ("bgImageTile", "bgImageTile"))
         self.setTransparent(False)
     
-    exec def_xview()
+    exec(def_xview())
     
     def setBgImageDelta(self, v):
         v = QPoint(v)
@@ -208,20 +208,33 @@ class BgImageEdit(QWidget):
             (hGroupBox("�ʒu", self._deltaX, self._deltaY), 0),
             (self._bgView , 1),
         ))
-    exec def_xview()
+    exec(def_xview())
 
-    exec def_delegate("_bgView", 
+    exec(def_delegate("_bgView", 
         ("bgDelta", "delta"), 
         ("setBgDelta", "setDelta"), 
-        ("bgDeltaChanged", "deltaChanged"),
-    )
-    exec def_delegate("_tile", 
+        ("bgDeltaChanged", "deltaChanged")
+    ))
+    exec(def_delegate("_tile", 
         ("tile", "value"), 
         ("setTile", "setValue"), 
         ("tileChanged", "valueChanged")
-    )
-    exec def_delegate("_deltaX", ("deltaX", "value"), ("setDeltaX", "setValue"), ("deltaXChanged", "valueChanged"))
-    exec def_delegate("_deltaY", ("deltaY", "value"), ("setDeltaY", "setValue"), ("deltaYChanged", "valueChanged"))
+    ))
+    # exec(def_delegate("_deltaX", ("deltaX", "value")), ("setDeltaX", "setValue"), ("deltaXChanged", "valueChanged"))
+    # グローバル変数用の辞書を作成
+    globals_dict = {}
+
+    # exec()の呼び出しを修正
+    exec(def_delegate("_deltaX", ("deltaX", "value")), globals_dict, {"setDeltaX": "setValue", "deltaXChanged": "valueChanged"})
+
+    # exec(def_delegate("_deltaY", ("deltaY", "value")), ("setDeltaY", "setValue"), ("deltaYChanged", "valueChanged"))
+
+    # グローバル変数用の辞書を作成
+    globals_dict = {}
+
+    # exec()の呼び出しを修正
+    exec(def_delegate("_deltaY", ("deltaY", "value")), globals_dict, {"setDeltaY": "setValue", "deltaYChanged": "valueChanged"})
+
     
     
     def setDelta(self, v):
@@ -242,9 +255,9 @@ class OptionWindow(QWidget):
     def __init__(self, parent=None, settings=None):
         QWidget.__init__(self, parent)
         self._settings = settings
-        self.setWindowTitle(u"�ݒ�")
+        self.setWindowTitle(u"設定")
         
-        # �O���ҏW�ƃo�b�N�A�b�v
+        # 外部編集とバックアップ
         self._sprExternalEdit = CommandLineEdit()
         self._airExternalEdit = CommandLineEdit()
         
@@ -254,39 +267,39 @@ class OptionWindow(QWidget):
         self._airExternalEdit.setText(self.settings().externalAirEditingCommand())
         self._airExternalEdit.textChanged.connect(self.settings().setExternalAirEditingCommand)
         
-        self._backup = ValueCheckBox("�S�~���Ƀo�b�N�A�b�v")
+        self._backup = ValueCheckBox("ゴミ箱にバックアップ")
         self._backup.setValue(self.settings().backupToRecycle())
         self._backup.valueChanged.connect(self.settings().setBackupToRecycle)
         
-        #�w�i�\��
+        #背景表示
         self._gridColors = GridColorsTextEdit()
         syncAttr(self._gridColors, self.xview(), ("value", "colorList"))
         
         self._bgImage = BgImageEdit()
         
-        # ���C�A�E�g��������
+        # レイアウトここから
         formLayout = QFormLayout()
-        formLayout.addRow("�摜", self._sprExternalEdit)
+        formLayout.addRow("画像", self._sprExternalEdit)
         formLayout.addRow("AIR", self._airExternalEdit)
         
         self._panel = QWidget()
         self._panel.setLayout(vBoxLayout(
-            groupBox("�O���ҏW", formLayout),
-            groupBox("�O���b�h�̐F", self._gridColors),
-            groupBox("�o�b�N�A�b�v", self._backup),
+            groupBox("外部編集", formLayout),
+            groupBox("グリッドの色", self._gridColors),
+            groupBox("バックアップ", self._backup),
         ))
         
         self._tab = QTabWidget(parent=self)
-        self._tab.addTab(self._panel, "��{")
-        self._tab.addTab(self._bgImage, "�w�i")
+        self._tab.addTab(self._panel, "基本")
+        self._tab.addTab(self._bgImage, "背景")
         
         self.setLayout(vBoxLayout(
             self._tab,
             CloseButtonBox(self),
         ))
     
-    exec def_settings()
-    exec def_xview()
+    exec(def_settings())
+    exec(def_xview())
     
         
 def main():

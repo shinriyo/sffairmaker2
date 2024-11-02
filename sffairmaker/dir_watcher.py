@@ -13,7 +13,7 @@ class DirTreeWatcher(QFileSystemWatcher):
     
     @classmethod
     def normpath(cls, path):
-        path = unicode(path)
+        path = str(path)
         path = os.path.abspath(path)
         path = os.path.normcase(path)
         return path
@@ -43,7 +43,7 @@ class ActDirWatcher(QObject):
         self._d.directoryChanged.connect(self._updateFiles)
         self._files = self._allfiles(self._dirPath)
     
-    exec def_qgetter("files", "dirPath")
+    exec(def_qgetter("files", "dirPath"))
     
     @classmethod
     def normpath(cls, path):

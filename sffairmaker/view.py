@@ -4,8 +4,8 @@ __metaclass__ = type
 
 import os
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 from sffairmaker.qutil import *
 from sffairmaker import (
@@ -69,7 +69,7 @@ class MyProgressDialog(QDialog):
 class Dialog:
     def __init__(self, parent=None):
         self._csvSaveFormatDialog = CsvSaveFormatDialog()
-        self._csvSaveFormatDialog.setExt(unicode(self.settings().value("CsvSaveFormatExt")))
+        self._csvSaveFormatDialog.setExt(str(self.settings().value("CsvSaveFormatExt")))
         self._csvFormats = RecentCsvFormats()
         def setNames(formats):
             self._csvSaveFormatDialog.setNames(formats)
@@ -82,13 +82,13 @@ class Dialog:
         return model.Model()
     
     def askSffSavePath(self):
-        return unicode(QFileDialog.getSaveFileName(
+        return str(QFileDialog.getSaveFileName(
             directory=self.xmodel().sff().dir(),
             filter=const.SffOpenFilter,
         ))
     
     def askSprSavePath(self):
-        return unicode(QFileDialog.getSaveFileName(
+        return str(QFileDialog.getSaveFileName(
             filter=const.PictureFilter,
         ))
     
@@ -96,21 +96,21 @@ class Dialog:
         r = QFileDialog.getOpenFileNames(
             filter=const.PictureFilter,
         )
-        return [unicode(s) for s in r]
+        return [str(s) for s in r]
     
     def askSprSwapPath(self):
-        return unicode(QFileDialog.getOpenFileName(
+        return str(QFileDialog.getOpenFileName(
             filter=const.PictureFilter,
         ))
     
     def askAirSavePath(self):
-        return unicode(QFileDialog.getSaveFileName(
+        return str(QFileDialog.getSaveFileName(
             directory=self.xmodel().air().dir(),
             filter=const.AirSaveFilter
         ))
     
     def askCsvSavePath(self):
-        return unicode(QFileDialog.getSaveFileName(
+        return str(QFileDialog.getSaveFileName(
             directory=self.xmodel().sff().dir(),
             filter=const.CsvSaveFilter,
         ))
@@ -121,13 +121,13 @@ class Dialog:
         return self._csvSaveFormatDialog.ask()
         
     def askSffOpenPath(self):
-        return unicode(QFileDialog.getOpenFileName(
+        return str(QFileDialog.getOpenFileName(
             directory=self.xmodel().sff().dir(),
             filter=const.SffOpenFilter,
         ))
     
     def askAirOpenPath(self):
-        return unicode(QFileDialog.getOpenFileName(
+        return str(QFileDialog.getOpenFileName(
             directory=self.xmodel().air().dir(),
             filter=const.AirOpenFilter
         ))
@@ -154,25 +154,25 @@ class Dialog:
         return self.askSaveBefore("Air")
     
     def askActOpenPath(self):
-        return unicode(QFileDialog.getOpenFileName(
+        return str(QFileDialog.getOpenFileName(
             directory=self.xmodel().sff().dir(),
             filter=const.ActOpenFilter
         ))
     
     def askActSavePath(self):
-        return unicode(QFileDialog.getSaveFileName(
+        return str(QFileDialog.getSaveFileName(
             directory=self.xmodel().sff().dir(),
             filter=const.ActSaveFilter
         ))
     
     def askGifSavePath(self):
-        return unicode(QFileDialog.getSaveFileName(
+        return str(QFileDialog.getSaveFileName(
             directory=self.xmodel().sff().dir(),
             filter=const.GifSaveFilter
         ))
     
     def askGifSaveDirPath(self):
-        return unicode(QFileDialog.getExistingDirectory(
+        return str(QFileDialog.getExistingDirectory(
             directory=self.xmodel().air().dir(),
         ))
         
@@ -273,7 +273,7 @@ class Dialog:
         return True
     
     def askExternalEditPath(self):
-        path = unicode(QFileDialog.getOpenFileName(
+        path = str(QFileDialog.getOpenFileName(
             filter=const.ExecutableFilter,
         ))
         if not path:
@@ -282,7 +282,7 @@ class Dialog:
             return os.path.abspath(path)
     
     def askBgImagePath(self):
-        path = unicode(QFileDialog.getOpenFileName(
+        path = str(QFileDialog.getOpenFileName(
             filter=const.PictureFilter,
         ))
         if not path:
@@ -296,7 +296,7 @@ class Holder(QObject):
     def __init__(self, v):
         QObject.__init__(self)
         self._value = v
-    exec def_qgetter("value")
+    exec(def_qgetter("value"))
     
     @emitSetter
     def setValue(self):
@@ -309,7 +309,7 @@ class RecentStrings(QObject):
     def __init__(self, parent=None):
         QObject.__init__(self, parent)
         v = Settings().value(self._keys())
-        self._strings = [unicode(i.toString()) for i in v.toList()]
+        self._strings = [str(i.toString()) for i in v.toList()]
         if not self._strings:
             self._strings = list(self._default())
     
@@ -419,7 +419,7 @@ class BgImageHolder(QObject):
         QObject.__init__(self, parent=parent)
         v = self.settings().value(self.Key)
         if v.isValid():
-            self._filename = unicode(v.toString())
+            self._filename = str(v.toString())
             self._image = QImage(self._filename)
         else:
             self._image = QImage()

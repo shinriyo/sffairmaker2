@@ -227,7 +227,7 @@ def join_if_need(delimiter, items):
     u'1'
     >>>
     """
-    items = list(map(unicode, items))
+    items = list(map(str, items))
     for i in xrange(len(items) - 1, -1, -1):
         if items[i]:
             break

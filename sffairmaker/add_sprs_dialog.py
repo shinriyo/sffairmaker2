@@ -45,7 +45,7 @@ class SprPosViewCore(AbstractImageViewCore):
             "bgImageTile",
         )
         
-    exec def_xview()
+    exec(def_xview())
     
     def setImage(self, image):
         self._image = Image256(image)

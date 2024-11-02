@@ -1,14 +1,14 @@
 # coding: utf-8
 """
-apng�o�͂̂��߂̃��W���[��
+apng出力のためのモジュール
 
-png�ɂ��Ă�
+pngについては
 http://www14.ocn.ne.jp/~setsuki/ext/png.htm
 
-apng�ɂ��Ă�
+apngについては
 https://wiki.mozilla.org/APNG_Specification#.60acTL.60:_The_Animation_Control_Chunk
 
-�Ȃǂ��Q�Ƃ̂���
+などを参照のこと
 """
 
 from __future__ import division, print_function, unicode_literals
@@ -21,28 +21,28 @@ import zlib
 
 AnimationControlFormat = (
     b"!"
-    b"I" #num_frames  	unsigned int  	�t���[����
-    b"I" #num_plays 	unsigned int 	APNG�̃��[�v�񐔁B0���w�肷��Ɩ������[�v�B
+    b"I" #num_frames  	unsigned int  	フレーム数
+    b"I" #num_plays 	unsigned int 	APNGのループ回数。0を指定すると無限ループ。
 )
 
 FrameControlFormat = (
     b"!"
-    b"I" # sequence_number  	unsigned int  	�A�j���[�V�����`�����N�̃V�[�P���X�ԍ��A0����n�܂�
-    b"I" # width unsigned int 	��ɑ����t���[���̕�
-    b"I" # height unsigned int 	��ɑ����t���[���̍���
-    b"I" # x_offset unsigned int 	��ɑ����t���[����`�悷��x���W
-    b"I" # y_offset unsigned int 	��ɑ����t���[����`�悷��y���W
-    b"H" # delay_num 	unsigned short 	�t���[���x���̕��q
-    b"H" # delay_den 	unsigned short 	�t���[���x���̕���
-    b"b" # dispose_op 	byte 	�t���[����`�悵����Ƀt���[���̈��p�����邩?
-    b"b" # blend_op 	byte 	�t���[���`����@�̃^�C�v
+    b"I" # sequence_number  	unsigned int  	アニメーションチャンクのシーケンス番号、0から始まる
+    b"I" # width unsigned int 	後に続くフレームの幅
+    b"I" # height unsigned int 	後に続くフレームの高さ
+    b"I" # x_offset unsigned int 	後に続くフレームを描画するx座標
+    b"I" # y_offset unsigned int 	後に続くフレームを描画するy座標
+    b"H" # delay_num 	unsigned short 	フレーム遅延の分子
+    b"H" # delay_den 	unsigned short 	フレーム遅延の分母
+    b"b" # dispose_op 	byte 	フレームを描画した後にフレーム領域を廃棄するか?
+    b"b" # blend_op 	byte 	フレーム描画方法のタイプ
 )
-APNG_DISPOSE_OP_NONE = 0 #���̃t���[����`�悷��O�ɏ������Ȃ��B�o�̓o�b�t�@�����̂܂܎g�p����B
-APNG_DISPOSE_OP_BACKGROUND = 1 #���̃t���[����`�悷��O�ɁA�o�̓o�b�t�@�̃t���[���̈���u���S�ɓ��߂ȍ��v�œh��Ԃ��B
-APNG_DISPOSE_OP_PREVIOUS = 2 #���̃t���[����`�悷��O�ɁA�o�̓o�b�t�@�̃t���[���̈�����̃t���[���ɓ���O�̏�Ԃɖ߂��B
+APNG_DISPOSE_OP_NONE = 0 #次のフレームを描画する前に消去しない。出力バッファをそのまま使用する。
+APNG_DISPOSE_OP_BACKGROUND = 1 #次のフレームを描画する前に、出力バッファのフレーム領域を「完全に透過な黒」で塗りつぶす。
+APNG_DISPOSE_OP_PREVIOUS = 2 #次のフレームを描画する前に、出力バッファのフレーム領域をこのフレームに入る前の状態に戻す。
 
-APNG_BLEND_OP_SOURCE = 0 #�A���t�@�l���܂߂��S�Ă̗v�f���t���[���̏o�̓o�b�t�@�̈�ɏ㏑������B
-APNG_BLEND_OP_OVER = 1 #�������ރf�[�^�̃A���t�@�l���g���ďo�̓o�b�t�@�ɍ�������B
+APNG_BLEND_OP_SOURCE = 0 #アルファ値を含めた全ての要素をフレームの出力バッファ領域に上書きする。
+APNG_BLEND_OP_OVER = 1 #書き込むデータのアルファ値を使って出力バッファに合成する。
 
 def writeAnimationControl(fp, elms):
     writeChunk(fp, b"acTL", struct.pack(AnimationControlFormat, len(elms), 0))
@@ -53,15 +53,15 @@ def writeFrameControl(fp, number, elm, canvasRect):
     
     p = elm.pos - canvasRect.topLeft()
     b = struct.pack(FrameControlFormat,
-        number, # sequence_number  	unsigned int  	�A�j���[�V�����`�����N�̃V�[�P���X�ԍ��A0����n�܂�
-        elm.image.width(), # width unsigned int 	��ɑ����t���[���̕�
-        elm.image.height(), # height unsigned int 	��ɑ����t���[���̍���
-        p.x(), # x_offset unsigned int 	��ɑ����t���[����`�悷��x���W
-        p.y(), # y_offset unsigned int 	��ɑ����t���[����`�悷��y���W
-        time.numerator, # delay_num 	unsigned short 	�t���[���x���̕��q
-        time.denominator, # delay_den 	unsigned short 	�t���[���x���̕���
-        APNG_DISPOSE_OP_BACKGROUND, # dispose_op 	byte 	�t���[����`�悵����Ƀt���[���̈��p�����邩?
-        APNG_BLEND_OP_OVER, # blend_op 	byte 	�t���[���`����@�̃^�C�v
+        number, # sequence_number  	unsigned int  	アニメーションチャンクのシーケンス番号、0から始まる
+        elm.image.width(), # width unsigned int 	後に続くフレームの幅
+        elm.image.height(), # height unsigned int 	後に続くフレームの高さ
+        p.x(), # x_offset unsigned int 	後に続くフレームを描画するx座標
+        p.y(), # y_offset unsigned int 	後に続くフレームを描画するy座標
+        time.numerator, # delay_num 	unsigned short 	フレーム遅延の分子
+        time.denominator, # delay_den 	unsigned short 	フレーム遅延の分母
+        APNG_DISPOSE_OP_BACKGROUND, # dispose_op 	byte 	フレームを描画した後にフレーム領域を廃棄するか?
+        APNG_BLEND_OP_OVER, # blend_op 	byte 	フレーム描画方法のタイプ
     )
     writeChunk(fp, b"fcTL", b)
     
@@ -89,13 +89,13 @@ def writeChunk(fp, chunkType, chunkData):
 def writeImageHeader(fp, elms, canvasRect):
     ImageHeaderFormat = (
         b"!"
-        b"I" #�C���[�W�̉���(4) �s�N�Z���P��
-        b"I" #�C���[�W�̍���(4) �s�N�Z���P��
-        b"B" #�r�b�g�̐[��(1) ����(1,2,4,8,16)
-        b"B" #�J���[�^�C�v(1) ����(0,2,3,4,6)
-        b"B" #���k����(1) �Œ�l�O
-        b"B" #�t�B���^�[����(1) �Œ�l�O
-        b"B" #�C���^���[�X����(1) ����(0,1)
+        b"I" #イメージの横幅(4) ピクセル単位
+        b"I" #イメージの高さ(4) ピクセル単位
+        b"B" #ビットの深さ(1) 整数(1,2,4,8,16)
+        b"B" #カラータイプ(1) 整数(0,2,3,4,6)
+        b"B" #圧縮方式(1) 固定値０
+        b"B" #フィルター方式(1) 固定値０
+        b"B" #インタレース方式(1) 整数(0,1)
     )
     b = struct.pack(ImageHeaderFormat,
         canvasRect.width(),

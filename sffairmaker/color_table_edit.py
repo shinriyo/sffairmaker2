@@ -1,7 +1,7 @@
 # coding: utf-8
 from __future__ import division, print_function
 
-from image_op import ipixelIndex
+# from image_op import ipixelIndex
 __metaclass__ = type 
 from sffairmaker.qutil import *
 
@@ -10,6 +10,7 @@ from sffairmaker import (
     model,
     color_slider,
 )
+from sffairmaker.image_op import ipixelIndex
 
 from sffairmaker.image_op import (
     Image256,
@@ -20,7 +21,7 @@ from sffairmaker.choice_menu import choiceMenu
 from sffairmaker.default_list import DefaultList
 
 from collections import namedtuple
-from itertools import product, izip_longest
+from itertools import product, zip_longest
 import operator
 
 from collections import OrderedDict
@@ -87,7 +88,7 @@ class ColorTableModelBase(QAbstractTableModel):
     def setColorTable(self, colorTable):
         changed_indexes = []
         append = changed_indexes.append 
-        for i, (v0, v1) in enumerate(izip_longest(self._colorTable, colorTable)):
+        for i, (v0, v1) in enumerate(zip_longest(self._colorTable, colorTable)):
             if v0 != v1:
                 append(i)
         
@@ -225,7 +226,7 @@ class SprColorTableModel(ColorTableModelBase):
         self.xmodel().sff().updated.connect(setValue)
         setValue()
     
-    exec def_qgetter("spr", "xmodel")
+    exec(def_qgetter("spr", "xmodel"))
     
     def setSpr(self, spr):
         if self.spr() == spr:
@@ -273,7 +274,7 @@ class CommonColorTableModel(ColorTableModelBase):
         self.sff().updated.connect(setValue)
         setValue()
         
-    exec def_qgetter("xmodel")
+    exec(def_qgetter("xmodel"))
     
     def sff(self):
         return self.xmodel().sff()
@@ -404,7 +405,7 @@ class ColorTableEditBase(ColorTableView):
             self.currentNumberChanged.emit(self.indexToNumber(curr))
         self.selectionModel().currentChanged.connect(emitCurrentNumberChanged)
         
-    exec def_qgetter("dragMode")
+    exec(def_qgetter("dragMode"))
     
     @emitSetter
     def setDragMode(self):

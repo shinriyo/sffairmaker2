@@ -23,9 +23,9 @@ class AnimScrollBar(ItemScrollBar):
     def _default(self):
         return model.Anim.Null()
     
-    exec def_alias("animChanged", "currentItemChanged")
-    exec def_alias("anim", "currentItem")
-    exec def_alias("setAnim", "setCurrentItem")
+    exec(def_alias("animChanged", "currentItemChanged"))
+    exec(def_alias("anim", "currentItem"))
+    exec(def_alias("setAnim", "setCurrentItem"))
     
     
 def main():

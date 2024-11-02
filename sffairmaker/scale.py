@@ -90,7 +90,7 @@ class ScaleWidget(QAbstractSpinBox):
         return getattr(self._scaleObject, name)
         
     def _setText(self, value):
-        self.lineEdit().setText(unicode(value))
+        self.lineEdit().setText(str(value))
     
     def stepBy(self, steps):
         self.setIndex(self.index() + steps)

@@ -30,7 +30,7 @@ class InsertPosWidget(QWidget):
                     child.setMouseTracking(True)
         self.setMouseTracking(True)
     
-    exec def_qgetter("insertPos")
+    exec(def_qgetter("insertPos"))
     
     def setInsertPos(self, v):
         v = max(min(v, len(self._items)), 0)
@@ -143,7 +143,7 @@ class Thumb(QFrame):
         
         def textLabel(x):
             label = QLabel()
-            label.setText(unicode(x))
+            label.setText(str(x))
             label.setAutoFillBackground(True)
             return label
         
