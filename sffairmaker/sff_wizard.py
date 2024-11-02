@@ -49,7 +49,7 @@ class TaskBase:
 ##        assert isinstance(widget, self._widgetClass)
         self._widget = widget
     
-    exec def_qgetter("text", "widget")
+    exec(def_qgetter("text", "widget"))
     def value(self):
         return self.widget().value()
     
@@ -113,7 +113,7 @@ class InvertTask(TaskBase):
 class ActFileLineEdit(LineEditWithBrowse):
     def browse(self):
         return self.xview().askActOpenPath()
-    exec def_xview()
+    exec(def_xview())
     
     
 class PaletteSetting(QWidget):
@@ -151,7 +151,7 @@ class PaletteSetting(QWidget):
             ("stretch", 1)
         ))
     
-    exec def_sff()
+    exec(def_sff())
     
     def value(self):
         if self._sffPalette.isChecked():
@@ -241,7 +241,7 @@ class RectsSetting(QWidget):
             ),
         ))
     
-    exec def_delegate("parent()", "xview")
+    exec(def_delegate("parent()", "xview"))
     def value(self):
         return {"rects":self._clsnEdit.value()}
     
@@ -350,14 +350,14 @@ class SffWizard(QDialog):
             dialogButtons(self)
         ))
     
-    exec def_xview()
+    exec(def_xview())
     
-    exec def_qgetter("spr")
+    exec(def_qgetter("spr"))
     @mySetter(emit=True)
     def setSpr(self):
         pass
     
-    exec def_delegate("_sprList", "sprs", "setSprs")
+    exec(def_delegate("_sprList", "sprs", "setSprs"))
     def value(self):
         i = self._taskCombo.currentIndex()
         task = self._tasks[i]

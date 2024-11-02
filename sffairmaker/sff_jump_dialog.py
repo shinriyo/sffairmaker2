@@ -26,7 +26,7 @@ class SprPreviewSelector(QWidget):
         mainLayout.addWidget(self._image, 1, Qt.AlignCenter)
         self.setLayout(mainLayout)
     
-    exec def_delegate("_scroll", "spr", "setSpr")
+    exec(def_delegate("_scroll", "spr", "setSpr"))
     
     def setEnabled(self, *a, **kw):
         QWidget.setEnabled(self,  *a, **kw)
@@ -68,9 +68,9 @@ class SffJumpButton(QPushButton):
         self._spr = NullSpr()
         self.clicked.connect(self.jump)
     
-    exec def_qgetter("spr")
+    exec(def_qgetter("spr"))
     
-    exec def_sff()
+    exec(def_sff())
     
     @emitSetter
     def setSpr(self):

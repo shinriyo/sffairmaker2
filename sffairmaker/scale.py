@@ -17,10 +17,10 @@ class ScaleObject(QObject):
         self._maximum = 8
         self._minimum = -2
     
-    exec def_qgetter("index", "maximum", "minimum")
-    exec def_alias("scale", "value")
-    exec def_alias("setScale", "setValue")
-    exec def_alias("scaleChanged", "valueChanged")
+    exec(def_qgetter("index", "maximum", "minimum"))
+    exec(def_alias("scale", "value"))
+    exec(def_alias("setScale", "setValue"))
+    exec(def_alias("scaleChanged", "valueChanged"))
     
     def setMaximum(self, v):
         v = int(v)

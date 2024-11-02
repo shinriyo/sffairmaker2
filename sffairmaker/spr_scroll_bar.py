@@ -14,7 +14,7 @@ class SprScrollBar(ItemScrollBar):
         self.sff().updated.connect(self._updateItems)
         self._updateItems()
     
-    exec def_sff()
+    exec(def_sff())
     def _default(self):
         return NullSpr()
     
@@ -22,9 +22,9 @@ class SprScrollBar(ItemScrollBar):
         items = sorted(self.xmodel().sff().sprs(), key=methodcaller("group_index"))
         self.setItems(items)
     
-    exec def_alias("sprChanged", "currentItemChanged")
-    exec def_alias("spr", "currentItem")
-    exec def_alias("setSpr", "setCurrentItem")
+    exec(def_alias("sprChanged", "currentItemChanged"))
+    exec(def_alias("spr", "currentItem"))
+    exec(def_alias("setSpr", "setCurrentItem"))
 
     
 def main():

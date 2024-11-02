@@ -4,8 +4,8 @@ __metaclass__ = type
 
 import os
 
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 from sffairmaker.qutil import *
 from sffairmaker import (
@@ -349,8 +349,8 @@ class RecentStrings(QObject):
         
 
 class RecentCsvFormats(RecentStrings):
-    exec def_alias("formats", "strings")
-    exec def_alias("formatsChanged", "stringsChanged")
+    exec(def_alias("formats", "strings"))
+    exec(def_alias("formatsChanged", "stringsChanged"))
     
     def _keys(self):
         return "RecentCsvFormats"
@@ -366,8 +366,8 @@ class RecentFiles(RecentStrings):
         self._name = name
         RecentStrings.__init__(self, parent)
     
-    exec def_alias("files", "strings")
-    exec def_alias("filesChanged", "stringsChanged")
+    exec(def_alias("files", "strings"))
+    exec(def_alias("filesChanged", "stringsChanged"))
     
     def _keys(self):
         return "RecentFiles/" + self._name
@@ -412,7 +412,7 @@ class BgImageHolder(QObject):
     filenameChanged = pyqtSignal("QString")
     imageChanged = pyqtSignal("QImage")
     
-    exec def_qgetter("filename")
+    exec(def_qgetter("filename"))
     
     Key = "BgImageFilename"
     def __init__(self, parent=None):
@@ -495,25 +495,25 @@ class _View(QObject, Dialog, Message):
     def air(self):
         return self.mainWindow().sff()
     
-    exec def_delegate("_recentSff", 
+    exec(def_delegate("_recentSff", 
         ("recentSffFilesChanged", "filesChanged"),
         ("recentSffFiles", "files"),
         ("addRecentSffFile", "add"),
-    )
-    exec def_delegate("_recentAir", 
+    ))
+    exec(def_delegate("_recentAir", 
         ("recentAirFilesChanged", "filesChanged"),
         ("recentAirFiles", "files"),
         ("addRecentAirFile", "add"),
-    )
-    exec def_delegate("_bgImage",
+    ))
+    exec(def_delegate("_bgImage",
         ("bgImage", "image"),
         ("bgImageChanged", "imageChanged"),
         ("bgImageFilename", "filename"),
         ("setBgImageFilename", "setFilename"),
         ("bgImageFilenameChanged", "filenameChanged"),
-    )
+    ))
     
-    exec def_delegate("_colorsHolder", *"""
+    exec(def_delegate("_colorsHolder", *"""
         colorsChanged
         colorIndexesChanged
         colorListChanged
@@ -524,9 +524,9 @@ class _View(QObject, Dialog, Message):
         
         setColorIndexes
         setColorList
-        """.split())
+        """.split()))
     
-    exec def_delegate("_scaleObject", 
+    exec(def_delegate("_scaleObject", 
         "scale",
         "scaleChanged",
         "setScale",
@@ -536,20 +536,20 @@ class _View(QObject, Dialog, Message):
         ("scaleZoomIn", "zoomIn"),
         ("scaleZoomOut", "zoomOut"),
         ("scaleZoomReset", "zoomReset"),
-    )
-    exec def_qgetter("scaleObject")
+    ))
+    exec(def_qgetter("scaleObject"))
     
-    exec def_delegate("mainWindow().statusBar()",
+    exec(def_delegate("mainWindow().statusBar()",
         ("statusBarShowMessage", "showMessage"),
         ("statusBarCurrentMessage", "currentMessage"),
         ("statusBarClearMessage", "clearMessage"),
-    )
+    ))
     
-    exec def_xmodel()
-    exec def_delegate("xmodel()",
+    exec(def_xmodel())
+    exec(def_delegate("xmodel()",
         "actColorTable",
         "actColorTableChanged"
-    )
+    ))
     
     
     def setupHolder(self, name, defaultValue):
@@ -567,7 +567,7 @@ class _View(QObject, Dialog, Message):
     def resetAxisDelta(self):
         self.setAxisDelta(QPoint(0, 0))
     
-    exec def_qgetter("mainWindow")
+    exec(def_qgetter("mainWindow"))
     
     def showMainWindow(self):
         if self._mainWindow is None:

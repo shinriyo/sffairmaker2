@@ -37,7 +37,7 @@ class RadioGroup(QGroupBox):
         layout.addStretch(1)
         self.setLayout(layout)
     
-    exec def_qgetter("value")
+    exec(def_qgetter("value"))
     
     @emitSetter
     def setValue(self):

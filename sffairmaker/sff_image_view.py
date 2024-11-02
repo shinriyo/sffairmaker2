@@ -118,9 +118,9 @@ class SffImageViewCore(AbstractImageViewCore):
         self.sff().updated.connect(self.update)
         
         
-    exec def_qgetter("spr", "imageOpMode")
-    exec def_xview()
-    exec def_xmodel()
+    exec(def_qgetter("spr", "imageOpMode"))
+    exec(def_xview())
+    exec(def_xmodel())
     
     @emitSetter
     def setSpr(self):

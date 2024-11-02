@@ -21,13 +21,13 @@ class SprImageLabel(QWidget):
         )
         self.setFixedSize(self.Size, self.Size)
     
-    exec def_sff()
-    exec def_xview()
+    exec(def_sff())
+    exec(def_xview())
     
-    exec def_update_accessor(
+    exec(def_update_accessor(
         "sprDisplayMode",
         "actColorTable",
-    )
+    ))
     def setSpr(self, spr):
         if self._spr == spr:
             return

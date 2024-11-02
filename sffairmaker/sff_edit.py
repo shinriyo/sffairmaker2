@@ -19,8 +19,8 @@ class SprEditMixin(EditMixin):
     def setup(self):
         EditMixin.setup(self)
         self.xmodel().sff().updated.connect(self._updateValue)
-    exec def_alias("setSpr", "setTarget")
-    exec def_alias("spr", "target")
+    exec(def_alias("setSpr", "setTarget"))
+    exec(def_alias("spr", "target"))
 
 class SprEditSpinBox(EditSpinBox, SprEditMixin):
     def setup(self):
@@ -67,7 +67,7 @@ class CharSffEdit(ValueCheckBox):
         with blockSignals(self):
             self.setValue(self.xmodel().sff().isCharSff())
     
-    exec def_xmodel()
+    exec(def_xmodel())
     
     
 

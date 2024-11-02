@@ -24,7 +24,7 @@ class IntComboBox(QComboBox):
         sh = self.sizeHint()
         self.setMinimumSize(sh.width(), sh.height())
         
-    exec def_qgetter("value")
+    exec(def_qgetter("value"))
     
     def _onTextChanged(self, t):
         v = safe_int(t)
@@ -100,9 +100,9 @@ class GroupIndexSelector(QWidget):
             (self._indexbox, 1),
         ))
     
-    exec def_qgetter("group", "index")
+    exec(def_qgetter("group", "index"))
     
-    exec def_sff()
+    exec(def_sff())
     
     def _xmodelSprs(self):
         return self.sff().sprs()
