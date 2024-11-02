@@ -154,7 +154,7 @@ class Spr(Proxy):
         return self._data.changeSpr(self._id, **kw)
     
     def isUseActFixed(self):
-        # (0, 0) �� (9000, 0) �� �L�����pSFF�ł͏��Act�K�p
+        # (0, 0) と (9000, 0) は キャラ用SFFでは常にAct適用
         return self.group_index() in [(0, 0), (9000, 0)] and \
                self._submodel.isCharSff()
     
@@ -181,7 +181,7 @@ class Spr(Proxy):
         if not filename:
             return
         
-        filename = str(filename)
+        filename = unicode(filename)
         try:
             image = Image256(filename)
         except (IOError, OSError):
@@ -238,7 +238,7 @@ class Spr(Proxy):
         self.change(image=image)
     
     def addColorsToCommonPalette(self):
-        #�摜�F��S�̃p���b�g�ɒǉ����AAct�K�p�ɂ���
+        #画像色を全体パレットに追加し、Act適用にする
         colorTable, image = image_op.addImageColors(
             self.commonColorTable(), 
             self.commonUsedColorIndexes(),
@@ -295,7 +295,7 @@ class Spr(Proxy):
     
     def save(self, filename=None):
         filename = filename or self._submodel.askSprSavePath()
-        filename = str(filename)
+        filename = unicode(filename)
         if not filename:
             return False
         
@@ -316,7 +316,7 @@ class Spr(Proxy):
     
     def saveGroup(self, filename=None):
         filename = filename or self.askCsvSavePath()
-        filename = str(filename)
+        filename = unicode(filename)
         if not filename:
             return
         
@@ -345,7 +345,7 @@ class Spr(Proxy):
     
     editExternal = editExternal_("tempSprFileName", "startExternalSprEditing")
     
-    #��������A���ߍ\���I�E�⏕�I���\�b�h�̒�`
+    #ここから、糖衣構文的・補助的メソッドの定義
     def group_index(self):
         return (self.group(), self.index())
     
@@ -398,7 +398,7 @@ class Anim(Proxy):
     def newElm(self):
         pos = self.askElmInsertPos(
             self,
-            caption=u"�V�����R�}�̑}����"
+            caption=u"新しいコマの挿入先"
         )
         if pos is None:
             return
@@ -430,7 +430,7 @@ class Anim(Proxy):
         s = self.textDialog(self.toString())
         if s.isNull():
             return
-        s = str(s)
+        s = unicode(s)
         
         try:
             self.changeFromString(s)
@@ -515,7 +515,7 @@ class Anim(Proxy):
         
         if self.loop() is not None:
             for e, t in elms[self.loop():]:
-                for _ in range(t):
+                for _ in xrange(t):
                     yield e
     
     def timeLineBeforeLoop(self):
@@ -525,10 +525,10 @@ class Anim(Proxy):
             yield e
         else:
             for e, t in elms:
-                for _ in range(t):
+                for _ in xrange(t):
                     yield e
     
-    #��������A���ߍ\���I�E�⏕�I���\�b�h�̒�`
+    #ここから、糖衣構文的・補助的メソッドの定義
     def timeLine(self):
         from itertools import cycle, chain
         return cycle(
@@ -617,7 +617,7 @@ class Elm(Proxy):
     def move(self):
         pos = self.askElmInsertPos(
             self.anim(),
-            caption=u"�ړ���"
+            caption=u"移動先"
         )
         if pos is not None:
             self.anim().moveElm(pos, self)
@@ -625,7 +625,7 @@ class Elm(Proxy):
     def clone(self):
         pos = self.askElmInsertPos(
             self.anim(),
-            caption=u"�R�s�[�̑}����"
+            caption=u"コピーの挿入先"
         )
         if pos is None:
             return
@@ -655,7 +655,7 @@ class Elm(Proxy):
         )
 
         
-    #��������A���ߍ\���I�E�⏕�I���\�b�h�̒�`
+    #ここから、糖衣構文的・補助的メソッドの定義
     def utime(self):
         return max(self.time(), 0)
     
@@ -760,20 +760,21 @@ class SimpleThread(QThread):
         self._exc_info = None
     
     exec(def_qgetter("callable", "exception", "result", "exc_info"))
-   
-    def run(self):
-        try:
-            self._result = self._callable()
-        except Exception as e:  # 一時的な変数名に変更
-            import sys
-            self._exception = e  # 一時変数の値をインスタンス変数に代入
-            self._exc_info = sys.exc_info()
-            pass
     
-    def reraise(self):
-        if self._exc_info:
-            type, value, trace = self.exc_info()
-            raise value.with_traceback(trace)  # 新しい構文
+def run(self):
+    try:
+        self._result = self._callable()
+    except Exception as e:  # 一時的な変数名に変更
+        import sys
+        self._exception = e  # 一時変数の値をインスタンス変数に代入
+        self._exc_info = sys.exc_info()
+        pass
+
+    
+def reraise(self):
+    if self._exc_info:
+        type, value, trace = self.exc_info()
+        raise value.with_traceback(trace)  # 新しい構文
 
 
 class SubModel(QObject):
@@ -822,8 +823,8 @@ class SubModel(QObject):
     @contextmanager
     def _updating(self):
         """
-        data�ɕύX��������悤�ȑ����with x._updating():�ň͂ނƁA
-        with ���𔲂���Ƃ��ɃT�u���f���ɕύX�����������Ƃ�ʒm����B
+        dataに変更を加えるような操作をwith x._updating():で囲むと、
+        with 文を抜けるときにサブモデルに変更があったことを通知する。
         """
         
         try:
@@ -972,7 +973,7 @@ class SubModel(QObject):
         except EnvironmentError as e:
             self.cannotOpenFileMsg(filename)
             return
-        except Exception as e:
+        except StandardError as e:
             self.invaildFormatMsg(filename)
             return
         
@@ -981,7 +982,7 @@ class SubModel(QObject):
         
     def getdir(self, filename):
         if filename is not None:
-            return os.path.dirname(str(filename))
+            return os.path.dirname(unicode(filename))
         else:
             return os.getcwd()
     
@@ -1396,7 +1397,7 @@ class SffPalette(Palette):
             self.updated.emit()
     
     def title(self):
-        return u"SFF�̃p���b�g"
+        return u"SFFのパレット"
     
     def __eq__(self, other):
         return False
