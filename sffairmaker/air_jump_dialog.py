@@ -35,7 +35,7 @@ class AnimIndexSelector(QComboBox):
             anims[anim.index()] = anim
         self.setAnim(anims.get(index, model.Anim.Null()))
     
-    exec def_qgetter("anim")
+    exec(def_qgetter("anim"))
     
     @emitSetter
     def setAnim(self):

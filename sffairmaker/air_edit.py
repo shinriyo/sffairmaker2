@@ -143,8 +143,8 @@ class AnimIndexSpinBox(EditSpinBox, AirEditMixin):
         EditSpinBox.__init__(self, *a, **kw)
         self.setup()
 
-    exec def_alias("anim", "target")
-    exec def_alias("setAnim", "setTarget")
+    exec(def_alias("anim", "target"))
+    exec(def_alias("setAnim", "setTarget"))
 
 
 class ElmAlphaEdit(AlphaEdit, AirEditMixin):
@@ -153,8 +153,8 @@ class ElmAlphaEdit(AlphaEdit, AirEditMixin):
         AlphaEdit.__init__(self, parent)
         self.setup()
 
-    exec def_alias("elm", "target")
-    exec def_alias("setElm", "setTarget")
+    exec(def_alias("elm", "target"))
+    exec(def_alias("setElm", "setTarget"))
     
 
 class ElmCheckBox(EditCheckBox, AirEditMixin):
@@ -162,8 +162,8 @@ class ElmCheckBox(EditCheckBox, AirEditMixin):
         EditCheckBox.__init__(self, *a, **kw)
         self.setup()
 
-    exec def_alias("elm", "target")
-    exec def_alias("setElm", "setTarget")
+    exec(def_alias("elm", "target"))
+    exec(def_alias("setElm", "setTarget"))
     
 class ElmHCheckBox(ElmCheckBox):
     _field = "h"
@@ -208,10 +208,10 @@ class ElmImageLabel(QWidget):
         self.air().updated.connect(self.update)
         self.setFixedSize(self.Size, self.Size)
     
-    exec def_sff()
-    exec def_air()
-    exec def_xview()
-    exec def_update_accessor("actColorTable")
+    exec(def_sff())
+    exec(def_air())
+    exec(def_xview())
+    exec(def_update_accessor("actColorTable"))
     
     def setElm(self, elm):
         if self._elm == elm:return
@@ -243,8 +243,8 @@ class ElmClsnEditBase(ClsnTextEdit, AirEditMixin):
     def __init__(self, parent=None):
         ClsnTextEdit.__init__(self, parent)
         self.setup()
-    exec def_alias("elm", "target")
-    exec def_alias("setElm", "setTarget")
+    exec(def_alias("elm", "target"))
+    exec(def_alias("setElm", "setTarget"))
 
 class ElmClsn1Edit(ElmClsnEditBase):
     _field = "clsn1"
@@ -256,8 +256,8 @@ class AnimClsnEditBase(ClsnTextEdit, AirEditMixin):
     def __init__(self, parent=None):
         ClsnTextEdit.__init__(self, parent)
         self.setup()
-    exec def_alias("anim", "target")
-    exec def_alias("setAnim", "setTarget")
+    exec(def_alias("anim", "target"))
+    exec(def_alias("setAnim", "setTarget"))
 
 class AnimClsn1Edit(AnimClsnEditBase):
     _field = "clsn1"

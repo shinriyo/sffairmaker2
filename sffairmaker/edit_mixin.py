@@ -13,7 +13,7 @@ class EditMixin:
     def xmodel(self):
         return model.Model()
         
-    exec def_qgetter("target")
+    exec(def_qgetter("target"))
     
     def setTarget(self, v):
         if self.target() == v:return

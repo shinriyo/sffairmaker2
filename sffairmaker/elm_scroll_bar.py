@@ -22,7 +22,7 @@ class ElmScrollBar(ItemScrollBar):
             items = []
         self.setItems(items)
     
-    exec def_qgetter("anim")
+    exec(def_qgetter("anim"))
     
     def xmodel(self):
         return model.Model()
@@ -34,9 +34,9 @@ class ElmScrollBar(ItemScrollBar):
     def setAnim(self):
         self._updateItems()
     
-    exec def_alias("elmChanged", "currentItemChanged")
-    exec def_alias("elm", "currentItem")
-    exec def_alias("setElm", "setCurrentItem")
+    exec(def_alias("elmChanged", "currentItemChanged"))
+    exec(def_alias("elm", "currentItem"))
+    exec(def_alias("setElm", "setCurrentItem"))
     
 
 def main():
