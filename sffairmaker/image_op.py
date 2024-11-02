@@ -7,7 +7,7 @@ from sffairmaker.mm import multimethod
 
 from itertools import chain, product, starmap
 from iterutils import grouper
-from io import StringIO
+
 import PIL.Image
     
 def pilimage_to_qimage(pilimage):
@@ -103,8 +103,8 @@ def Image256(im):
     return im
     
 @multimethod(str)
-# @multimethod(str)
-# @multimethod(str)
+# @multimethod(unicode)
+# @multimethod(QString)
 def Image256(filename):
     im = QImage(filename)
     if im.isNull():
@@ -137,7 +137,7 @@ def rectToCrop(image):
     def emptyHLine(y):
         return all(image.pixelIndex(x, y) == 0 for x in range(image.width()))
     
-    #���[
+    #左端
     for x in range(image.width() - 1):
         if not emptyVLine(x):
             left = x
@@ -145,7 +145,7 @@ def rectToCrop(image):
     else:
         left = image.width() - 1
     
-    #�E�[
+    #右端
     for x in range(image.width() - 1, left, -1):
         if not emptyVLine(x):
             right = x
@@ -153,7 +153,7 @@ def rectToCrop(image):
     else:
         right = left
     
-    #��[
+    #上端
     for y in range(image.height() - 1):
         if not emptyHLine(y):
             top = y
@@ -161,7 +161,7 @@ def rectToCrop(image):
     else:
         top = image.height() - 1
     
-    #���[
+    #下端
     for y in range(image.height() - 1, top, -1):
         if not emptyHLine(y):
             bottom = y
@@ -239,7 +239,7 @@ def deleteUnusedColors(image):
 class NoUnusedColorError(ValueError):pass
     
 def allocBgColor(image, bg=qRgb(255, 0, 255)):
-    #�p���b�g��0�Ԃ�w�i�p�Ɋm�ۂ��܂��B
+    #パレットの0番を背景用に確保します。
     
     used = usedColorIndexes(image)
     unused = set(range(256)) - used
@@ -384,7 +384,7 @@ def addImageColors(colorTable, usedIndexes, image):
     lastUsedIndexes = max(chain(usedIndexes, [0]))
     spaces = [k for k in range(lastUsedIndexes + 1, 256) if k not in usedIndexes] + \
              [k for k in range(1, lastUsedIndexes) if k not in usedIndexes]
-    #0�Ԃɂ͗Ⴆ(0, 0, 0)�ł��ǉ����Ȃ�
+    #0番には例え(0, 0, 0)でも追加しない
     
     print(spaces)
     
@@ -424,4 +424,3 @@ def mirrored(image, pos, spr_pos, h, v):
             pos = QPoint(pos.x() - image.width() + 2*spr_pos.x(), pos.y())
     
     return image, pos
-
