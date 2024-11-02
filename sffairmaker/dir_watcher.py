@@ -1,10 +1,9 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
 from sffairmaker.allfiles import alldirs, allfiles
 
-from itertools import imap
 import os
 
 class DirTreeWatcher(QFileSystemWatcher):
@@ -23,12 +22,12 @@ class DirTreeWatcher(QFileSystemWatcher):
         self.addPaths([path])
     
     def addPaths(self, paths):
-        dirs = set(imap(self.normpath, paths))
+        dirs = set(map(self.normpath, paths))
         for path in paths:
             assert os.path.isdir(path), path
             
-            dirs.update(imap(self.normpath, alldirs(path)))
-        dirs -= set(imap(self.normpath, self.directories()))
+            dirs.update(map(self.normpath, alldirs(path)))
+        dirs -= set(map(self.normpath, self.directories()))
         if dirs:
             QFileSystemWatcher.addPaths(self, list(dirs))
 
@@ -52,7 +51,7 @@ class ActDirWatcher(QObject):
     
     @classmethod
     def _allfiles(cls, dir):
-        return set(imap(cls.normpath, allfiles(dir, "*.act")))
+        return set(map(cls.normpath, allfiles(dir, "*.act")))
         
     def _updateFiles(self, _=None):
         files = self._allfiles(self._dirPath)

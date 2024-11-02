@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 
@@ -35,11 +35,11 @@ from sffairmaker.color_table_edit import (
 class ImageOpRadioGroup(RadioGroup):
     def __init__(self, imageView, parent=None):
         items = [
-            (ImageOpMode.Pos, u"ˆÚ“®"),
-            (ImageOpMode.EraseRects, u"Á‹"),
-            (ImageOpMode.EraseRectsColors, u"F‚Ìœ‹"),
+            (ImageOpMode.Pos, u"ï¿½Ú“ï¿½"),
+            (ImageOpMode.EraseRects, u"ï¿½ï¿½ï¿½ï¿½"),
+            (ImageOpMode.EraseRectsColors, u"ï¿½Fï¿½Ìï¿½ï¿½ï¿½"),
         ]
-        RadioGroup.__init__(self, u"ƒhƒ‰ƒbƒO‚Ì‘€ì", items, parent=parent)
+        RadioGroup.__init__(self, u"ï¿½hï¿½ï¿½ï¿½bï¿½Oï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½", items, parent=parent)
         
         imageView.setImageOpMode(self.value())
         self.valueChanged.connect(imageView.setImageOpMode)
@@ -50,9 +50,9 @@ class SprDisplayModeWidget(RadioGroup):
         items = [
             (spr_display.Mode.Act, u"Act"),
             (spr_display.Mode.Sff, u"Sff"),
-            (spr_display.Mode.Spr, u"‰æ‘œŒÅ—L"),
+            (spr_display.Mode.Spr, u"ï¿½æ‘œï¿½Å—L"),
         ]
-        RadioGroup.__init__(self, u"•\¦‚·‚éƒpƒŒƒbƒg", items, parent=parent)
+        RadioGroup.__init__(self, u"ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½bï¿½g", items, parent=parent)
         
         syncAttr(self, self.xview(), 
             ("value", "sprDisplayMode"))
@@ -79,27 +79,27 @@ class SffTab(QWidget):
         scrollPos = SliderPositionWidget(self)
         scrollPos.setSlider(self._scroll)
         
-        @commandButton(u"•¡»")
+        @commandButton(u"ï¿½ï¿½ï¿½ï¿½")
         def sprClone():
             if not self.spr().isValid():return
             self.spr().clone()
         
-        @commandButton(u"íœ")
+        @commandButton(u"ï¿½íœ")
         def sprDelete():
             if not self.spr().isValid():return
             self.spr().remove()
         
-        @commandButton(u"’Ç‰Á")
+        @commandButton(u"ï¿½Ç‰ï¿½")
         def sprAdd():
             if not self.spr().isValid():return
             self.xmodel().sff().addSprs()
         
-        @commandButton(u"“ü‘Ö")
+        @commandButton(u"ï¿½ï¿½ï¿½ï¿½")
         def sprSwap():
             if not self.spr().isValid():return
             self.spr().swap()
             
-        @commandButton(u"•Û‘¶")
+        @commandButton(u"ï¿½Û‘ï¿½")
         def sprSave():
             if not self.spr().isValid():return
             self.spr().save()
@@ -152,7 +152,7 @@ class SffTab(QWidget):
         self._imageView.colorNumberSelected.connect(self._commonColorTable.setCurrentNumber)
                 
         
-        #ƒŒƒCƒAƒEƒg‚±‚±‚©‚ç
+        #ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         leftLayout = vBoxLayout(
             hBoxLayout(
                 self._jump,
@@ -172,8 +172,8 @@ class SffTab(QWidget):
                 ("stretch", 1),
             ),
             hBoxLayout(
-                hGroupBox(u"”Ô†", self._group, self._index),
-                hGroupBox(u"ˆÊ’u", self._x, self._y),
+                hGroupBox(u"ï¿½Ôï¿½", self._group, self._index),
+                hGroupBox(u"ï¿½Ê’u", self._x, self._y),
                 self._useAct,
                 size,
             ),
@@ -181,11 +181,11 @@ class SffTab(QWidget):
             sprDisplayMode,
             colorTableDragMode,
             hBoxLayout(
-                groupBoxV(u"SFF‘S‘Ì‚ÌƒpƒŒƒbƒg", 
+                groupBoxV(u"SFFï¿½Sï¿½Ì‚Ìƒpï¿½ï¿½ï¿½bï¿½g", 
                     self._commonColorTable,
                     self._commonColorSlider,
                 ),
-                groupBoxV(u"‰æ‘œŒÅ—L‚ÌƒpƒŒƒbƒg", 
+                groupBoxV(u"ï¿½æ‘œï¿½Å—Lï¿½Ìƒpï¿½ï¿½ï¿½bï¿½g", 
                     self._sprColorTable,
                     self._sprColorSlider,
                 ),
@@ -207,17 +207,17 @@ class SffTab(QWidget):
         self.setLayout(mainLayout)
     
     def label(self):
-        #tab‚Ìƒ‰ƒxƒ‹
+        #tabï¿½Ìƒï¿½ï¿½xï¿½ï¿½
         sff = self.xmodel().sff()
         if sff.filename() is None:
-            path = u"V‹K"
+            path = u"ï¿½Vï¿½K"
         else:
             path = os.path.basename(sff.filename())
         
         size = len(sff.sprs())
         t = u"sff/{0}/({1})".format(path, size)
         if sff.hasChanged():
-            return t + u"(XV)"
+            return t + u"(ï¿½Xï¿½V)"
         else:
             return t
     

@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 from sffairmaker import airlib
@@ -91,23 +91,23 @@ class Elm(createHolder("Elm", "x y time group index h v alpha clsn1 clsn2".split
     def pos(self):
         return (self.x(), self.y())
 
-class ParsingError(StandardError):
+class ParsingError(Exception):
     def __init__(self, lineno, line):
         self.lineno = lineno
         self.line = line
         msg = "Parsing Error in line {0} of action ('{1}').".format(lineno, line)
-        StandardError.__init__(self, msg)
+        Exception.__init__(self, msg)
 
-class SectionMissingError(StandardError):
+class SectionMissingError(Exception):
     def __init__(self):
         msg = "action is not found.".format()
-        StandardError.__init__(self, msg)
+        Exception.__init__(self, msg)
 
-class PasingSectionNameError(StandardError):
+class PasingSectionNameError(Exception):
     def __init__(self, section_name):
         self.section_name = section_name
         msg = "Invalid section name '{0}'".format(section_name)
-        StandardError.__init__(self, msg)
+        Exception.__init__(self, msg)
 
 class Air:
     def __init__(self):
@@ -147,7 +147,7 @@ class Air:
     
     @classmethod
     def open(cls, filename):
-        # ƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡AIOError‚ğ•Ô‚·‰Â”\«‚ª‚ ‚é
+        # ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½AIOErrorï¿½ï¿½Ô‚ï¿½ï¿½Â”\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         ins = cls()
         for i, a in airlib.open(filename).items():
             ins._addAnimFromAirlib(i, a)
@@ -504,7 +504,7 @@ class AirData(QObject):
         self._filename = self._source = None
         self.create()
     
-    exec def_qgetter("filename")
+    exec(def_qgetter("filename"))
     
     @emitSetter
     def setFilename(self):
@@ -568,7 +568,7 @@ class AirData(QObject):
     
 
 def main():
-    #ƒAƒjƒ‚ÌƒeƒLƒXƒg•ÒW‚ÅA•ÒW‘O‚Æ“à—e‚ª•Ï‚í‚ç‚È‚©‚Á‚½‚çAƒAƒ“ƒhƒD‚É“o˜^‚µ‚È‚¢
+    #ï¿½Aï¿½jï¿½ï¿½ï¿½Ìƒeï¿½Lï¿½Xï¿½gï¿½ÒWï¿½ÅAï¿½ÒWï¿½Oï¿½Æ“ï¿½ï¿½eï¿½ï¿½ï¿½Ï‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Aï¿½ï¿½ï¿½hï¿½Dï¿½É“oï¿½^ï¿½ï¿½ï¿½È‚ï¿½
     a = AirData()
     animId, = a.animIds()
     for index in xrange(10):

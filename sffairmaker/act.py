@@ -1,7 +1,7 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
-from PyQt4.QtGui import qRed, qGreen, qBlue, qRgb, QColor
+from PyQt5.QtGui import qRed, qGreen, qBlue, qRgb, QColor
 from sffairmaker.image_op import colorTable256, Image256
 from sffairmaker import image_op
 

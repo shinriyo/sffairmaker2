@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -183,13 +183,13 @@ class SprListWidgetBase(QListView):
         self.setModel(self._createModel())
         self.setItemDelegate (SprListItemDelegate(self))
         
-        #view‚Ìİ’è
+        #viewï¿½Ìİ’ï¿½
         self.setSelectionMode(QListView.ExtendedSelection)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
         self.selectionModel().currentChanged.connect(self.emitCurrentSprChanged)
         
-        #model‚Ìİ’è
+        #modelï¿½Ìİ’ï¿½
         self.setSortingEnabled(True)
     
     def selectedSprs(self):
@@ -215,7 +215,7 @@ class SprListWidgetBase(QListView):
         import functools
         width = max(s.width() for s in sizes)
         height_list = sorted((s.height() for s in sizes), reverse=True)
-        #ãˆÊ10ŒÂ‚Ì˜a
+        #ï¿½ï¿½ï¿½10ï¿½Â‚Ì˜a
         if len(height_list) < 10:
             height_list.extend(height_list[:1]*(10 - len(height_list)))
         height = sum(height_list[:10])

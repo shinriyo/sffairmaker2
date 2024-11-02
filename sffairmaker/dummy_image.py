@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 from sffairmaker.qutil import *
@@ -38,7 +38,7 @@ def _dummyImage():
     painter.setFont(f)
     t1 = "this is 'BY DESIGN'."
     p1 = QRect(0, 0, size, size // 2)
-    t2 = u"‚±‚Ì‰æ‘œ‚Ì’Ç‰Á‚ÍŽd—l‚Å‚·"
+    t2 = u"ï¿½ï¿½ï¿½Ì‰æ‘œï¿½Ì’Ç‰ï¿½ï¿½ÍŽdï¿½lï¿½Å‚ï¿½"
     p2 = QRect(0, size//2, size, size//2)
     
     for t, p in [(t1, p1), (t2, p2)]:

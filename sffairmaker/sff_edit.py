@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 from sffairmaker.qutil import *
@@ -47,7 +47,7 @@ class SprYEdit(SprEditSpinBox):
 
 class SprUseActEdit(SprEditCheckBox):
     _field = "useAct"
-    _label = u"Act“K—p"
+    _label = u"Actï¿½Kï¿½p"
     def _updateValue(self):
         SprEditCheckBox._updateValue(self)
         self.setEnabled(not self.target().isUseActFixed())
@@ -58,7 +58,7 @@ class CharSffEdit(ValueCheckBox):
     def __init__(self, parent=None):
         ValueCheckBox.__init__(self, parent)
         
-        self.setText(u"ƒLƒƒƒ‰—p")
+        self.setText(u"ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½p")
         self.setValue(self.xmodel().sff().isCharSff())
         self.valueChanged.connect(self.xmodel().sff().setIsCharSff)
         self.xmodel().sff().updated.connect(self._updateValue)

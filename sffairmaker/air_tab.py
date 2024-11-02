@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type
 import os.path
@@ -42,7 +42,7 @@ from sffairmaker.air_edit import (
 
 class DrawingAllClsnButton(ValueButton):
     def __init__(self, imageView, parent=None):
-        ValueButton.__init__(self, u"CLSN‘S•\¦", parent=parent)
+        ValueButton.__init__(self, u"CLSNï¿½Sï¿½\ï¿½ï¿½", parent=parent)
         self._imageView = imageView
         
         self.valueChanged.connect(self.onValueChanged)
@@ -64,7 +64,7 @@ class DrawingAllClsnButton(ValueButton):
 
 class AppendingClsnButton(ValueButton):
     def __init__(self, key, imageView, parent=None):
-        ValueButton.__init__(self, u"’Ç‰Á", parent=parent)
+        ValueButton.__init__(self, u"ï¿½Ç‰ï¿½", parent=parent)
         self.setCheckable(True)
         self._key = key
         self._imageView = imageView
@@ -87,12 +87,12 @@ class AppendingClsnButton(ValueButton):
 class ClsnDragModeGroup(RadioGroup):
     def __init__(self, imageView, parent=None):
         items = [
-            (ClsnDragMode.Normal, u"ŒÂ•Ê"),
-            (ClsnDragMode.Group, u"ƒOƒ‹[ƒv"),
-            (ClsnDragMode.All, u"‚·‚×‚Ä“¯‚É"),
-            (ClsnDragMode.AllPos, u"‰æ‘œˆÊ’u‚à“¯‚É")
+            (ClsnDragMode.Normal, u"ï¿½Â•ï¿½"),
+            (ClsnDragMode.Group, u"ï¿½Oï¿½ï¿½ï¿½[ï¿½v"),
+            (ClsnDragMode.All, u"ï¿½ï¿½ï¿½×‚Ä“ï¿½ï¿½ï¿½ï¿½ï¿½"),
+            (ClsnDragMode.AllPos, u"ï¿½æ‘œï¿½Ê’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
         ]
-        RadioGroup.__init__(self, u"CLSN‚ÌˆÚ“®•û–@", items, parent=parent)
+        RadioGroup.__init__(self, u"CLSNï¿½ÌˆÚ“ï¿½ï¿½ï¿½ï¿½@", items, parent=parent)
         
         self.valueChanged.connect(imageView.setClsnDragMode)
         imageView.clsnDragModeChanged.connect(self.setValue)
@@ -104,9 +104,9 @@ class SprDisplayModeWidget(RadioGroup):
         items = [
             (spr_display.Mode.Act, u"Act"),
             (spr_display.Mode.Sff, u"Sff"),
-            (spr_display.Mode.Spr, u"‰æ‘œŒÅ—L"),
+            (spr_display.Mode.Spr, u"ï¿½æ‘œï¿½Å—L"),
         ]
-        RadioGroup.__init__(self, u"•\¦‚·‚éƒpƒŒƒbƒg", items, parent=parent)
+        RadioGroup.__init__(self, u"ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½bï¿½g", items, parent=parent)
         syncAttr(self, self.xview(), 
             ("value", "sprDisplayMode"))
     exec def_xview()
@@ -122,22 +122,22 @@ class AirTab(QWidget):
         
         self._scroll = AnimScrollBar(Qt.Horizontal, self)
         
-        @commandButton(u"’Ç‰Á")
+        @commandButton(u"ï¿½Ç‰ï¿½")
         def animNew():
             if not self.anim().isValid():return
             self.setAnim(self.air().newAnim())
         
-        @commandButton(u"•¡»")
+        @commandButton(u"ï¿½ï¿½ï¿½ï¿½")
         def animClone():
             if not self.anim().isValid():return
             self.anim().clone()
             
-        @commandButton(u"íœ")
+        @commandButton(u"ï¿½íœ")
         def animDelete():
             if not self.anim().isValid():return
             anim = self.anim().remove()
         
-        @commandButton(u"ƒeƒLƒXƒg•ÒW")
+        @commandButton(u"ï¿½eï¿½Lï¿½Xï¿½gï¿½ÒW")
         def animEdit():
             if not self.anim().isValid():return
             self.anim().textEdit()
@@ -146,22 +146,22 @@ class AirTab(QWidget):
         self._elmScrollPos = SliderPositionWidget()
         self._elmScrollPos.setSlider(self._elmScroll)
         
-        @commandButton(u"•¡»")
+        @commandButton(u"ï¿½ï¿½ï¿½ï¿½")
         def elmClone():
             if not self.elm().isValid():return
             self.elm().clone()
             
-        @commandButton(u"ˆÚ“®")
+        @commandButton(u"ï¿½Ú“ï¿½")
         def elmMove():
             if not self.elm().isValid():return
             self.elm().move()
         
-        @commandButton(u"íœ")
+        @commandButton(u"ï¿½íœ")
         def elmDelete():
             if not self.elm().isValid():return
             self.elm().remove()
         
-        @commandButton(u"’Ç‰Á")
+        @commandButton(u"ï¿½Ç‰ï¿½")
         def elmAdd():
             if not self.elm().isValid():return
             self.elm().anim().newElm()
@@ -235,7 +235,7 @@ class AirTab(QWidget):
         imageView.wheelEvent = wheelEvent
         
         self._sprDisplayMode = SprDisplayModeWidget(parent=self)
-        #ƒŒƒCƒAƒEƒg‚±‚±‚©‚ç
+        #ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         items = [
             ("Clsn1", self._clsn1, const.ClsnKeys._1),
             ("Clsn2", self._clsn2, const.ClsnKeys._2),
@@ -276,7 +276,7 @@ class AirTab(QWidget):
                ("stretch", 1),
             ),
             hBoxLayout(
-               hGroupBox(u"ƒAƒjƒ”Ô†", self._animIndex),
+               hGroupBox(u"ï¿½Aï¿½jï¿½ï¿½ï¿½Ôï¿½", self._animIndex),
                hGroupBox(u"Loop", self._animLoop),
                ("stretch", 1),
             ),
@@ -296,17 +296,17 @@ class AirTab(QWidget):
                ("stretch", 1),
             ),
             hBoxLayout(
-                hGroupBox(u"‰æ‘œ”Ô†", self._group, self._index),
-                hGroupBox(u"ˆÊ’u", self._x, self._y),
+                hGroupBox(u"ï¿½æ‘œï¿½Ôï¿½", self._group, self._index),
+                hGroupBox(u"ï¿½Ê’u", self._x, self._y),
                 ("stretch", 1),
             ),
             hBoxLayout(
-                hGroupBox(u"•\¦ŠÔ", self._time),
-                hGroupBox(u"”½“]", self._h, self._v),
+                hGroupBox(u"ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", self._time),
+                hGroupBox(u"ï¿½ï¿½ï¿½]", self._h, self._v),
                ("stretch", 1),
             ),
             hBoxLayout(
-                hGroupBox(u"“§‰ß", self._alpha),
+                hGroupBox(u"ï¿½ï¿½ï¿½ï¿½", self._alpha),
                ("stretch", 1),
             ),
             self._drawingAllClsn,
@@ -330,14 +330,14 @@ class AirTab(QWidget):
     def label(self):
         air = self.air()
         if air.filename() is None:
-            path = u"V‹K"
+            path = u"ï¿½Vï¿½K"
         else:
             path = os.path.basename(air.filename())
         
         size = len(air.anims())
         t = u"air/{0}/({1})".format(path, size)
         if air.hasChanged():
-            return t + u"(XV)"
+            return t + u"(ï¿½Xï¿½V)"
         else:
             return t
     

@@ -1,17 +1,23 @@
-#encoding:shift-jis
-#“Æ—§‚³‚¹‚é‚Ü‚Å‚à‚È‚¢ŠÖ”EƒNƒ‰ƒX‚Ì‘ƒŒA
+# coding: utf-8
+#ï¿½Æ—ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚Å‚ï¿½ï¿½È‚ï¿½ï¿½Öï¿½ï¿½Eï¿½Nï¿½ï¿½ï¿½Xï¿½Ì‘ï¿½ï¿½A
 
 from __future__ import division, with_statement, print_function
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from contextlib import contextmanager, nested
+#from PyQt4.QtCore import *
+#from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+# from contextlib import contextmanager, nested
+#from PyQt5.QtWidgets import QCheckBox, QApplication, QWidget, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import *
+from contextlib import contextmanager
 import re
 import copy
 
 import io
 from functools import wraps, partial
 from sffairmaker.line import VLine, HLine
-import cStringIO
+# import cStringIO
+from io import StringIO
 import PIL.Image
 
 
@@ -215,8 +221,22 @@ def mySetter(emit=False, signal=None):
         return _mySetterWrapper
     return _mySetterDeco
 
+# def blockSignals(*widgets):
+#     return nested(*[_blockAWidgetSignals(w) for w in widgets])
+
+@contextmanager
 def blockSignals(*widgets):
-    return nested(*[_blockAWidgetSignals(w) for w in widgets])
+    # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    contexts = [_blockAWidgetSignals(w) for w in widgets]
+    try:
+        # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        for context in contexts:
+            context.__enter__()  # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        yield  # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    finally:
+        # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        for context in reversed(contexts):
+            context.__exit__(None, None, None)  # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 @contextmanager
 def _blockAWidgetSignals(widget):
@@ -261,8 +281,10 @@ class SquareButton(QPushButton):
 
 
 class ValueMixin:
-    exec def_alias("valueChanged", "toggled")
-    exec def_alias("value", "isChecked")
+    # exec def_alias("valueChanged", "toggled")
+    exec(def_alias("valueChanged", "toggled"))
+    # exec def_alias("value", "isChecked")
+    exec(def_alias("value", "isChecked"))
     def setValue(self, v):
         return self.setChecked(v)
 
@@ -406,7 +428,8 @@ def createAction(obj, shortcut):
 
     
 def pilimage_to_qimage(pilimage):
-    fp = cStringIO.StringIO()
+    # fp = cStringIO.StringIO()
+    fp = StringIO()
     pilimage.save(fp, "BMP")
     qimage = QImage()
     qimage.loadFromData(fp.getvalue(), "BMP")
@@ -417,7 +440,8 @@ def qimage_to_pilimage(qimage):
     buffer.open(QIODevice.WriteOnly)
     qimage.save(buffer, "BMP")
     
-    fp = cStringIO.StringIO()
+    # fp = cStringIO.StringIO()
+    fp = StringIO()
     fp.write(buffer.data())
     buffer.close()
     fp.seek(0)

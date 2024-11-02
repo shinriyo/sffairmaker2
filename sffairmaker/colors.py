@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -213,13 +213,13 @@ def main1():
     w = QWidget()
     c = ColorSelector()
     
-    @commandButton(u"’Ç‰Á")
+    @commandButton(u"ï¿½Ç‰ï¿½")
     def add():
         colorList = list(c.colorList())
         colorList.append(QColor(randrange(256), randrange(256), randrange(256)))
         c.setColorList(colorList)
     
-    @commandButton(u"íœ")
+    @commandButton(u"ï¿½íœ")
     def remove():
         colorList = c.colorList()
         if colorList:

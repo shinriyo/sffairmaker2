@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 
@@ -22,7 +22,6 @@ import os
 from collections import namedtuple
 
 from collections import OrderedDict
-import cStringIO
 import copy
 from collections import namedtuple
 from operator import attrgetter, methodcaller
@@ -30,7 +29,6 @@ import csv
 
 from enum import Enum
 from iterutils import grouper
-from itertools import izip
 
 
 class CsvSaveFormat:
@@ -58,7 +56,7 @@ class CsvSaveFormat:
         from os.path import dirname, join
         return join(dirname(csvPath), self.imageBasename(csvPath, spr))
     
-    exec def_qgetter("nameFormat", "ext")
+    exec(def_qgetter("nameFormat", "ext"))
     
     def __repr__(self):
         return "{0}({1}, {2})".format(
@@ -315,7 +313,7 @@ class Sff:
         except EnvironmentError:
             raise CsvSaveError(filename)
         
-        for spr, path in izip(sprs, paths):
+        for spr, path in zip(sprs, paths):
             self._saveSpr(spr, path, getColorTable)
             
             
@@ -397,7 +395,7 @@ class SffData(QObject):
         self._filename = self._source = None
         self.create()
     
-    exec def_qgetter("filename", "source")
+    exec(def_qgetter("filename", "source"))
     
     @emitSetter
     def setFilename(self):

@@ -1,7 +1,7 @@
 #encoding: shift-jis
 from __future__ import division, print_function, unicode_literals
 __metaclass__ = type 
-from PyQt4.QtGui import (
+from PyQt5.QtGui import (
     QHBoxLayout,
     QVBoxLayout,
     QPushButton,
@@ -9,7 +9,7 @@ from PyQt4.QtGui import (
     QCheckBox,
     QDialogButtonBox,
 )
-from PyQt4.QtCore import Qt
+from PyQt5.QtCore import Qt
 
 from sffairmaker.qutils import def_alias
 
@@ -20,8 +20,8 @@ class SquareButton(QPushButton):
 
 
 class ValueMixin:
-    exec def_alias("valueChanged", "toggled")
-    exec def_alias("value", "isChecked")
+    exec(def_alias("valueChanged", "toggled"))
+    exec(def_alias("value", "isChecked"))
     def setValue(self, v):
         return self.setChecked(v)
 

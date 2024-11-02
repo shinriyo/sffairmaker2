@@ -1,7 +1,8 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
-from PyQt4.QtCore import *
+# from PyQt4.QtCore import *
+from PyQt5.QtCore import *
 
 
 class Clsn(tuple):

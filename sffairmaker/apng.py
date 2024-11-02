@@ -1,14 +1,14 @@
-#encoding:shift-jis
+# coding: utf-8
 """
-apngo—Í‚Ì‚½‚ß‚Ìƒ‚ƒWƒ…[ƒ‹
+apngï¿½oï¿½Í‚Ì‚ï¿½ï¿½ß‚Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½
 
-png‚É‚Â‚¢‚Ä‚Í
+pngï¿½É‚Â‚ï¿½ï¿½Ä‚ï¿½
 http://www14.ocn.ne.jp/~setsuki/ext/png.htm
 
-apng‚É‚Â‚¢‚Ä‚Í
+apngï¿½É‚Â‚ï¿½ï¿½Ä‚ï¿½
 https://wiki.mozilla.org/APNG_Specification#.60acTL.60:_The_Animation_Control_Chunk
 
-‚È‚Ç‚ğQÆ‚Ì‚±‚Æ
+ï¿½È‚Ç‚ï¿½ï¿½Qï¿½Æ‚Ì‚ï¿½ï¿½ï¿½
 """
 
 from __future__ import division, print_function, unicode_literals
@@ -21,28 +21,28 @@ import zlib
 
 AnimationControlFormat = (
     b"!"
-    b"I" #num_frames  	unsigned int  	ƒtƒŒ[ƒ€”
-    b"I" #num_plays 	unsigned int 	APNG‚Ìƒ‹[ƒv‰ñ”B0‚ğw’è‚·‚é‚Æ–³ŒÀƒ‹[ƒvB
+    b"I" #num_frames  	unsigned int  	ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½
+    b"I" #num_plays 	unsigned int 	APNGï¿½Ìƒï¿½ï¿½[ï¿½vï¿½ñ”B0ï¿½ï¿½ï¿½wï¿½è‚·ï¿½ï¿½Æ–ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½vï¿½B
 )
 
 FrameControlFormat = (
     b"!"
-    b"I" # sequence_number  	unsigned int  	ƒAƒjƒ[ƒVƒ‡ƒ“ƒ`ƒƒƒ“ƒN‚ÌƒV[ƒPƒ“ƒX”Ô†A0‚©‚çn‚Ü‚é
-    b"I" # width unsigned int 	Œã‚É‘±‚­ƒtƒŒ[ƒ€‚Ì•
-    b"I" # height unsigned int 	Œã‚É‘±‚­ƒtƒŒ[ƒ€‚Ì‚‚³
-    b"I" # x_offset unsigned int 	Œã‚É‘±‚­ƒtƒŒ[ƒ€‚ğ•`‰æ‚·‚éxÀ•W
-    b"I" # y_offset unsigned int 	Œã‚É‘±‚­ƒtƒŒ[ƒ€‚ğ•`‰æ‚·‚éyÀ•W
-    b"H" # delay_num 	unsigned short 	ƒtƒŒ[ƒ€’x‰„‚Ì•ªq
-    b"H" # delay_den 	unsigned short 	ƒtƒŒ[ƒ€’x‰„‚Ì•ª•ê
-    b"b" # dispose_op 	byte 	ƒtƒŒ[ƒ€‚ğ•`‰æ‚µ‚½Œã‚ÉƒtƒŒ[ƒ€—Ìˆæ‚ğ”pŠü‚·‚é‚©?
-    b"b" # blend_op 	byte 	ƒtƒŒ[ƒ€•`‰æ•û–@‚Ìƒ^ƒCƒv
+    b"I" # sequence_number  	unsigned int  	ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ÌƒVï¿½[ï¿½Pï¿½ï¿½ï¿½Xï¿½Ôï¿½ï¿½A0ï¿½ï¿½ï¿½ï¿½nï¿½Ü‚ï¿½
+    b"I" # width unsigned int 	ï¿½ï¿½É‘ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ï¿½
+    b"I" # height unsigned int 	ï¿½ï¿½É‘ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½
+    b"I" # x_offset unsigned int 	ï¿½ï¿½É‘ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½`ï¿½æ‚·ï¿½ï¿½xï¿½ï¿½ï¿½W
+    b"I" # y_offset unsigned int 	ï¿½ï¿½É‘ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½`ï¿½æ‚·ï¿½ï¿½yï¿½ï¿½ï¿½W
+    b"H" # delay_num 	unsigned short 	ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Ì•ï¿½ï¿½q
+    b"H" # delay_den 	unsigned short 	ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Ì•ï¿½ï¿½ï¿½
+    b"b" # dispose_op 	byte 	ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½`ï¿½æ‚µï¿½ï¿½ï¿½ï¿½Éƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìˆï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½é‚©?
+    b"b" # blend_op 	byte 	ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½@ï¿½Ìƒ^ï¿½Cï¿½v
 )
-APNG_DISPOSE_OP_NONE = 0 #Ÿ‚ÌƒtƒŒ[ƒ€‚ğ•`‰æ‚·‚é‘O‚ÉÁ‹‚µ‚È‚¢Bo—Íƒoƒbƒtƒ@‚ğ‚»‚Ì‚Ü‚Üg—p‚·‚éB
-APNG_DISPOSE_OP_BACKGROUND = 1 #Ÿ‚ÌƒtƒŒ[ƒ€‚ğ•`‰æ‚·‚é‘O‚ÉAo—Íƒoƒbƒtƒ@‚ÌƒtƒŒ[ƒ€—Ìˆæ‚ğuŠ®‘S‚É“§‰ß‚È•v‚Å“h‚è‚Â‚Ô‚·B
-APNG_DISPOSE_OP_PREVIOUS = 2 #Ÿ‚ÌƒtƒŒ[ƒ€‚ğ•`‰æ‚·‚é‘O‚ÉAo—Íƒoƒbƒtƒ@‚ÌƒtƒŒ[ƒ€—Ìˆæ‚ğ‚±‚ÌƒtƒŒ[ƒ€‚É“ü‚é‘O‚Ìó‘Ô‚É–ß‚·B
+APNG_DISPOSE_OP_NONE = 0 #ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½`ï¿½æ‚·ï¿½ï¿½Oï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Bï¿½oï¿½Íƒoï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Ü‚Ügï¿½pï¿½ï¿½ï¿½ï¿½B
+APNG_DISPOSE_OP_BACKGROUND = 1 #ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½`ï¿½æ‚·ï¿½ï¿½Oï¿½ÉAï¿½oï¿½Íƒoï¿½bï¿½tï¿½@ï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìˆï¿½ï¿½ï¿½uï¿½ï¿½ï¿½Sï¿½É“ï¿½ï¿½ß‚Èï¿½ï¿½vï¿½Å“hï¿½ï¿½Â‚Ô‚ï¿½ï¿½B
+APNG_DISPOSE_OP_PREVIOUS = 2 #ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½`ï¿½æ‚·ï¿½ï¿½Oï¿½ÉAï¿½oï¿½Íƒoï¿½bï¿½tï¿½@ï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìˆï¿½ï¿½ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½É“ï¿½ï¿½ï¿½Oï¿½Ìï¿½Ô‚É–ß‚ï¿½ï¿½B
 
-APNG_BLEND_OP_SOURCE = 0 #ƒAƒ‹ƒtƒ@’l‚ğŠÜ‚ß‚½‘S‚Ä‚Ì—v‘f‚ğƒtƒŒ[ƒ€‚Ìo—Íƒoƒbƒtƒ@—Ìˆæ‚Éã‘‚«‚·‚éB
-APNG_BLEND_OP_OVER = 1 #‘‚«‚Şƒf[ƒ^‚ÌƒAƒ‹ƒtƒ@’l‚ğg‚Á‚Äo—Íƒoƒbƒtƒ@‚É‡¬‚·‚éB
+APNG_BLEND_OP_SOURCE = 0 #ï¿½Aï¿½ï¿½ï¿½tï¿½@ï¿½lï¿½ï¿½ï¿½Ü‚ß‚ï¿½ï¿½Sï¿½Ä‚Ì—vï¿½fï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìoï¿½Íƒoï¿½bï¿½tï¿½@ï¿½Ìˆï¿½Éã‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+APNG_BLEND_OP_OVER = 1 #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Şƒfï¿½[ï¿½^ï¿½ÌƒAï¿½ï¿½ï¿½tï¿½@ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Äoï¿½Íƒoï¿½bï¿½tï¿½@ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
 
 def writeAnimationControl(fp, elms):
     writeChunk(fp, b"acTL", struct.pack(AnimationControlFormat, len(elms), 0))
@@ -53,15 +53,15 @@ def writeFrameControl(fp, number, elm, canvasRect):
     
     p = elm.pos - canvasRect.topLeft()
     b = struct.pack(FrameControlFormat,
-        number, # sequence_number  	unsigned int  	ƒAƒjƒ[ƒVƒ‡ƒ“ƒ`ƒƒƒ“ƒN‚ÌƒV[ƒPƒ“ƒX”Ô†A0‚©‚çn‚Ü‚é
-        elm.image.width(), # width unsigned int 	Œã‚É‘±‚­ƒtƒŒ[ƒ€‚Ì•
-        elm.image.height(), # height unsigned int 	Œã‚É‘±‚­ƒtƒŒ[ƒ€‚Ì‚‚³
-        p.x(), # x_offset unsigned int 	Œã‚É‘±‚­ƒtƒŒ[ƒ€‚ğ•`‰æ‚·‚éxÀ•W
-        p.y(), # y_offset unsigned int 	Œã‚É‘±‚­ƒtƒŒ[ƒ€‚ğ•`‰æ‚·‚éyÀ•W
-        time.numerator, # delay_num 	unsigned short 	ƒtƒŒ[ƒ€’x‰„‚Ì•ªq
-        time.denominator, # delay_den 	unsigned short 	ƒtƒŒ[ƒ€’x‰„‚Ì•ª•ê
-        APNG_DISPOSE_OP_BACKGROUND, # dispose_op 	byte 	ƒtƒŒ[ƒ€‚ğ•`‰æ‚µ‚½Œã‚ÉƒtƒŒ[ƒ€—Ìˆæ‚ğ”pŠü‚·‚é‚©?
-        APNG_BLEND_OP_OVER, # blend_op 	byte 	ƒtƒŒ[ƒ€•`‰æ•û–@‚Ìƒ^ƒCƒv
+        number, # sequence_number  	unsigned int  	ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ÌƒVï¿½[ï¿½Pï¿½ï¿½ï¿½Xï¿½Ôï¿½ï¿½A0ï¿½ï¿½ï¿½ï¿½nï¿½Ü‚ï¿½
+        elm.image.width(), # width unsigned int 	ï¿½ï¿½É‘ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ï¿½
+        elm.image.height(), # height unsigned int 	ï¿½ï¿½É‘ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½
+        p.x(), # x_offset unsigned int 	ï¿½ï¿½É‘ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½`ï¿½æ‚·ï¿½ï¿½xï¿½ï¿½ï¿½W
+        p.y(), # y_offset unsigned int 	ï¿½ï¿½É‘ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½`ï¿½æ‚·ï¿½ï¿½yï¿½ï¿½ï¿½W
+        time.numerator, # delay_num 	unsigned short 	ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Ì•ï¿½ï¿½q
+        time.denominator, # delay_den 	unsigned short 	ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Ì•ï¿½ï¿½ï¿½
+        APNG_DISPOSE_OP_BACKGROUND, # dispose_op 	byte 	ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½`ï¿½æ‚µï¿½ï¿½ï¿½ï¿½Éƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìˆï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½é‚©?
+        APNG_BLEND_OP_OVER, # blend_op 	byte 	ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½@ï¿½Ìƒ^ï¿½Cï¿½v
     )
     writeChunk(fp, b"fcTL", b)
     
@@ -89,13 +89,13 @@ def writeChunk(fp, chunkType, chunkData):
 def writeImageHeader(fp, elms, canvasRect):
     ImageHeaderFormat = (
         b"!"
-        b"I" #ƒCƒ[ƒW‚Ì‰¡•(4) ƒsƒNƒZƒ‹’PˆÊ
-        b"I" #ƒCƒ[ƒW‚Ì‚‚³(4) ƒsƒNƒZƒ‹’PˆÊ
-        b"B" #ƒrƒbƒg‚Ì[‚³(1) ®”(1,2,4,8,16)
-        b"B" #ƒJƒ‰[ƒ^ƒCƒv(1) ®”(0,2,3,4,6)
-        b"B" #ˆ³k•û®(1) ŒÅ’è’l‚O
-        b"B" #ƒtƒBƒ‹ƒ^[•û®(1) ŒÅ’è’l‚O
-        b"B" #ƒCƒ“ƒ^ƒŒ[ƒX•û®(1) ®”(0,1)
+        b"I" #ï¿½Cï¿½ï¿½ï¿½[ï¿½Wï¿½Ì‰ï¿½ï¿½ï¿½(4) ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Pï¿½ï¿½
+        b"I" #ï¿½Cï¿½ï¿½ï¿½[ï¿½Wï¿½Ìï¿½ï¿½ï¿½(4) ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Pï¿½ï¿½
+        b"B" #ï¿½rï¿½bï¿½gï¿½Ì[ï¿½ï¿½(1) ï¿½ï¿½ï¿½ï¿½(1,2,4,8,16)
+        b"B" #ï¿½Jï¿½ï¿½ï¿½[ï¿½^ï¿½Cï¿½v(1) ï¿½ï¿½ï¿½ï¿½(0,2,3,4,6)
+        b"B" #ï¿½ï¿½ï¿½kï¿½ï¿½ï¿½ï¿½(1) ï¿½Å’ï¿½lï¿½O
+        b"B" #ï¿½tï¿½Bï¿½ï¿½ï¿½^ï¿½[ï¿½ï¿½ï¿½ï¿½(1) ï¿½Å’ï¿½lï¿½O
+        b"B" #ï¿½Cï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½[ï¿½Xï¿½ï¿½ï¿½ï¿½(1) ï¿½ï¿½ï¿½ï¿½(0,1)
     )
     b = struct.pack(ImageHeaderFormat,
         canvasRect.width(),

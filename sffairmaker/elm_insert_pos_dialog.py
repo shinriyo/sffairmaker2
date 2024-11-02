@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -158,7 +158,7 @@ class ElmInsertPosDialog(InsertPosDialog):
     def __init__(self, anim, *a, **kw):
         items = [Thumb(e) for e in anim.elms()]
         InsertPosDialog.__init__(self, items, *a, **kw)
-        self.setWindowTitle(u"ƒRƒ}‚Ì‘}“üæ")
+        self.setWindowTitle(u"ï¿½Rï¿½}ï¿½Ì‘}ï¿½ï¿½ï¿½ï¿½")
         
 def main():
     pass

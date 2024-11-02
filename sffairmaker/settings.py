@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 
@@ -8,6 +8,7 @@ from win32com.shell import shell
 
 from sffairmaker.qutil import *
 from sffairmaker import const
+from PyQt5.QtCore import QString
 
 def appdata_dir():
     CSIDL_APPDATA = 0x1A

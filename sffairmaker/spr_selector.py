@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -8,7 +8,7 @@ from sffairmaker.model_null import NullSpr
 def safe_int(s):
     try:
         return int(s)
-    except StandardError:
+    except Exception:
         return None
 
 class IntComboBox(QComboBox):
@@ -94,7 +94,7 @@ class GroupIndexSelector(QWidget):
         self._group = self._groupbox.value()
         self._index = self._indexbox.value()
         
-        #ƒŒƒCƒAƒEƒg‚±‚±‚©‚ç
+        #ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         self.setLayout(hBoxLayout(
             (self._groupbox, 1),
             (self._indexbox, 1),
@@ -171,8 +171,8 @@ class GroupIndexSelector(QWidget):
             group, index = v
         
         with blockSignals(self):
-            # blockSignals(self)‚Æ‚¢‚¤‚Ì‚ÍA# self.valueChanged.emit‚Ì‚İ—}§‚µ‚½‚¢‚©‚ç
-            # self._indexbox‚Ìitems‚ÍXV‚³‚ê‚Ä—~‚µ‚¢
+            # blockSignals(self)ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½Ì‚ÍA# self.valueChanged.emitï¿½Ì‚İ—}ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            # self._indexboxï¿½ï¿½itemsï¿½ÍXï¿½Vï¿½ï¿½ï¿½ï¿½Ä—~ï¿½ï¿½ï¿½ï¿½
             self._groupbox.setValue(group)
             self._indexbox.setValue(index)
         

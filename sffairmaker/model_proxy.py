@@ -1,9 +1,9 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
 
-class Error(StandardError):pass
+class Error(Exception):pass
 
 class Proxy(QObject):
     __slots__ = ("_id", "_submodel")

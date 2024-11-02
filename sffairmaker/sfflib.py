@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 
 from sffairmaker.qutil import *
@@ -6,7 +6,8 @@ import PIL.Image
 import PIL.PcxImagePlugin
 
 import struct
-import cStringIO
+# import cStringIO
+from io import StringIO
 import copy
 import itertools
 from collections import namedtuple
@@ -80,7 +81,8 @@ class SprBase:
         return self.image.getpalette()
     
     def image_data(self):
-        mem = cStringIO.StringIO()
+        # mem = cStringIO.StringIO()
+        mem = StringIO()
         self.image.save(mem, format="pcx")
         return mem.getvalue()
 
@@ -158,7 +160,8 @@ def readExternalSprList(fp):
         
         if length:
             imageBytes = fp.read(length)
-            i = cStringIO.StringIO(imageBytes)
+            # i = cStringIO.StringIO(imageBytes)
+            i = StringIO(imageBytes)
             
             try:
                 im = PIL.Image.open(i)
@@ -307,7 +310,7 @@ def writeSffHeader(fp, sprList):
 
 def writeExternalSprList(fp, exSprList):
     writeSffHeader(fp , exSprList)
-    #Še‰æ‘œ‚Ì‘‚«‚İ
+    #ï¿½eï¿½æ‘œï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     L = len(exSprList)
     for i, s in enumerate(exSprList):
         writeSffSubFile(fp, s, i==L-1)
@@ -320,9 +323,9 @@ def externalSprList(inSprList, forChar=True):
         return externalSprListForStage(inSprList)
 
 def externalSprListForChar(inSprList):
-    # –}—á:(group, index, useAct)
+    # ï¿½}ï¿½ï¿½:(group, index, useAct)
     #
-    # ‰æ‘œ‚Ì•À‚Ô‡”Ô
+    # ï¿½æ‘œï¿½Ì•ï¿½ï¿½Ôï¿½ï¿½ï¿½
     # (9000, 0, *)
     # (9000, 1, True)
     # (9000, 1, False)
@@ -354,7 +357,7 @@ def externalSprListForChar(inSprList):
         group[bool(s.useAct)].append(s)
     
     if not s_0_0_0 and not s_0_0_1:
-        # (0, 0) ‚Ì‰æ‘œ‚ª–³‚¢ê‡Ad•û‚È‚¢‚Ì‚Å‹ó‚Ì‰æ‘œ‚ğ’Ç‰Á‚·‚é
+        # (0, 0) ï¿½Ì‰æ‘œï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½Aï¿½dï¿½ï¿½ï¿½È‚ï¿½ï¿½Ì‚Å‹ï¿½Ì‰æ‘œï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
         exSpr = InternalSpr()
         exSpr.group_index = (0, 0)
         exSpr.image = PIL.Image.new("P", (1, 1))
@@ -366,7 +369,7 @@ def externalSprListForChar(inSprList):
         exSpr.group_index = s.group_index
         exSpr.pos = s.pos
         exSpr.image = s.image
-        exSpr.dependentPalette = False # (9000, 0)‚Í•K‚¸“Æ—§ƒpƒŒƒbƒg
+        exSpr.dependentPalette = False # (9000, 0)ï¿½Í•Kï¿½ï¿½ï¿½Æ—ï¿½ï¿½pï¿½ï¿½ï¿½bï¿½g
         append(exSpr)
     
     for s in itertools.chain(s_9000_1_1, s_9000_1_0, s_0_0_0, s_0_0_1, s_x_x_1, s_x_x_0):

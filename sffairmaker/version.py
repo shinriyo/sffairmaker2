@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import with_statement, division, print_function
 
 version_info = (2, 0, 0, "beta", 6)

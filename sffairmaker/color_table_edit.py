@@ -1,5 +1,7 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
+
+from image_op import ipixelIndex
 __metaclass__ = type 
 from sffairmaker.qutil import *
 
@@ -18,7 +20,7 @@ from sffairmaker.choice_menu import choiceMenu
 from sffairmaker.default_list import DefaultList
 
 from collections import namedtuple
-from itertools import product, imap, izip, izip_longest
+from itertools import product, izip_longest
 import operator
 
 from collections import OrderedDict
@@ -45,7 +47,7 @@ def colorTableEqual(table1, table2):
            all([(qRed(i), qGreen(i), qBlue(i)) == (0, 0, 0) for i in long[len(short):]])
 
 def pixelIndexEqual(im1, im2):
-    return all(starmap(operator.eq, izip(ipixelIndex(im1), ipixelIndex(im2))))
+    return all(starmap(operator.eq, zip(ipixelIndex(im1), ipixelIndex(im2))))
 
 
 def imageEqual(im1, im2):
@@ -169,7 +171,7 @@ class ColorTableModelBase(QAbstractTableModel):
     def deleteColors(self, indexes):
         raise NotImplementedError
 
-    #‚±‚±‚©‚çAQAbstractTableModel‚ÌÀ‘•‚·‚é•K—v‚ª‚ ‚évirtualƒƒ\ƒbƒh
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½AQAbstractTableModelï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½virtualï¿½ï¿½ï¿½\ï¿½bï¿½h
     def rowCount(self, parent=None):
         return 16
     
@@ -441,7 +443,7 @@ class ColorTableEditBase(ColorTableView):
         globalPos = self.mapToGlobal(pos)
         
         actions = [
-            (u"‘I‘ğF‚Ìíœ", self.deleteSelectedColors)
+            (u"ï¿½Iï¿½ï¿½Fï¿½Ìíœ", self.deleteSelectedColors)
         ]
         
         v = choiceMenu([t for t, _ in actions], globalPos, parent=self)
@@ -538,12 +540,12 @@ class CommonColorTableEdit(ColorTableEditBase):
 
 
 class ColorTableDragModeRadio(RadioGroup):
-    def __init__(self, title=u"ƒhƒ‰ƒbƒO‚Ì‘€ì", *a, **kw):
+    def __init__(self, title=u"ï¿½hï¿½ï¿½ï¿½bï¿½Oï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½", *a, **kw):
         items = [
-            (ColorTableDragMode.Move, u"ˆÚ“®"),
-            (ColorTableDragMode.Copy, u"ƒRƒs["),
-            (ColorTableDragMode.Swap, u"ŒğŠ·"),
-            (ColorTableDragMode.SwapImageColor, u"FˆÊ’u‚Ì“ü‘Ö"),
+            (ColorTableDragMode.Move, u"ï¿½Ú“ï¿½"),
+            (ColorTableDragMode.Copy, u"ï¿½Rï¿½sï¿½["),
+            (ColorTableDragMode.Swap, u"ï¿½ï¿½ï¿½ï¿½"),
+            (ColorTableDragMode.SwapImageColor, u"ï¿½Fï¿½Ê’uï¿½Ì“ï¿½ï¿½ï¿½"),
         ]
         RadioGroup.__init__(self, title, items, *a, **kw)
     

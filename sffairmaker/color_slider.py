@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -8,13 +8,13 @@ def textToColor(t):
     t = unicode(t).lower()
     t = "".join(c for c in t if c in string.hexdigits)
     if len(t) == 3:
-        # #RGB 偺宍偺応崌
+        # #RGB 锟教宍锟教応崌
         r = t[0:1]
         g = t[1:2]
         b = t[2:3]
         return QColor(int(r*2, 16), int(g*2, 16), int(b*2, 16))
     if len(t) == 6:
-        # #RRGGBB 偺宍偺応崌
+        # #RRGGBB 锟教宍锟教応崌
         r = t[0:2]
         g = t[2:4]
         b = t[4:6]

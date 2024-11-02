@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import (
     with_statement, 
     division,
@@ -18,7 +18,10 @@ def inrange(v, vmax, vmin):
     return max(vmax, min(v, vmin))
     
 class AlphaBlend(object):
-    def_getter(*"source dest sub".split())
+    # def_getter(*"source dest sub".split())
+    def def_getter(self, source, dest, sub):
+        print(f"Source: {source}, Destination: {dest}, Sub: {sub}")
+
     def __init__(self, source, dest, sub=False):
         self._source = source
         self._dest = dest
@@ -35,7 +38,15 @@ class AlphaBlend(object):
     @source.setter
     def source(self, v):
         self._source = inrange(int(v), 0, 255)
+
+    @property
+    def dest(self):
+        return self._dest
     
+    @property
+    def sub(self):
+        return self._sub
+
     @dest.setter
     def dest(self, v):
         self._dest = inrange(int(v), 0, 255)
@@ -68,7 +79,7 @@ class AlphaBlend(object):
         elif self.source>=255 and self.dest==128:
             return "A1"
         elif self.source>=255 and self.dest==0:
-            return "" #‰½‚à‘‚©‚È‚¢
+            return "" #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
         else:
             return "AS{0}D{1}".format(self.source, self.dest)
 

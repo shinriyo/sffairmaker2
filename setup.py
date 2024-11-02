@@ -67,7 +67,7 @@ kw.update(
 setup(
     options = {'py2exe': py2exe_options},
     windows = [dict(
-        script = ur'sffairmaker/main.py',
+        script = 'sffairmaker/main.py',
         icon_resources  = [],
         other_resources = [(24, 1, manifest)],
     )],

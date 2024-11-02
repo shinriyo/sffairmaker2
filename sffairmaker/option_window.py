@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function, unicode_literals
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -181,7 +181,7 @@ class BgImageEdit(QWidget):
         
         self._filename = BgImagePathLineEdit(parent=self)
         
-        self._tile = ValueCheckBox(u"ŒJ‚è•Ô‚µ", parent=self)
+        self._tile = ValueCheckBox(u"ï¿½Jï¿½ï¿½Ô‚ï¿½", parent=self)
         
         self._deltaX = QSpinBox(self)
         self._deltaX.setRange(-300, 300)
@@ -205,7 +205,7 @@ class BgImageEdit(QWidget):
         self.setLayout(vBoxLayout(
             (self._filename, 0),
             (self._tile, 0),
-            (hGroupBox("ˆÊ’u", self._deltaX, self._deltaY), 0),
+            (hGroupBox("ï¿½Ê’u", self._deltaX, self._deltaY), 0),
             (self._bgView , 1),
         ))
     exec def_xview()
@@ -242,9 +242,9 @@ class OptionWindow(QWidget):
     def __init__(self, parent=None, settings=None):
         QWidget.__init__(self, parent)
         self._settings = settings
-        self.setWindowTitle(u"İ’è")
+        self.setWindowTitle(u"ï¿½İ’ï¿½")
         
-        # ŠO•”•ÒW‚ÆƒoƒbƒNƒAƒbƒv
+        # ï¿½Oï¿½ï¿½ï¿½ÒWï¿½Æƒoï¿½bï¿½Nï¿½Aï¿½bï¿½v
         self._sprExternalEdit = CommandLineEdit()
         self._airExternalEdit = CommandLineEdit()
         
@@ -254,31 +254,31 @@ class OptionWindow(QWidget):
         self._airExternalEdit.setText(self.settings().externalAirEditingCommand())
         self._airExternalEdit.textChanged.connect(self.settings().setExternalAirEditingCommand)
         
-        self._backup = ValueCheckBox("ƒSƒ~” ‚ÉƒoƒbƒNƒAƒbƒv")
+        self._backup = ValueCheckBox("ï¿½Sï¿½~ï¿½ï¿½ï¿½Éƒoï¿½bï¿½Nï¿½Aï¿½bï¿½v")
         self._backup.setValue(self.settings().backupToRecycle())
         self._backup.valueChanged.connect(self.settings().setBackupToRecycle)
         
-        #”wŒi•\¦
+        #ï¿½wï¿½iï¿½\ï¿½ï¿½
         self._gridColors = GridColorsTextEdit()
         syncAttr(self._gridColors, self.xview(), ("value", "colorList"))
         
         self._bgImage = BgImageEdit()
         
-        # ƒŒƒCƒAƒEƒg‚±‚±‚©‚ç
+        # ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         formLayout = QFormLayout()
-        formLayout.addRow("‰æ‘œ", self._sprExternalEdit)
+        formLayout.addRow("ï¿½æ‘œ", self._sprExternalEdit)
         formLayout.addRow("AIR", self._airExternalEdit)
         
         self._panel = QWidget()
         self._panel.setLayout(vBoxLayout(
-            groupBox("ŠO•”•ÒW", formLayout),
-            groupBox("ƒOƒŠƒbƒh‚ÌF", self._gridColors),
-            groupBox("ƒoƒbƒNƒAƒbƒv", self._backup),
+            groupBox("ï¿½Oï¿½ï¿½ï¿½ÒW", formLayout),
+            groupBox("ï¿½Oï¿½ï¿½ï¿½bï¿½hï¿½ÌF", self._gridColors),
+            groupBox("ï¿½oï¿½bï¿½Nï¿½Aï¿½bï¿½v", self._backup),
         ))
         
         self._tab = QTabWidget(parent=self)
-        self._tab.addTab(self._panel, "Šî–{")
-        self._tab.addTab(self._bgImage, "”wŒi")
+        self._tab.addTab(self._panel, "ï¿½ï¿½{")
+        self._tab.addTab(self._bgImage, "ï¿½wï¿½i")
         
         self.setLayout(vBoxLayout(
             self._tab,

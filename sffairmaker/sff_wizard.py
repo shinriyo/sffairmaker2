@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type
 
@@ -60,9 +60,9 @@ class TaskBase:
 class NoSetting(QWidget):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
-        groupBox = QGroupBox(u"İ’è")
+        groupBox = QGroupBox(u"ï¿½İ’ï¿½")
         layout = QHBoxLayout()
-        layout.addWidget(QLabel(u"İ’è€–Ú‚Í‚ ‚è‚Ü‚¹‚ñ"))
+        layout.addWidget(QLabel(u"ï¿½İ’è€ï¿½Ú‚Í‚ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½"))
         groupBox.setLayout(layout)
         
         self.setLayout(hBoxLayout(
@@ -78,23 +78,23 @@ class NoSetting(QWidget):
     
 @TaskType
 class AutoCropTask(TaskBase):
-    _text = u"—]”’‚Ìíœ"
+    _text = u"ï¿½]ï¿½ï¿½ï¿½Ìíœ"
     _widgetClass = NoSetting
     
 @TaskType
 class AllocBgTask(TaskBase):
-    _text = u"”wŒiF‚ÌŠm•Û"
+    _text = u"ï¿½wï¿½iï¿½Fï¿½ÌŠmï¿½ï¿½"
     _widgetClass = NoSetting
 
 class InvertSetting(QWidget):
     def __init__(self, parent=None):
         TaskBase.__init__(self, parent)
         items = [
-            ((True, False), u"¶‰E"),
-            ((False, True), u"ã‰º"),
-            ((True, True), u"ã‰º¶‰E"),
+            ((True, False), u"ï¿½ï¿½ï¿½E"),
+            ((False, True), u"ï¿½ã‰º"),
+            ((True, True), u"ï¿½ã‰ºï¿½ï¿½ï¿½E"),
         ]
-        self._direction = RadioGroup(u"”½“]‚³‚¹‚é•ûŒü", items, parent=self)
+        self._direction = RadioGroup(u"ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", items, parent=self)
         self.setLayout(hBoxLayout(
             self._direction
         ))
@@ -105,7 +105,7 @@ class InvertSetting(QWidget):
     
 @TaskType
 class InvertTask(TaskBase):
-    _text = u"”½“]"
+    _text = u"ï¿½ï¿½ï¿½]"
     _widgetClass = NoSetting
 
     
@@ -120,11 +120,11 @@ class PaletteSetting(QWidget):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         
-        self._sffPalette = QRadioButton(u"Sff‘S‘Ì‚ÌƒpƒŒƒbƒg")
+        self._sffPalette = QRadioButton(u"Sffï¿½Sï¿½Ì‚Ìƒpï¿½ï¿½ï¿½bï¿½g")
         self._sffPalette.setChecked(True)
-        self._actPalette = QRadioButton(u"Act‚ÌƒpƒŒƒbƒg")
-        self._filePalette = QRadioButton(u"ƒtƒ@ƒCƒ‹‚ÌƒpƒŒƒbƒg")
-        self._sprPalette = QRadioButton(u"w’è‚µ‚½‰æ‘œ‚ÌƒpƒŒƒbƒg")
+        self._actPalette = QRadioButton(u"Actï¿½Ìƒpï¿½ï¿½ï¿½bï¿½g")
+        self._filePalette = QRadioButton(u"ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ìƒpï¿½ï¿½ï¿½bï¿½g")
+        self._sprPalette = QRadioButton(u"ï¿½wï¿½è‚µï¿½ï¿½ï¿½æ‘œï¿½Ìƒpï¿½ï¿½ï¿½bï¿½g")
         
         self._filePath = ActFileLineEdit(self)
         self._filePalette.toggled.connect(self._filePath.setEnabled)
@@ -147,7 +147,7 @@ class PaletteSetting(QWidget):
         layout.addWidget(self._spr, 0, Qt.AlignRight)
         
         self.setLayout(vBoxLayout(
-            groupBox(u"g—p‚·‚éƒpƒŒƒbƒg", layout),
+            groupBox(u"ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½bï¿½g", layout),
             ("stretch", 1)
         ))
     
@@ -169,17 +169,17 @@ class PaletteSetting(QWidget):
         
 @TaskType
 class CleanColorTableTask(TaskBase):
-    _text = u"ƒpƒŒƒbƒg‚ÌƒNƒŠ[ƒ“"
+    _text = u"ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½ÌƒNï¿½ï¿½ï¿½[ï¿½ï¿½"
     _widgetClass = PaletteSetting
 
 @TaskType
 class ReplaceColorTableTask(TaskBase):
-    _text = u"ƒpƒŒƒbƒg‚Ì’uŠ·"
+    _text = u"ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½Ì’uï¿½ï¿½"
     _widgetClass = PaletteSetting
 
 ##@TaskType
 ##class UnifyColorTableTask(PaletteTaskBase):
-##    _text = u"ƒpƒŒƒbƒg‚Ì“‡"
+##    _text = u"ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½Ì“ï¿½ï¿½ï¿½"
 
 class RectsSetting(QWidget):
     def __init__(self, parent=None):
@@ -229,10 +229,10 @@ class RectsSetting(QWidget):
         
         self.setLayout(hBoxLayout(
             hGroupBox(
-                u"Á‚·•”•ª",
+                u"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
                 vBoxLayout(
                     hBoxLayout(
-                        vGroupBox(u"”{—¦", self._scale),
+                        vGroupBox(u"ï¿½{ï¿½ï¿½", self._scale),
                         ("stretch", 1),
                     ),
                     (self._clsnEdit, 1), 
@@ -247,17 +247,17 @@ class RectsSetting(QWidget):
     
 @TaskType
 class EraseRectsTask(TaskBase):
-    _text = u"Á‹"
+    _text = u"ï¿½ï¿½ï¿½ï¿½"
     _widgetClass = RectsSetting
 
 @TaskType
 class EraseRectsColorsTask(TaskBase):
-    _text = u"F‚Ìœ‹"
+    _text = u"ï¿½Fï¿½Ìï¿½ï¿½ï¿½"
     _widgetClass = RectsSetting
 
 ##@TaskType
 ##class CropRectTask(TaskBase):
-##    _text = u"Ø‚è”²‚«"
+##    _text = u"ï¿½Ø‚è”²ï¿½ï¿½"
 ##    _widgetClass = RectsSetting
 
 
@@ -265,7 +265,7 @@ class SffWizard(QDialog):
     sprChanged = pyqtSignal("PyQt_PyObject")
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"ˆêŠ‡‘€ì")
+        self.setWindowTitle(u"ï¿½êŠ‡ï¿½ï¿½ï¿½ï¿½")
         
         self._spr = NullSpr()
         self._lastSprs = []
@@ -275,11 +275,11 @@ class SffWizard(QDialog):
         add    = AddSprButton(self._sprList, self._allSprList)
         remove = RemoveSprButton(self._sprList)
         
-        @commandButton(u"‘S‚Ä’Ç‰Á")
+        @commandButton(u"ï¿½Sï¿½Ä’Ç‰ï¿½")
         def all():
             self._sprList.addSprs(self._allSprList.sprs())
         
-        @commandButton(u"‘O‰ñ‚Æ“¯‚¶")
+        @commandButton(u"ï¿½Oï¿½ï¿½Æ“ï¿½ï¿½ï¿½")
         def sameAsLast():
             self._sprList.clear()
             self._sprList.addSprs(spr for spr in self._lastSprs if spr.isValid())

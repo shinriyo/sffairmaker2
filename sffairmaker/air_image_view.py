@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 
@@ -37,11 +37,11 @@ class NoDragging(DraggingType):
         pass
     
     def mouseMove(self, event):
-        ##M    : •\¦ˆÊ’uˆÚ“®
-        ##S-C-L: •\¦ˆÊ’uˆÚ“®
-        ##S-L  : ‰æ‘œ‚ÌˆÚ“®iPos•ÏXj
-        ##C-L  : CLSN‚ÌˆÚ“®EƒŠƒTƒCƒY
-        ##L    : CLSN’Ç‰Á or ‰æ‘œ‚ÌˆÚ“®
+        ##M    : ï¿½\ï¿½ï¿½ï¿½Ê’uï¿½Ú“ï¿½
+        ##S-C-L: ï¿½\ï¿½ï¿½ï¿½Ê’uï¿½Ú“ï¿½
+        ##S-L  : ï¿½æ‘œï¿½ÌˆÚ“ï¿½ï¿½iPosï¿½ÏXï¿½j
+        ##C-L  : CLSNï¿½ÌˆÚ“ï¿½ï¿½Eï¿½ï¿½ï¿½Tï¿½Cï¿½Y
+        ##L    : CLSNï¿½Ç‰ï¿½ or ï¿½æ‘œï¿½ÌˆÚ“ï¿½
         ctrl  = event.modifiers() & Qt.ControlModifier
         shift = event.modifiers() & Qt.ShiftModifier
         
@@ -253,7 +253,7 @@ class AirImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
             delta = QPoint(0, 0)
         self._drawAElm(painter, elm, delta, 255)
     
-    # ‚±‚±‚©‚çvirtualƒƒ\ƒbƒh
+    # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½virtualï¿½ï¿½ï¿½\ï¿½bï¿½h
     def _clsns(self, elm=None):
         if elm is None:
             elm = self.elm()
@@ -304,11 +304,11 @@ class AirImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
         return NoDragging(self)
     
     def _draggingType(self, event, pos):
-        ##M    : •\¦ˆÊ’uˆÚ“®
-        ##S-C-L: •\¦ˆÊ’uˆÚ“®
-        ##S-L  : ‰æ‘œ‚ÌˆÚ“®iPos•ÏXj
-        ##C-L  : CLSN‚ÌˆÚ“®EƒŠƒTƒCƒY
-        ##L    : CLSN’Ç‰Á or ‰æ‘œ‚ÌˆÚ“®
+        ##M    : ï¿½\ï¿½ï¿½ï¿½Ê’uï¿½Ú“ï¿½
+        ##S-C-L: ï¿½\ï¿½ï¿½ï¿½Ê’uï¿½Ú“ï¿½
+        ##S-L  : ï¿½æ‘œï¿½ÌˆÚ“ï¿½ï¿½iPosï¿½ÏXï¿½j
+        ##C-L  : CLSNï¿½ÌˆÚ“ï¿½ï¿½Eï¿½ï¿½ï¿½Tï¿½Cï¿½Y
+        ##L    : CLSNï¿½Ç‰ï¿½ or ï¿½æ‘œï¿½ÌˆÚ“ï¿½
         
         left  = event.buttons() & Qt.LeftButton
         mid   = event.buttons() & Qt.MidButton

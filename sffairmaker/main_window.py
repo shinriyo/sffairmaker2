@@ -1,9 +1,9 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function, unicode_literals
 __metaclass__ = type
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 from sffairmaker import (
     version,
@@ -31,7 +31,7 @@ import re
 
 class ShowAxis(ValueCheckBox):
     def __init__(self, parent=None):
-        ValueCheckBox.__init__(self, u"²", parent=None)
+        ValueCheckBox.__init__(self, u"ï¿½ï¿½", parent=None)
         
         @self.valueChanged.connect
         def setView(v):
@@ -50,7 +50,7 @@ class ShowAxis(ValueCheckBox):
 
 class ShowGrid(ValueCheckBox):
     def __init__(self, parent=None):
-        ValueCheckBox.__init__(self, u"ƒOƒŠƒbƒh", parent=None)
+        ValueCheckBox.__init__(self, u"ï¿½Oï¿½ï¿½ï¿½bï¿½h", parent=None)
         
         @self.valueChanged.connect
         def setView(v):
@@ -71,7 +71,7 @@ class RecentFileMenu(QMenu):
     pathSelected = pyqtSignal("PyQt_PyObject")
     actions_alt_char = True
     
-    def __init__(self, title=u"Å‹ßg‚Á‚½ƒtƒ@ƒCƒ‹(&F)", parent=None):
+    def __init__(self, title=u"ï¿½Å‹ßgï¿½ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½(&F)", parent=None):
         QMenu.__init__(self, parent)
         self._files = []
         self._actions = []
@@ -122,7 +122,7 @@ class DisplayActMenu(QMenu):
         from os.path import join, relpath, abspath
         self.clear()
         
-        a = self.addAction(u"SFF–{—ˆ‚ÌƒpƒŒƒbƒg")
+        a = self.addAction(u"SFFï¿½{ï¿½ï¿½ï¿½Ìƒpï¿½ï¿½ï¿½bï¿½g")
         a.triggered.connect(lambda :self.xmodel().sff().palette().display())
         
         self.addSeparator()
@@ -137,7 +137,7 @@ class DisplayActMenu(QMenu):
             a.triggered.connect(lambda _, f=f:self.xmodel().act().open(f))
         
         self.addSeparator()
-        a = self.addAction(u"QÆ")
+        a = self.addAction(u"ï¿½Qï¿½ï¿½")
         a.triggered.connect(lambda :self.xmodel().act().open())
     
     def xmodel(self):
@@ -204,7 +204,7 @@ class MainWindow(QMainWindow):
         syncAttr(self._scale, self.xview().scaleObject(),
             "index", "maximum", "minimum")
         
-        self._transparent = ValueCheckBox("“§‰ß•\¦", parent=self)
+        self._transparent = ValueCheckBox("ï¿½ï¿½ï¿½ß•\ï¿½ï¿½", parent=self)
         syncAttr(self._transparent, self.xview().transparentObject(), "value")
         
         onion = OnionWidget(self)
@@ -217,21 +217,21 @@ class MainWindow(QMainWindow):
         self.setupMenu()
         self.setupShortcut()
         
-        #ƒŒƒCƒAƒEƒg‚±‚±‚©‚ç
+        #ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         @commandButton("showtest")
         def showtest():
             lineEdit.show()
         
         leftLayout = vBoxLayout(
-            groupBox(u"”{—¦", self._scale),
-            groupBox(u"“§‰ß•\¦", self._transparent),
-            groupBox(u"Fˆê——", colorSelector),
+            groupBox(u"ï¿½{ï¿½ï¿½", self._scale),
+            groupBox(u"ï¿½ï¿½ï¿½ß•\ï¿½ï¿½", self._transparent),
+            groupBox(u"ï¿½Fï¿½ê——", colorSelector),
             vGroupBox(
-                u"•\¦", 
+                u"ï¿½\ï¿½ï¿½", 
                 showGrid,
                 showAxis,
             ),
-            groupBox(u"ƒIƒjƒIƒ“", onion),
+            groupBox(u"ï¿½Iï¿½jï¿½Iï¿½ï¿½", onion),
             ("stretch", 1),
         )
         w = QWidget()
@@ -279,28 +279,28 @@ class MainWindow(QMainWindow):
             a.triggered.connect(lambda _:callback())
             return a
         
-        sffCreate = action(u'V‹Kì¬\tCtrl+N', 
-            u'V‚µ‚­SFF‚ğì‚è‚Ü‚·B',
+        sffCreate = action(u'ï¿½Vï¿½Kï¿½ì¬\tCtrl+N', 
+            u'ï¿½Vï¿½ï¿½ï¿½ï¿½SFFï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().sff().create()"
         )
-        sffOpen = action(u'ŠJ‚­\tCtrl+O', 
-            u'Šù‘¶‚ÌSFF‚ğŠJ‚«‚Ü‚·B',
+        sffOpen = action(u'ï¿½Jï¿½ï¿½\tCtrl+O', 
+            u'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½SFFï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().sff().open()"
         )
-        sffSave = action(u'ã‘‚«•Û‘¶', 
-            u'Œ»İ‚ÌSFF‚ğ•Û‘¶‚µ‚Ü‚·B',
+        sffSave = action(u'ï¿½ã‘ï¿½ï¿½ï¿½Û‘ï¿½', 
+            u'ï¿½ï¿½ï¿½İ‚ï¿½SFFï¿½ï¿½Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().sff().save()"
         )
-        sffSaveAs = action(u'–¼‘O‚ğ•t‚¯‚Ä•Û‘¶', 
-            u'Œ»İ‚ÌSFF‚ğV‚µ‚¢–¼‘O‚Å•Û‘¶‚µ‚Ü‚·B',
+        sffSaveAs = action(u'ï¿½ï¿½ï¿½Oï¿½ï¿½tï¿½ï¿½ï¿½Ä•Û‘ï¿½', 
+            u'ï¿½ï¿½ï¿½İ‚ï¿½SFFï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½Å•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().sff().saveAs()"
         )
-        sffSaveCsv = action(u"CSV‚É•Û‘¶",
-            u"SFF‚ğExecl‚âƒƒ‚’ ‚Å•ÒW‚Å‚«‚éŒ`®‚Å•Û‘¶‚µ‚Ü‚·B",
+        sffSaveCsv = action(u"CSVï¿½É•Û‘ï¿½",
+            u"SFFï¿½ï¿½Execlï¿½âƒï¿½ï¿½ï¿½ï¿½ï¿½Å•ÒWï¿½Å‚ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½Å•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xmodel().sff().saveCsv()"
         )
-        sffReload = action(u"Ä“Ç‚İ‚İ(&R)",
-            u"SFF‚ğƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ’¼‚µ‚Ü‚·B",
+        sffReload = action(u"ï¿½Ä“Ç‚İï¿½ï¿½ï¿½(&R)",
+            u"SFFï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚İ’ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xmodel().sff().reload()"
         )
         def setReloadEnabled(filename):
@@ -309,167 +309,167 @@ class MainWindow(QMainWindow):
         self.xmodel().sff().filenameChanged.connect(setReloadEnabled)
         setReloadEnabled(self.xmodel().sff().filename())
         
-        airCreate = action(u'V‹Kì¬(&N)', 
-            u'V‚µ‚­AIR‚ğì‚è‚Ü‚·B',
+        airCreate = action(u'ï¿½Vï¿½Kï¿½ì¬(&N)', 
+            u'ï¿½Vï¿½ï¿½ï¿½ï¿½AIRï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().air().create()"
         )
-        airOpen = action(u'ŠJ‚­(&O)',
-            u'Šù‘¶‚ÌAIR‚ğŠJ‚«‚Ü‚·B',
+        airOpen = action(u'ï¿½Jï¿½ï¿½(&O)',
+            u'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½AIRï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().air().open()"
         )
-        airSave = action(u'ã‘‚«•Û‘¶(&S)', 
-            u'Œ»İ‚ÌAIR‚ğ•Û‘¶‚µ‚Ü‚·B',
+        airSave = action(u'ï¿½ã‘ï¿½ï¿½ï¿½Û‘ï¿½(&S)', 
+            u'ï¿½ï¿½ï¿½İ‚ï¿½AIRï¿½ï¿½Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().air().save()"
         )
-        airSaveAs = action(u'–¼‘O‚ğ•t‚¯‚Ä•Û‘¶(&A)', 
-            u'Œ»İ‚ÌAIR‚ğV‚µ‚¢–¼‘O‚Å•Û‘¶‚µ‚Ü‚·B',
+        airSaveAs = action(u'ï¿½ï¿½ï¿½Oï¿½ï¿½tï¿½ï¿½ï¿½Ä•Û‘ï¿½(&A)', 
+            u'ï¿½ï¿½ï¿½İ‚ï¿½AIRï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½Å•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().air().saveAs()"
         )
-        airReload = action(u"Ä“Ç‚İ‚İ(&R)",
-            u"AIR‚ğƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ’¼‚µ‚Ü‚·B",
+        airReload = action(u"ï¿½Ä“Ç‚İï¿½ï¿½ï¿½(&R)",
+            u"AIRï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚İ’ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xmodel().air().reload()"
         )
         self.xmodel().air().filenameChanged.connect(
             lambda p:airReload.setEnabled(p is not None))
         airReload.setEnabled(self.xmodel().air().filename() is not None)
         
-        sffUndo = action(u'Œ³‚É–ß‚·(&U)', 
-            u'SFF‚É’¼‘O‚És‚Á‚½‘€ì‚ğæ‚èÁ‚µ‚Ü‚·B',
+        sffUndo = action(u'ï¿½ï¿½ï¿½É–ß‚ï¿½(&U)', 
+            u'SFFï¿½É’ï¿½ï¿½Oï¿½Ésï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().sff().undo()"
         )
-        sffRedo = action(u'ŒJ‚è•Ô‚µ(&R)', 
-            u'SFF‚Ìæ‚èÁ‚µ‚½‘€ì‚ğ‚â‚è’¼‚µ‚Ü‚·B',
+        sffRedo = action(u'ï¿½Jï¿½ï¿½Ô‚ï¿½(&R)', 
+            u'SFFï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è’¼ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().sff().redo()"
         )
-        sffSaveSpr = action(u'‰æ‘œ‚Ì•Û‘¶', 
-            u'‰æ‘œ‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ü‚·B',
+        sffSaveSpr = action(u'ï¿½æ‘œï¿½Ì•Û‘ï¿½', 
+            u'ï¿½æ‘œï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½É•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xview().spr().save()"
         )
-        sffSaveGroup = action(u'Group‚Ì•Û‘¶', 
-            u'Group‚Ì‰æ‘œ‚ğ‚Ü‚Æ‚ß‚Äƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ü‚·B',
+        sffSaveGroup = action(u'Groupï¿½Ì•Û‘ï¿½', 
+            u'Groupï¿½Ì‰æ‘œï¿½ï¿½ï¿½Ü‚Æ‚ß‚Äƒtï¿½@ï¿½Cï¿½ï¿½ï¿½É•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xview().spr().saveGroup()",
         )
         
-        sffSaveSprAct = action(u"‰æ‘œ‚ÌƒpƒŒƒbƒg‚ğ•Û‘¶",
-            u"‰æ‘œŒÅ—L‚ÌƒpƒŒƒbƒg‚ğAAct‚â‰æ‘œ‚Æ‚µ‚Ä•Û‘¶‚µ‚Ü‚·B",
+        sffSaveSprAct = action(u"ï¿½æ‘œï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½Û‘ï¿½",
+            u"ï¿½æ‘œï¿½Å—Lï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½AActï¿½ï¿½æ‘œï¿½Æ‚ï¿½ï¿½Ä•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().saveColorTable()",
         )
-        sffSwapSprAct = action(u"‰æ‘œ‚ÌƒpƒŒƒbƒg‚ğ“Ç‚İ‚İ",
-            u"‰æ‘œ‚ÌƒpƒŒƒbƒg‚ğAActƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚İ‚Ü‚·B",
+        sffSwapSprAct = action(u"ï¿½æ‘œï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½Ç‚İï¿½ï¿½ï¿½",
+            u"ï¿½æ‘œï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½AActï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½İ‚Ü‚ï¿½ï¿½B",
             "self.xview().spr().swapColorTable()",
         )
         
-        sffSaveSffAct = action(u"SFF‚ÌƒpƒŒƒbƒg‚ğ•Û‘¶",
-            u"SFF‘S‘Ì‚ÌƒpƒŒƒbƒg‚ğAAct‚â‰æ‘œ‚Æ‚µ‚Ä•Û‘¶‚µ‚Ü‚·B",
+        sffSaveSffAct = action(u"SFFï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½Û‘ï¿½",
+            u"SFFï¿½Sï¿½Ì‚Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½AActï¿½ï¿½æ‘œï¿½Æ‚ï¿½ï¿½Ä•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xmodel().sff().saveColorTable()",
         )
-        sffSwapSffAct = action(u"SFF‚ÌƒpƒŒƒbƒg‚ğ“Ç‚İ‚İ",
-            u"SFF‘S‘Ì‚ÌƒpƒŒƒbƒg‚ğAActƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚İ‚Ü‚·B",
+        sffSwapSffAct = action(u"SFFï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½Ç‚İï¿½ï¿½ï¿½",
+            u"SFFï¿½Sï¿½Ì‚Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½AActï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½İ‚Ü‚ï¿½ï¿½B",
             "self.xmodel().sff().swapColorTable()",
         )
         
-        sffCrop = action(u"Cropi—]”’‚Ìíœj(&C)",
-            u"—]”’•”•ª‚ğí‚èA‰æ‘œ‚ğ¬‚³‚­‚µ‚Ü‚·B",
+        sffCrop = action(u"Cropï¿½iï¿½]ï¿½ï¿½ï¿½Ìíœï¿½j(&C)",
+            u"ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½æ‘œï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().autoCrop()"
         )
-        sffCleanSpr = action(u"ƒpƒŒƒbƒg‚ÌƒNƒŠ[ƒ“",
-            u"SFF‘S‘Ì‚ÌƒpƒŒƒbƒg‚É–³‚¢F‚ğ”wŒiF‚Å’u‚«Š·‚¦A" \
-            u"‰æ‘œŒÅ—L‚ÌƒpƒŒƒbƒg‚ğASFF‘S‘Ì‚ÌƒpƒŒƒbƒg‚Å’u‚«Š·‚¦‚Ü‚·B",
+        sffCleanSpr = action(u"ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½ÌƒNï¿½ï¿½ï¿½[ï¿½ï¿½",
+            u"SFFï¿½Sï¿½Ì‚Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½É–ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½wï¿½iï¿½Fï¿½Å’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½A" \
+            u"ï¿½æ‘œï¿½Å—Lï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ASFFï¿½Sï¿½Ì‚Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½Å’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().cleanColorTable()"
         )
-        sffReplaceColorTable = action(u"ƒpƒŒƒbƒg‚Ì’uŠ·",
-            u"‰æ‘œŒÅ—L‚ÌƒpƒŒƒbƒg‚ğASFF‘S‘Ì‚ÌƒpƒŒƒbƒg‚Å’u‚«Š·‚¦‚Ü‚·B",
+        sffReplaceColorTable = action(u"ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½Ì’uï¿½ï¿½",
+            u"ï¿½æ‘œï¿½Å—Lï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ASFFï¿½Sï¿½Ì‚Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½Å’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().replaceColorTable()"
         )
-        sffDeleteUnusedColor = action(u"–¢g—pF‚Ìíœ",
-            u"‰æ‘œŒÅ—L‚ÌƒpƒŒƒbƒg‚©‚çA–¢g—pF‚ğíœ‚µ‚Ü‚·B",
+        sffDeleteUnusedColor = action(u"ï¿½ï¿½ï¿½gï¿½pï¿½Fï¿½Ìíœ",
+            u"ï¿½æ‘œï¿½Å—Lï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½gï¿½pï¿½Fï¿½ï¿½ï¿½íœï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().deleteUnusedColors()",
         )
-        sffAllocBgColor = action(u"”wŒiF‚ÌŠm•Û",
-            u"g—p’†‚ÌF‚ğ‚P‚Â‚¸‚Â‚¸‚ç‚µAƒpƒŒƒbƒg‚Ì0”Ô‚ÉV‚µ‚¢F‚ğ—pˆÓ‚µ‚Ü‚·B",
+        sffAllocBgColor = action(u"ï¿½wï¿½iï¿½Fï¿½ÌŠmï¿½ï¿½",
+            u"ï¿½gï¿½pï¿½ï¿½ï¿½ÌFï¿½ï¿½ï¿½Pï¿½Â‚ï¿½ï¿½Â‚ï¿½ï¿½ç‚µï¿½Aï¿½pï¿½ï¿½ï¿½bï¿½gï¿½ï¿½0ï¿½Ô‚ÉVï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½pï¿½Ó‚ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().allocBgColor()",
         )
-        sffAddColorsToCommonPalette = action(u"‘S‘ÌƒpƒŒƒbƒg‚É‰æ‘œF‚ğ’Ç‰Á",
-            u"‘S‘ÌƒpƒŒƒbƒg‚É‰æ‘œ‚ÌƒpƒŒƒbƒg‚ÌF‚ğ’Ç‰Á‚µAAct“K—p‚É‚µ‚Ü‚·B",
+        sffAddColorsToCommonPalette = action(u"ï¿½Sï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½É‰æ‘œï¿½Fï¿½ï¿½Ç‰ï¿½",
+            u"ï¿½Sï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½É‰æ‘œï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ÌFï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½AActï¿½Kï¿½pï¿½É‚ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().addColorsToCommonPalette()",
         )
-        sffInvH = action(u"¶‰E”½“](&H)",
-            u"‰æ‘œ‚ğ¶‰E”½“]‚µ‚Ü‚·B",
+        sffInvH = action(u"ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½](&H)",
+            u"ï¿½æ‘œï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().invertH()",
         )
-        sffInvV = action(u"ã‰º”½“](&V)",
-            u"‰æ‘œ‚ğã‰º”½“]‚µ‚Ü‚·B",
+        sffInvV = action(u"ï¿½ã‰ºï¿½ï¿½ï¿½](&V)",
+            u"ï¿½æ‘œï¿½ï¿½ï¿½ã‰ºï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().invertV()",
         )
         
         
-        sffJump = action(u"w’è‚µ‚½”Ô†‚ÉˆÚ“®(&J)\tCtrl+J",
-            u"w’è‚µ‚½”Ô†‚Ì‰æ‘œ‚ÉˆÚ“®‚µ‚Ü‚·B",
+        sffJump = action(u"ï¿½wï¿½è‚µï¿½ï¿½ï¿½Ôï¿½ï¿½ÉˆÚ“ï¿½(&J)\tCtrl+J",
+            u"ï¿½wï¿½è‚µï¿½ï¿½ï¿½Ôï¿½ï¿½Ì‰æ‘œï¿½ÉˆÚ“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().sff().jump()",
         )
-        sffWizard = action(u"ˆêŠ‡‘€ì(&W)",
-            u"•¡”‚Ì‰æ‘œ‚É‘Î‚µ‚Äˆê“x‚É•ÏŠ·‚ğ‚µ‚Ü‚·",
+        sffWizard = action(u"ï¿½êŠ‡ï¿½ï¿½ï¿½ï¿½(&W)",
+            u"ï¿½ï¿½ï¿½ï¿½ï¿½Ì‰æ‘œï¿½É‘Î‚ï¿½ï¿½Äˆï¿½xï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½",
             "self.xmodel().sff().wizard()",
         )
-        sffEditExternal = action(u"ŠO•”•ÒW",
-            u"‰æ‘œ‚ğ•Ê‚Ìƒ\ƒtƒg‚ğg‚Á‚Ä•ÒW‚µ‚Ü‚·B",
+        sffEditExternal = action(u"ï¿½Oï¿½ï¿½ï¿½ÒW",
+            u"ï¿½æ‘œï¿½ï¿½Ê‚Ìƒ\ï¿½tï¿½gï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ä•ÒWï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().spr().editExternal()",
         )
         
-        sffNext = action(u"Ÿ‚Ì‰æ‘œ(&N)\tCtrl+.",
-            u"Ÿ‚Ì‰æ‘œB",
+        sffNext = action(u"ï¿½ï¿½ï¿½Ì‰æ‘œ(&N)\tCtrl+.",
+            u"ï¿½ï¿½ï¿½Ì‰æ‘œï¿½B",
             "self._sff.nextItem()",
         )
-        sffPrev = action(u"‘O‚Ì‰æ‘œ(&P)\tCtrl+,",
-            u"‘O‚Ì‰æ‘œB",
+        sffPrev = action(u"ï¿½Oï¿½Ì‰æ‘œ(&P)\tCtrl+,",
+            u"ï¿½Oï¿½Ì‰æ‘œï¿½B",
             "self._sff.prevItem()",
         )
         
         
-        airUndo = action(u'Œ³‚É–ß‚·(&U)', 
-            u'AIR‚É’¼‘O‚És‚Á‚½‘€ì‚ğæ‚èÁ‚µ‚Ü‚·B',
+        airUndo = action(u'ï¿½ï¿½ï¿½É–ß‚ï¿½(&U)', 
+            u'AIRï¿½É’ï¿½ï¿½Oï¿½Ésï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().air().undo()"
         )
-        airRedo = action(u'ŒJ‚è•Ô‚µ(&R)', 
-            u'AIR‚Ìæ‚èÁ‚µ‚½‘€ì‚ğ‚â‚è’¼‚µ‚Ü‚·B',
+        airRedo = action(u'ï¿½Jï¿½ï¿½Ô‚ï¿½(&R)', 
+            u'AIRï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è’¼ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B',
             "self.xmodel().air().redo()"
         )
-        airEditExternal = action(u'ŠO•”•ÒW', 
-            u"AIR‚ğ•Ê‚Ìƒ\ƒtƒg‚ğg‚Á‚Ä•ÒW‚µ‚Ü‚·B",
+        airEditExternal = action(u'ï¿½Oï¿½ï¿½ï¿½ÒW', 
+            u"AIRï¿½ï¿½Ê‚Ìƒ\ï¿½tï¿½gï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ä•ÒWï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xmodel().air().editExternal()"
         )
-        airSaveToGif = action(u'GIF/APNG‚É•Û‘¶', 
-            u"GIF/APNGƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ü‚·B",
+        airSaveToGif = action(u'GIF/APNGï¿½É•Û‘ï¿½', 
+            u"GIF/APNGï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½É•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().anim().saveToGif()"
         )
-        airSaveToGifAll = action(u'‘S‚Ä‚ÌƒAƒjƒ‚ğGIF‚É•Û‘¶', 
-            u"‘S‚Ä‚ÌƒAƒjƒ‚ğƒAƒjƒ[ƒVƒ‡ƒ“GIFƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ü‚·B",
+        airSaveToGifAll = action(u'ï¿½Sï¿½Ä‚ÌƒAï¿½jï¿½ï¿½ï¿½ï¿½GIFï¿½É•Û‘ï¿½', 
+            u"ï¿½Sï¿½Ä‚ÌƒAï¿½jï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½GIFï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½É•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xmodel().air().saveToGifAll(ext='gif')"
         )
-        airSaveToApngAll = action(u'‘S‚Ä‚ÌƒAƒjƒ‚ğAPNG‚É•Û‘¶', 
-            u"‘S‚Ä‚ÌƒAƒjƒ‚ğƒAƒjƒ[ƒVƒ‡ƒ“PNGƒtƒ@ƒCƒ‹‚É•Û‘¶‚µ‚Ü‚·B",
+        airSaveToApngAll = action(u'ï¿½Sï¿½Ä‚ÌƒAï¿½jï¿½ï¿½ï¿½ï¿½APNGï¿½É•Û‘ï¿½', 
+            u"ï¿½Sï¿½Ä‚ÌƒAï¿½jï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½PNGï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½É•Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xmodel().air().saveToGifAll(ext='apng')"
         )
-        airJump = action(u"w’è‚µ‚½”Ô†‚ÉˆÚ“®(&J)\tCtrl+J",
-            u"w’è‚µ‚½”Ô†‚ÌƒAƒjƒ‚ÉˆÚ“®‚µ‚Ü‚·B",
+        airJump = action(u"ï¿½wï¿½è‚µï¿½ï¿½ï¿½Ôï¿½ï¿½ÉˆÚ“ï¿½(&J)\tCtrl+J",
+            u"ï¿½wï¿½è‚µï¿½ï¿½ï¿½Ôï¿½ï¿½ÌƒAï¿½jï¿½ï¿½ï¿½ÉˆÚ“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             "self.xview().air().jump()",
         )
-        airNext = action(u"Ÿ‚ÌƒAƒjƒ(&N)\tCtrl+.",
-            u"Ÿ‚ÌƒAƒjƒB",
+        airNext = action(u"ï¿½ï¿½ï¿½ÌƒAï¿½jï¿½ï¿½(&N)\tCtrl+.",
+            u"ï¿½ï¿½ï¿½ÌƒAï¿½jï¿½ï¿½ï¿½B",
             "self._air.nextItem()",
         )
-        airPrev = action(u"‘O‚ÌƒAƒjƒ(&P)\tCtrl+,",
-            u"‘O‚ÌƒAƒjƒB",
+        airPrev = action(u"ï¿½Oï¿½ÌƒAï¿½jï¿½ï¿½(&P)\tCtrl+,",
+            u"ï¿½Oï¿½ÌƒAï¿½jï¿½ï¿½ï¿½B",
             "self._air.prevItem()",
         )
         
-        exit_ = action(u"I—¹(&X)", 
-            "{0.name}‚ğI—¹‚µ‚Ü‚·B".format(version),
+        exit_ = action(u"ï¿½Iï¿½ï¿½(&X)", 
+            "{0.name}ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B".format(version),
             "self.xmodel().exit()"
         )
         
-        option = action(u"ƒIƒvƒVƒ‡ƒ“(&O)", 
-            "ƒIƒvƒVƒ‡ƒ“",
+        option = action(u"ï¿½Iï¿½vï¿½Vï¿½ï¿½ï¿½ï¿½(&O)", 
+            "ï¿½Iï¿½vï¿½Vï¿½ï¿½ï¿½ï¿½",
             "self.xview().showOptionWindow()"
         )
         
@@ -495,7 +495,7 @@ class MainWindow(QMainWindow):
             allocate_char_to_menus(menu)
             return menu
         
-        menu(self.menuBar(), u"SFFƒtƒ@ƒCƒ‹(&S)", 
+        menu(self.menuBar(), u"SFFï¿½tï¿½@ï¿½Cï¿½ï¿½(&S)", 
             sffCreate,
             sffOpen, sffSave, sffSaveAs, sffSaveCsv, 
             "-",
@@ -506,7 +506,7 @@ class MainWindow(QMainWindow):
             exit_
         )
         
-        menu(self.menuBar(), u"SFF•ÒW(&E)", 
+        menu(self.menuBar(), u"SFFï¿½ÒW(&E)", 
             sffUndo, sffRedo,
             "-",
             sffSaveSpr, sffSaveGroup,
@@ -528,7 +528,7 @@ class MainWindow(QMainWindow):
             sffJump,
         )
         
-        menu(self.menuBar(), u"AIRƒtƒ@ƒCƒ‹(&A)", 
+        menu(self.menuBar(), u"AIRï¿½tï¿½@ï¿½Cï¿½ï¿½(&A)", 
             airCreate, airOpen, airSave, airSaveAs,
             "-", 
             airReload,
@@ -539,7 +539,7 @@ class MainWindow(QMainWindow):
             "-", 
             exit_
         )
-        menu(self.menuBar(), u"AIR•ÒW(&G)",
+        menu(self.menuBar(), u"AIRï¿½ÒW(&G)",
             airUndo, airRedo,
             "-",
             airEditExternal,
@@ -552,22 +552,22 @@ class MainWindow(QMainWindow):
             airNext,
             airJump,
         )
-        menu(self.menuBar(), u"ƒc[ƒ‹(&T)",
+        menu(self.menuBar(), u"ï¿½cï¿½[ï¿½ï¿½(&T)",
             option,
         )
         
-        a = self.menuBar().addAction(u"²ˆÊ’u‚ğŒ³‚É–ß‚·(&R)")
+        a = self.menuBar().addAction(u"ï¿½ï¿½ï¿½Ê’uï¿½ï¿½ï¿½ï¿½ï¿½É–ß‚ï¿½(&R)")
         a.triggered.connect(self.xview().resetAxisDelta)
         
-        self.menuBar().addMenu(DisplayActMenu(u"•\¦—pACT(&P)", parent=self.menuBar()))
+        self.menuBar().addMenu(DisplayActMenu(u"ï¿½\ï¿½ï¿½ï¿½pACT(&P)", parent=self.menuBar()))
         
         
-        aboutQtVersion = action(u"Qt‚É‚Â‚¢‚Ä",
-            u"–{ƒ\ƒtƒg‚Åg—p‚µ‚Ä‚¢‚éQt‚É‚Â‚¢‚Ä‚Ìî•ñ‚Å‚·B",
+        aboutQtVersion = action(u"Qtï¿½É‚Â‚ï¿½ï¿½ï¿½",
+            u"ï¿½{ï¿½\ï¿½tï¿½gï¿½Ågï¿½pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Qtï¿½É‚Â‚ï¿½ï¿½Ä‚Ìï¿½ï¿½Å‚ï¿½ï¿½B",
             u"self.xview().aboutQtVersion()",
         )
-        aboutVersion = action(u"SFFAIRMaker‚É‚Â‚¢‚Ä",
-            u"ƒo[ƒWƒ‡ƒ“î•ñ‚âƒ‰ƒCƒZƒ“ƒXî•ñ“™‚ğ•\¦‚µ‚Ü‚·B",
+        aboutVersion = action(u"SFFAIRMakerï¿½É‚Â‚ï¿½ï¿½ï¿½",
+            u"ï¿½oï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½âƒ‰ï¿½Cï¿½Zï¿½ï¿½ï¿½Xï¿½ï¿½ñ“™‚ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B",
             u"self.xview().aboutVersion()",
         )
         
@@ -638,11 +638,11 @@ class MainWindow(QMainWindow):
         return self._view
     
     def cannotUndo(self):
-        self.statusBar().showMessage(u"Šù‚ÉÅ‚àŒÃ‚¢ó‘Ô‚Å‚·B")
+        self.statusBar().showMessage(u"ï¿½ï¿½ï¿½ÉÅ‚ï¿½ï¿½Ã‚ï¿½ï¿½ï¿½Ô‚Å‚ï¿½ï¿½B")
         QApplication.beep()
     
     def cannotRedo(self):
-        self.statusBar().showMessage(u"Šù‚ÉÅ‚àV‚µ‚¢ó‘Ô‚Å‚·B")
+        self.statusBar().showMessage(u"ï¿½ï¿½ï¿½ÉÅ‚ï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚Å‚ï¿½ï¿½B")
         QApplication.beep()
     
     def dragEnterEvent(self, evt):
@@ -670,7 +670,7 @@ class MainWindow(QMainWindow):
             ext = ext.lower()
             if ext not in const.NonPictureExts and isfile(f):
                 globalPos = self.mapToGlobal(evt.pos())
-                v = choiceMenu(u"’Ç‰Á “ü‘Ö".split(), globalPos, parent=self)
+                v = choiceMenu(u"ï¿½Ç‰ï¿½ ï¿½ï¿½ï¿½ï¿½".split(), globalPos, parent=self)
                 
                 if v == 0:
                     self.xmodel().sff().addSprs(files)

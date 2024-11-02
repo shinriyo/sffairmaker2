@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type
 from sffairmaker.qutil import *
@@ -61,7 +61,7 @@ class GroupIndexWidget(QWidget):
         QWidget.__init__(self, parent)
         
         self._selector = SffGroupIndexSelector(parent=self)
-        self._jump = SffJumpButton(u"QÆ", parent=self)
+        self._jump = SffJumpButton(u"ï¿½Qï¿½ï¿½", parent=self)
         
         @self._jump.sprChanged.connect
         def onJump(spr):
@@ -123,8 +123,8 @@ class OnionWidget(QWidget):
         
         self._value = Onion(0)
         
-        self._relative = QRadioButton(u"‘Š‘Î")
-        self._fixed = QRadioButton(u"ŒÅ’è")
+        self._relative = QRadioButton(u"ï¿½ï¿½ï¿½ï¿½")
+        self._fixed = QRadioButton(u"ï¿½Å’ï¿½")
         
         self._group_index = GroupIndexWidget(self)
         self._slider = OnionSlider(self)

@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 
@@ -60,20 +60,20 @@ class ImagePathPreview(QTextEdit):
                 if not spr.isValid():continue
                 name = self._format.imageBasename(self._csvPath, spr)
                 imageNames.append((name, spr))
-        except StandardError as e:
+        except Exception as e:
             self._isValid = False
             self.setHtml("<font color='red'>" + 
                 e.__class__.__name__ + ":" + str(e) + 
                 "</font>")
             return
         
-        #d•¡‚ÌŒŸo
+        #ï¿½dï¿½ï¿½ï¿½ÌŒï¿½ï¿½o
         dup = self._findDuplicate(imageNames)
         if dup is not None:
             self._isValid = False
             name, sprs = dup
             self.setHtml("<font color='red'>" + 
-                u"d•¡: " + "".join(str(s) for s in sprs) + 
+                u"ï¿½dï¿½ï¿½: " + "".join(str(s) for s in sprs) + 
                 "->" + name +
                 "</font>")
         else:
@@ -86,7 +86,7 @@ class CsvSaveFormatDialog(QDialog):
     formatChanged = pyqtSignal(CsvSaveFormat)
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"‰æ‘œ‚ÌŒ`®")
+        self.setWindowTitle(u"ï¿½æ‘œï¿½ÌŒ`ï¿½ï¿½")
         
         self._name = QComboBox()
         self._name.setAutoCompletion(True)
@@ -109,13 +109,13 @@ class CsvSaveFormatDialog(QDialog):
         self._ext.editTextChanged.connect(setPreviewFormat)
         setPreviewFormat()
         
-        #ƒŒƒCƒAƒEƒg‚±‚±‚©‚ç
+        #ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         self.setLayout(vBoxLayout(
             hBoxLayout(
                 (self._name, 1),
                 self._ext
             ),
-            (groupBox(u"ƒvƒŒƒrƒ…[", self._preview), 1),
+            (groupBox(u"ï¿½vï¿½ï¿½ï¿½rï¿½ï¿½ï¿½[", self._preview), 1),
             self._buttons,
         ))
         self.setMinimumWidth(300)

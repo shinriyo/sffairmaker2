@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -6,7 +6,7 @@ from sffairmaker.qutil import *
 class TextDialog(QDialog):
     def __init__(self, text="", parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"ƒeƒLƒXƒg•ÒW")
+        self.setWindowTitle(u"ï¿½eï¿½Lï¿½Xï¿½gï¿½ÒW")
         
         self._textEdit = QTextEdit(self)
         self._textEdit.setText(text)
@@ -37,8 +37,8 @@ class TextDialog(QDialog):
 def main():
     app = QApplication([])
     s = u"""\
-‚­‚Ÿ‚—‚¹‚„‚’‚†‚”‚‡‚™‚Ó‚¶‚±‚Œ‚
-‚‚§‚«‚¶‚ã‚ˆ‚™‚‡‚”‚†‚’‚Å‚·‚Ÿ‚‘"""
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã‚ˆï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½"""
     print(TextDialog.get(s))
     
     

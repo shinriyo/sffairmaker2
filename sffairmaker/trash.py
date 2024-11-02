@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 import os
@@ -8,10 +8,10 @@ from win32com.shell.shellcon import FOF_NOCONFIRMATION, FOF_ALLOWUNDO, FOF_SILEN
 def trash(path , dlg=False):
     path = os.path.abspath(path)
     path = unicode(path)
-    #‹æØ‚è•¶š‚ÍƒoƒbƒNƒXƒ‰ƒbƒVƒ…
+    #ï¿½ï¿½Ø‚è•¶ï¿½ï¿½ï¿½Íƒoï¿½bï¿½Nï¿½Xï¿½ï¿½ï¿½bï¿½Vï¿½ï¿½
     path = path.replace("/", "\\")
     
-    #\‚ÅI‚í‚Á‚Ä‚¢‚é‚Æíœ‚Å‚«‚È‚¢
+    #\ï¿½ÅIï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Æíœï¿½Å‚ï¿½ï¿½È‚ï¿½
     for i,c in enumerate(reversed(path)):
         if c != u"\\":
             if i==0:
@@ -22,7 +22,7 @@ def trash(path , dlg=False):
     if not dlg:
         Flags = FOF_NOCONFIRMATION | FOF_ALLOWUNDO | FOF_SILENT
     else:
-        Flags = FOF_NOCONFIRMATION | FOF_ALLOWUNDO# ƒtƒ‰ƒO
+        Flags = FOF_NOCONFIRMATION | FOF_ALLOWUNDO# ï¿½tï¿½ï¿½ï¿½O
     
     s = (
         0, # hwnd,

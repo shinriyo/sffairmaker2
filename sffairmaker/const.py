@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 from sffairmaker.alpha import AlphaBlend
@@ -6,8 +6,8 @@ from enum import Enum
 from collections import namedtuple
 
 Title = u"SFFAIRMaker2"
-IniName = ur"SFFAIRMaker2.ini"
-IniDir  = ur"%APPDATA%"
+IniName = u"SFFAIRMaker2.ini"
+IniDir  = u"%APPDATA%"
 
 AlphaSourceRange = AlphaBlend.SourceRange
 AlphaDestRange = AlphaBlend.DestRange
@@ -20,16 +20,21 @@ ElmIndexRange = SprIndexRange = (-32767, 32767)
 SprXRange = SprYRange = (-32767, 32767)
 ElmXRange = ElmYRange = (-32767, 32767)
 
-ClsnKeys = Enum("_1", "_2", "_1d", "_2d")
-ClsnKeys._1.name = "clsn1"
-ClsnKeys._2.name = "clsn2"
-ClsnKeys._1d.name = "clsn1Default"
-ClsnKeys._2d.name = "clsn2Default"
+# ClsnKeys = Enum("_1", "_2", "_1d", "_2d")
+# ClsnKeys._1.name = "clsn1"
+# ClsnKeys._2.name = "clsn2"
+# ClsnKeys._1d.name = "clsn1Default"
+# ClsnKeys._2d.name = "clsn2Default"
+class ClsnKeys(Enum):
+    _1 = "clsn1"
+    _2 = "clsn2"
+    _1d = "clsn1Default"
+    _2d = "clsn2Default"
 
 MaxRecentFiles = 10
 
 PictureFilter = u";;".join([
-    u"‰æ‘œƒtƒ@ƒCƒ‹(*.bmp *.jpg *.jpeg *.jpe *.png *.pcx)",
+    u"ï¿½æ‘œï¿½tï¿½@ï¿½Cï¿½ï¿½(*.bmp *.jpg *.jpeg *.jpe *.png *.pcx)",
     u"BMP - Windows Bitmap(*.bmp)",
     u"PCX - Zsoft Paint Brush(*.pcx)",
     u"JPG - JPEG Format(*.jpg *.jpeg *.jpe)",
@@ -46,7 +51,7 @@ CsvSaveFilter = "CSV File(*.csv);;All File(*.*)"
 AirOpenFilter = AirSaveFilter = "MUGEN AIR File(*.air);;All File(*.*)"
 
 ActOpenFilter = u";;".join([
-    u"ƒpƒŒƒbƒg‚É—˜—p‰Â”\‚Èƒtƒ@ƒCƒ‹(*.act *.bmp *.pcx *.png *.jpg *.jpeg *.jpe)",
+    u"ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½É—ï¿½ï¿½pï¿½Â”\ï¿½Èƒtï¿½@ï¿½Cï¿½ï¿½(*.act *.bmp *.pcx *.png *.jpg *.jpeg *.jpe)",
     u"ACT - MUGEN Palete(*.act)",
     u"BMP - Windows Bitmap(*.bmp)",
     u"PCX - Zsoft Paint Brush(*.pcx)",
@@ -56,7 +61,7 @@ ActOpenFilter = u";;".join([
 ])
 
 ActSaveFilter = u";;".join([
-    u"ƒpƒŒƒbƒg‚ğ•Û‘¶‰Â”\‚Èƒtƒ@ƒCƒ‹(*.act *.png *.bmp *.pcx)",
+    u"ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½ï¿½Û‘ï¿½ï¿½Â”\ï¿½Èƒtï¿½@ï¿½Cï¿½ï¿½(*.act *.png *.bmp *.pcx)",
     u"ACT - MUGEN Palete(*.act)",
     u"BMP - Windows Bitmap(*.bmp)",
     u"PCX - Zsoft Paint Brush(*.pcx)",
@@ -65,7 +70,7 @@ ActSaveFilter = u";;".join([
 ])
 
 ExecutableFilter = u";;".join([
-    u"Àsƒtƒ@ƒCƒ‹(*.exe)",
+    u"ï¿½ï¿½ï¿½sï¿½tï¿½@ï¿½Cï¿½ï¿½(*.exe)",
     u"All Files(*.*)",
 ])
 
@@ -87,7 +92,7 @@ DefaultCsvNameFormats = [u"{name}\{group:04}-{index:04}"]
 def TitleFormat(type, filename, hasChanged):
     from os.path import abspath, basename
     if filename is None:
-        t = u"V‹K"
+        t = u"ï¿½Vï¿½K"
     else:
         t = u"{0}: {1}".format(
             basename(filename),

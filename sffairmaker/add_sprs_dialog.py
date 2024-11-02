@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 
@@ -92,7 +92,7 @@ class AddSprsDialog(QDialog):
     
     def __init__(self, image=None, parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"‰æ‘œ‚Ì’Ç‰Á")
+        self.setWindowTitle(u"ï¿½æ‘œï¿½Ì’Ç‰ï¿½")
         
         self._x = QSpinBox()
         self._y = QSpinBox()
@@ -104,19 +104,19 @@ class AddSprsDialog(QDialog):
         self._group.setRange(*const.SprGroupRange)
         self._index.setRange(*const.SprIndexRange)
         
-        self._useAct = ValueCheckBox(u"Act“K—p")
-        self._withBgColor = ValueCheckBox(u"”wŒiFw’èÏ‚İ")
+        self._useAct = ValueCheckBox(u"Actï¿½Kï¿½p")
+        self._withBgColor = ValueCheckBox(u"ï¿½wï¿½iï¿½Fï¿½wï¿½ï¿½Ï‚ï¿½")
         self._withBgColor.setValue(True)
         
         items = [
-            (const.CropType.NoCrop, u"Crop‚µ‚È‚¢"),
-            (const.CropType.CropPosAfter,  u"Crop‚·‚éiCropŒã‚ğŠî€‚ÉˆÊ’uw’èj"),
-            (const.CropType.CropPosBefore, u"Crop‚·‚éiCrop‘O‚ğŠî€‚ÉˆÊ’uw’èj")
+            (const.CropType.NoCrop, u"Cropï¿½ï¿½ï¿½È‚ï¿½"),
+            (const.CropType.CropPosAfter,  u"Cropï¿½ï¿½ï¿½ï¿½iCropï¿½ï¿½ï¿½ï¿½î€ï¿½ÉˆÊ’uï¿½wï¿½ï¿½j"),
+            (const.CropType.CropPosBefore, u"Cropï¿½ï¿½ï¿½ï¿½iCropï¿½Oï¿½ï¿½ï¿½î€ï¿½ÉˆÊ’uï¿½wï¿½ï¿½j")
         ]
         
         self._cropType = RadioGroup(u"Crop", items, Qt.Vertical)
         
-        self._sequential = ValueCheckBox(u"ˆÈ~‚Í˜A”Ô")
+        self._sequential = ValueCheckBox(u"ï¿½È~ï¿½Í˜Aï¿½ï¿½")
         
         for name in """x y group index useAct cropType sequential withBgColor""".split():
             setattr(self, name,
@@ -172,10 +172,10 @@ class AddSprsDialog(QDialog):
         
         buttonBox = dialogButtons(self)
         
-        #ƒŒƒCƒAƒEƒg‚±‚±‚©‚ç
+        #ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         leftLayout = vBoxLayout(
-            hGroupBox(u"“o˜^æ", self._group, self._index),
-            hGroupBox(u"ˆÊ’u", self._x, self._y),
+            hGroupBox(u"ï¿½oï¿½^ï¿½ï¿½", self._group, self._index),
+            hGroupBox(u"ï¿½Ê’u", self._x, self._y),
             self._withBgColor,
             self._useAct,
             self._cropType,
@@ -183,7 +183,7 @@ class AddSprsDialog(QDialog):
             ("stretch", 1)
         )
         
-        scaleBox = hGroupBox(u"”{—¦", self._scale)
+        scaleBox = hGroupBox(u"ï¿½{ï¿½ï¿½", self._scale)
         scaleBox.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         rightLayout = vBoxLayout(
             scaleBox,

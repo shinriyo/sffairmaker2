@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 
@@ -24,11 +24,11 @@ class NoDragging(DraggingType):
         self.setCursor(Qt.ArrowCursor)
     
     def mouseMove(self, event):
-        ##M    : •\¦ˆÊ’uˆÚ“®
-        ##S-C-L: •\¦ˆÊ’uˆÚ“®
-        ##S-L  : ‰æ‘œ‚ÌˆÚ“®iPos•ÏXj
-        ##C-L  : ‰½‚à‚µ‚È‚¢
-        ##L    : ‰æ‘œ‘€ìi‰æ‘œ‚ÌˆÚ“®EÁ‹EF‚Ìœ‹j
+        ##M    : ï¿½\ï¿½ï¿½ï¿½Ê’uï¿½Ú“ï¿½
+        ##S-C-L: ï¿½\ï¿½ï¿½ï¿½Ê’uï¿½Ú“ï¿½
+        ##S-L  : ï¿½æ‘œï¿½ÌˆÚ“ï¿½ï¿½iPosï¿½ÏXï¿½j
+        ##C-L  : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
+        ##L    : ï¿½æ‘œï¿½ï¿½ï¿½ï¿½iï¿½æ‘œï¿½ÌˆÚ“ï¿½ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½Fï¿½Ìï¿½ï¿½ï¿½ï¿½j
         ctrl  = event.modifiers() & Qt.ControlModifier
         shift = event.modifiers() & Qt.ShiftModifier
         
@@ -134,11 +134,11 @@ class SffImageViewCore(AbstractImageViewCore):
         return NoDragging(self)
     
     def _draggingType(self, event, pos):
-        ##M    : •\¦ˆÊ’uˆÚ“®
-        ##S-C-L: •\¦ˆÊ’uˆÚ“®
-        ##S-L  : ‰æ‘œ‚ÌˆÚ“®iPos•ÏXj
-        ##C-L  : ‰½‚à‚µ‚È‚¢
-        ##L    : ‰æ‘œ‘€ìi‰æ‘œ‚ÌˆÚ“®EÁ‹EF‚Ìœ‹j
+        ##M    : ï¿½\ï¿½ï¿½ï¿½Ê’uï¿½Ú“ï¿½
+        ##S-C-L: ï¿½\ï¿½ï¿½ï¿½Ê’uï¿½Ú“ï¿½
+        ##S-L  : ï¿½æ‘œï¿½ÌˆÚ“ï¿½ï¿½iPosï¿½ÏXï¿½j
+        ##C-L  : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
+        ##L    : ï¿½æ‘œï¿½ï¿½ï¿½ï¿½iï¿½æ‘œï¿½ÌˆÚ“ï¿½ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½Fï¿½Ìï¿½ï¿½ï¿½ï¿½j
         
         left  = event.buttons() & Qt.LeftButton
         mid   = event.buttons() & Qt.MidButton

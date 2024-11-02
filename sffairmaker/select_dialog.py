@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -39,7 +39,7 @@ class SelectDialog(QDialog):
 def main():
     app = QApplication([])
     
-    i = SelectDialog.get(u"‚ ‚ ‚ ‚ ", [x*5 for x in u"‚©‚«‚­‚¯‚±"])
+    i = SelectDialog.get(u"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", [x*5 for x in u"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"])
     print(i)
     
     

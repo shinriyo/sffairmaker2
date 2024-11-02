@@ -1,9 +1,9 @@
-#encoding:shift-jis
+# coding: utf-8
 from sffairmaker.section_file import isection, isection_from_string
 from sffairmaker.alphablend import AlphaBlend
-import __builtin__
+# import __builtin__
+import builtins
 from collections import namedtuple
-from itertools import imap
 import re
 
 class Rect(namedtuple("Rect", "left top width height")):
@@ -14,7 +14,8 @@ class Rect(namedtuple("Rect", "left top width height")):
     def bottom(self):
         return self.top + self.height
 
-class Error(StandardError):
+class Error(Exception):
+    """カスタムエラークラス"""
     pass
 
 _ReBeginAction = re.compile(r"begin \s* action \s* ((\+|-)?\d+)",  re.I | re.X)
@@ -81,11 +82,10 @@ class AIR(dict):
             index = int(m.group(1))
             try:
                 inst[index] = ActionBuilder(lines).A
-            except Error, e:
-                msg = "%s\n%s��Begin Action %d"%(e, srcname, n)
+            except Error as e:  # ここを修正
+                msg = "%s\n%s\nBegin Action %d" % (e, srcname, index)  # nをindexに変更
                 raise Error(msg)
         return inst
-    
     
 class Action(object):
     """
@@ -198,7 +198,7 @@ class Action(object):
             
             append("Clsn{0}Default:{1}".format(clsnindex, len(clsns)))
             for k, rc in enumerate(clsns):
-                rectstr = ",".join(imap(str, [rc.left, rc.top, rc.right, rc.bottom]))
+                rectstr = ",".join(map(str, [rc.left, rc.top, rc.right, rc.bottom]))
                 append("  Clsn{clsnindex}[{k}] = {rect}"\
                         .format(clsnindex=clsnindex, k=k, rect=rectstr))
         

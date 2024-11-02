@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 from sffairmaker.qutil import *
@@ -129,19 +129,19 @@ class ClsnImageViewMixin:
             k, i = rectIndex
             c = self._clsns()[k]
             rect = c.clsn[i]
-            drc = self._screenRect(rect) #•\¦ã‚ÌRect
+            drc = self._screenRect(rect) #ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½Rect
             
-            #‹÷‚ÉŠÜ‚ß‚é‚©‚Ç‚¤‚©‚ÌAŒë·‚ ‚é‚¢‚Í‹–—e”ÍˆÍ
-            #Rect‚ÌŠO‘¤‚Ö‚ÌŒë·
+            #ï¿½ï¿½ï¿½ÉŠÜ‚ß‚é‚©ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½ÌAï¿½ë·ï¿½ï¿½ï¿½é‚¢ï¿½Í‹ï¿½ï¿½eï¿½Íˆï¿½
+            #Rectï¿½ÌŠOï¿½ï¿½ï¿½Ö‚ÌŒë·
             errorMargin = self.ClsnDragErrorMargin * self.scale()
             
-            #Rect‚Ì“à‘¤‚Ö‚ÌŒë·ic•Ój
+            #Rectï¿½Ì“ï¿½ï¿½ï¿½ï¿½Ö‚ÌŒë·ï¿½iï¿½cï¿½Ój
             vErrorMargin = min(errorMargin, abs(drc.height()) // 3)
             
-            #Rect‚Ì“à‘¤‚Ö‚ÌŒë·i‰¡•Ój
+            #Rectï¿½Ì“ï¿½ï¿½ï¿½ï¿½Ö‚ÌŒë·ï¿½iï¿½ï¿½ï¿½Ój
             hErrorMargin = min(errorMargin, abs(drc.width()) // 3)
             
-            on = {} #ã‰º¶‰E‚ÌŠe•Ó‚Ì‰„’·üã‚É‚ ‚é‚©H
+            on = {} #ï¿½ã‰ºï¿½ï¿½ï¿½Eï¿½ÌŠeï¿½Ó‚Ì‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½é‚©ï¿½H
             on["left"]   = -errorMargin <= pos.x()-drc.left()  <= hErrorMargin
             on["right"]  = -hErrorMargin<= pos.x()-drc.right() <= errorMargin
             on["top"]    = -errorMargin <= pos.y()-drc.top()   <= vErrorMargin
@@ -155,7 +155,7 @@ class ClsnImageViewMixin:
                     dragType = (v, h)
                     dragClsns.append((diff, dragType, rectIndex))
             
-            #Rect‚Ìã‚É‚ ‚é‚©
+            #Rectï¿½Ìï¿½É‚ï¿½ï¿½é‚©
             onRect = drc.left() - errorMargin <= pos.x() <= drc.right() + errorMargin and \
                      drc.top() - errorMargin <= pos.y() <= drc.bottom() + errorMargin
             
@@ -263,7 +263,7 @@ class ClsnImageViewMixin:
             drawClsn(self.appendingClsn(), c.clsn, c.color)
         
 
-    #‚±‚±‚©‚çvirtualƒƒ\ƒbƒh
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½virtualï¿½ï¿½ï¿½\ï¿½bï¿½h
     def _clsns(self):
         raise NotImplementedError
     

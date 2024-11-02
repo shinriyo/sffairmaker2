@@ -5,11 +5,15 @@ import re
 from itertools import *
 from operator import *
 from sffairmaker.multidict import multidict
-from cStringIO import StringIO
+# from cStringIO import StringIO
+from io import StringIO
 
 def bufferedFileIO(filename):
-    with open(filename) as fp:
+    with open(filename, 'r', encoding='utf-8') as fp:
         return StringIO(fp.read())
+# def bufferedFileIO(filename):
+#     with open(filename) as fp:
+#         return StringIO(fp.read())
 
 _ReSectionHead = re.compile(r"^\s* \[ \s* (.*?) \s* \] \s*$" , re.I|re.X)
 _ReSectionHead_match = _ReSectionHead.match
@@ -35,7 +39,7 @@ def _isection_from_fp(fp, match=None):
         p = line.find(";")
         if 0 <= p:
             line = line[:p]
-        line = line.strip("\n @")
+        line = line.strip("\n Â@")
         if not line:continue
         
         mh = _ReSectionHead_match(line)

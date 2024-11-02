@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -6,7 +6,7 @@ from sffairmaker.qutil import *
 class ErrorDialog(QDialog):
     def __init__(self, message="", parent=None):
         QDialog.__init__(self, parent=parent)
-        self.setWindowTitle(u"ÉGÉâÅ[")
+        self.setWindowTitle(u"ÔøΩGÔøΩÔøΩÔøΩ[")
         
         self._text = QPlainTextEdit(message, parent=self)
         self._text.setReadOnly(True)

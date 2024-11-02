@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 
@@ -31,12 +31,12 @@ def screenPos(p, scale):
 
 def dataRect(rc, scale):
     """
-    screenã‚ÌRect -> SFF‚âAIR‚È‚Ç‚Ìdata“à‚Å‚ÌRect
+    screenï¿½ï¿½ï¿½Rect -> SFFï¿½ï¿½AIRï¿½È‚Ç‚ï¿½dataï¿½ï¿½ï¿½Å‚ï¿½Rect
     
-    data‚ÌƒsƒNƒZƒ‹(0, 0)‚ÍAscreenã‚ÅQRect(0, 0, scale, scale)‚Æ‚µ‚Ä•`‰æ‚³‚ê‚éB
+    dataï¿½Ìƒsï¿½Nï¿½Zï¿½ï¿½(0, 0)ï¿½ÍAscreenï¿½ï¿½ï¿½QRect(0, 0, scale, scale)ï¿½Æ‚ï¿½ï¿½Ä•`ï¿½æ‚³ï¿½ï¿½ï¿½B
     
-    ‚±‚ÌŠÖ”‚Å‚ÍAscreenã‚Årc‚ª­‚µ‚Å‚à”í‚é‚æ‚¤‚Èdata‚ÌƒsƒNƒZƒ‹‚ÍA
-    dataRect‚ÉŠÜ‚Ü‚ê‚é‚Æ‚·‚éB
+    ï¿½ï¿½ï¿½ÌŠÖï¿½ï¿½Å‚ÍAscreenï¿½ï¿½ï¿½rcï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½ï¿½dataï¿½Ìƒsï¿½Nï¿½Zï¿½ï¿½ï¿½ÍA
+    dataRectï¿½ÉŠÜ‚Ü‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½B
     
     >>> dataRect(QRect(QPoint(0, 0), QPoint(0, 0)), 1)
     PyQt4.QtCore.QRect(0, 0, 1, 1)
@@ -52,7 +52,7 @@ def dataRect(rc, scale):
     
 def screenRect(rc, scale):
     """
-    SFF‚âAIR‚È‚Ç‚Ìdata“à‚Å‚ÌRect -> screenã‚ÌRect
+    SFFï¿½ï¿½AIRï¿½È‚Ç‚ï¿½dataï¿½ï¿½ï¿½Å‚ï¿½Rect -> screenï¿½ï¿½ï¿½Rect
     >>> rc = QRect(0, 0, 1, 1)
     >>> s = 5
     >>> dataRect(screenRect(rc, s), s)
@@ -165,17 +165,17 @@ def gridLines(rect, size):
 
 
 class AbstractImageViewCore(QWidget):
-##    ImageView‚Ì•¶š’Ê‚èŠjB
-##    AbstractImageViewCore‚ÌƒTƒuƒNƒ‰ƒX‚ğcreateImageViewClass‚É“n‚µA
-##    ImageView‚ÌƒTƒuƒNƒ‰ƒX‚ğì‚éB
+##    ImageViewï¿½Ì•ï¿½ï¿½ï¿½ï¿½Ê‚ï¿½jï¿½B
+##    AbstractImageViewCoreï¿½ÌƒTï¿½uï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½createImageViewClassï¿½É“nï¿½ï¿½ï¿½A
+##    ImageViewï¿½ÌƒTï¿½uï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½B
     
-##    Drag&Drop ‚ğ’Ç‰Á‚µ‚½‚¢‚Æ‚«‚ÍA
-##    mousePressEvent‚È‚Ç‚ğƒI[ƒo[ƒ‰ƒCƒh‚·‚é‚Ì‚Å‚Í‚È‚­A
-##    _draggingType‚ğƒI[ƒo[ƒ‰ƒCƒh‚·‚éB
-##    _draggingType‚Íƒ}ƒEƒX‚Ìiaxis‚ÉŠî‚Ã‚¢‚½“à•”“I‚ÈjˆÊ’u‚ÆmouseEvent‚ğŒ³‚ÉA
-##    DraggingType‚ÌƒTƒuƒNƒ‰ƒX‚ğ•Ô‚·B
+##    Drag&Drop ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ÍA
+##    mousePressEventï¿½È‚Ç‚ï¿½ï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½Cï¿½hï¿½ï¿½ï¿½ï¿½Ì‚Å‚Í‚È‚ï¿½ï¿½A
+##    _draggingTypeï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½Cï¿½hï¿½ï¿½ï¿½ï¿½B
+##    _draggingTypeï¿½Íƒ}ï¿½Eï¿½Xï¿½Ìiaxisï¿½ÉŠï¿½Ã‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½Èjï¿½Ê’uï¿½ï¿½mouseEventï¿½ï¿½ï¿½ï¿½ï¿½ÉA
+##    DraggingTypeï¿½ÌƒTï¿½uï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Ô‚ï¿½ï¿½B
     
-##    DraggingType‚ÍmousePress mouseMove mouseRelease‚É‚µ‚½‚¢‰½‚©‚ğÀ‘•‚µ‚½ƒNƒ‰ƒX‚Å‚ ‚éB
+##    DraggingTypeï¿½ï¿½mousePress mouseMove mouseReleaseï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½Å‚ï¿½ï¿½ï¿½B
     
     
     axisDeltaChanged = pyqtSignal(QPoint)
@@ -471,7 +471,7 @@ class AbstractImageViewCore(QWidget):
     def _moveDelta(self):
         return QPoint(self._dragDelta() / self.scale())
     
-    # ‚±‚±‚©‚çvirtualƒƒ\ƒbƒh
+    # ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½virtualï¿½ï¿½ï¿½\ï¿½bï¿½h
     def _draggingType(self, event, pos):
         raise NotImplementedError
     
@@ -485,8 +485,8 @@ class AbstractImageViewCore(QWidget):
 
 class ImageView(QWidget):
     """
-    •`‰æŠÖŒW‚ğŠg’£‚µ‚½‚¢‚Æ‚«A‚±‚ÌƒNƒ‰ƒX‚Í’¼ÚŒp³‚·‚é‚×‚«‚Å‚Í‚È‚¢B
-    AbstractImageView‚ğŒp³‚µAcreateImageViewClass‚ÅƒTƒuƒNƒ‰ƒX‚ğì‚é‚×‚µB
+    ï¿½`ï¿½ï¿½ÖŒWï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Aï¿½ï¿½ï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½Í’ï¿½ï¿½ÚŒpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×‚ï¿½ï¿½Å‚Í‚È‚ï¿½ï¿½B
+    AbstractImageViewï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½AcreateImageViewClassï¿½ÅƒTï¿½uï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½×‚ï¿½ï¿½B
     """
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)

@@ -1,8 +1,11 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+#from PyQt4.QtGui import *
+#from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import QFrame
 
 class HLine(QFrame):
     def __init__(self, margin=5, parent=None):

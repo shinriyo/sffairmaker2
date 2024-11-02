@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -10,7 +10,7 @@ from sffairmaker.spr_selector import SprSelector
 class SprPreviewSelector(QWidget):
     def __init__(self, sprs, parent=None):
         QWidget.__init__(self, parent)
-        self.setWindowTitle(u"ˆÚ“®æ")
+        self.setWindowTitle(u"ï¿½Ú“ï¿½ï¿½ï¿½")
         
         self._scroll = SprScrollBar(Qt.Horizontal, parent=self)
         self._selector = SprSelector(sprs=sprs, parent=self)
@@ -36,7 +36,7 @@ class SprPreviewSelector(QWidget):
 class SffJumpDialog(QDialog):
     def __init__(self, sprs, parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"ˆÚ“®æ")
+        self.setWindowTitle(u"ï¿½Ú“ï¿½ï¿½ï¿½")
         
         self._selector = SprPreviewSelector(sprs=sprs, parent=self)
         buttonBox = dialogButtons(self)

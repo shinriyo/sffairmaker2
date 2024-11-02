@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 import copy
@@ -17,7 +17,7 @@ def createHolder(name, fields):
             assert set(kw) == set(self._fields)
             self.__dict__.update(("_"+k, v)for k, v  in kw.items())
         
-        exec def_qgetter(*_fields)
+        exec(def_qgetter(*_fields))
         
         def _replace(self, **kw):
             assert set(kw) <= set(self._fields)

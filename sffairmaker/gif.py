@@ -1,8 +1,8 @@
-#encoding:shift-jis
+# coding: utf-8
 """
-gifo—Í‚Ì‚½‚ß‚Ìƒ‚ƒWƒ…[ƒ‹
-http://d.hatena.ne.jp/chikuchikugonzalez/20100627/1277648358‚ÌƒR[ƒh‚ğ‘å•ªQl‚É‚³‚¹‚Ä‚¢‚½‚¾‚¢‚½B
-gif‚É‚Â‚¢‚Ä‚ÍAhttp://www.tohoho-web.com/wwwgif.htm‚È‚Ç‚ğQÆ‚Ì–
+gifï¿½oï¿½Í‚Ì‚ï¿½ï¿½ß‚Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½
+http://d.hatena.ne.jp/chikuchikugonzalez/20100627/1277648358ï¿½ÌƒRï¿½[ï¿½hï¿½ï¿½å•ªï¿½Qï¿½lï¿½É‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+gifï¿½É‚Â‚ï¿½ï¿½Ä‚ÍAhttp://www.tohoho-web.com/wwwgif.htmï¿½È‚Ç‚ï¿½ï¿½Qï¿½Æ‚Ìï¿½
 """
 from __future__ import division, print_function, unicode_literals
 __metaclass__ = type 

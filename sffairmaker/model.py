@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 from sffairmaker.qutil import *
@@ -154,7 +154,7 @@ class Spr(Proxy):
         return self._data.changeSpr(self._id, **kw)
     
     def isUseActFixed(self):
-        # (0, 0) ‚Æ (9000, 0) ‚Í ƒLƒƒƒ‰—pSFF‚Å‚Íí‚ÉAct“K—p
+        # (0, 0) ï¿½ï¿½ (9000, 0) ï¿½ï¿½ ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½pSFFï¿½Å‚Íï¿½ï¿½Actï¿½Kï¿½p
         return self.group_index() in [(0, 0), (9000, 0)] and \
                self._submodel.isCharSff()
     
@@ -238,7 +238,7 @@ class Spr(Proxy):
         self.change(image=image)
     
     def addColorsToCommonPalette(self):
-        #‰æ‘œF‚ğ‘S‘ÌƒpƒŒƒbƒg‚É’Ç‰Á‚µAAct“K—p‚É‚·‚é
+        #ï¿½æ‘œï¿½Fï¿½ï¿½Sï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½É’Ç‰ï¿½ï¿½ï¿½ï¿½AActï¿½Kï¿½pï¿½É‚ï¿½ï¿½ï¿½
         colorTable, image = image_op.addImageColors(
             self.commonColorTable(), 
             self.commonUsedColorIndexes(),
@@ -345,7 +345,7 @@ class Spr(Proxy):
     
     editExternal = editExternal_("tempSprFileName", "startExternalSprEditing")
     
-    #‚±‚±‚©‚çA“œˆß\•¶“IE•â•“Iƒƒ\ƒbƒh‚Ì’è‹`
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ß\ï¿½ï¿½ï¿½Iï¿½Eï¿½â•ï¿½Iï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Ì’ï¿½`
     def group_index(self):
         return (self.group(), self.index())
     
@@ -398,7 +398,7 @@ class Anim(Proxy):
     def newElm(self):
         pos = self.askElmInsertPos(
             self,
-            caption=u"V‚µ‚¢ƒRƒ}‚Ì‘}“üæ"
+            caption=u"ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½}ï¿½Ì‘}ï¿½ï¿½ï¿½ï¿½"
         )
         if pos is None:
             return
@@ -528,7 +528,7 @@ class Anim(Proxy):
                 for _ in xrange(t):
                     yield e
     
-    #‚±‚±‚©‚çA“œˆß\•¶“IE•â•“Iƒƒ\ƒbƒh‚Ì’è‹`
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ß\ï¿½ï¿½ï¿½Iï¿½Eï¿½â•ï¿½Iï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Ì’ï¿½`
     def timeLine(self):
         from itertools import cycle, chain
         return cycle(
@@ -617,7 +617,7 @@ class Elm(Proxy):
     def move(self):
         pos = self.askElmInsertPos(
             self.anim(),
-            caption=u"ˆÚ“®æ"
+            caption=u"ï¿½Ú“ï¿½ï¿½ï¿½"
         )
         if pos is not None:
             self.anim().moveElm(pos, self)
@@ -625,7 +625,7 @@ class Elm(Proxy):
     def clone(self):
         pos = self.askElmInsertPos(
             self.anim(),
-            caption=u"ƒRƒs[‚Ì‘}“üæ"
+            caption=u"ï¿½Rï¿½sï¿½[ï¿½Ì‘}ï¿½ï¿½ï¿½ï¿½"
         )
         if pos is None:
             return
@@ -655,7 +655,7 @@ class Elm(Proxy):
         )
 
         
-    #‚±‚±‚©‚çA“œˆß\•¶“IE•â•“Iƒƒ\ƒbƒh‚Ì’è‹`
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ß\ï¿½ï¿½ï¿½Iï¿½Eï¿½â•ï¿½Iï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Ì’ï¿½`
     def utime(self):
         return max(self.time(), 0)
     
@@ -695,7 +695,7 @@ class Act(Palette):
         self._filename = ""
         self._colorTable = None
     
-    exec def_qgetter("filename")
+    exec(def_qgetter("filename"))
     
     def colorTable(self):
         assert self._colorTable is not None
@@ -759,20 +759,21 @@ class SimpleThread(QThread):
         self._result = None
         self._exc_info = None
     
-    exec def_qgetter("callable", "exception", "result", "exc_info")
-    
+    exec(def_qgetter("callable", "exception", "result", "exc_info"))
+   
     def run(self):
         try:
             self._result = self._callable()
-        except Exception as self._exception:
+        except Exception as e:  # ä¸€æ™‚çš„ãªå¤‰æ•°åã«å¤‰æ›´
             import sys
+            self._exception = e  # ä¸€æ™‚å¤‰æ•°ã®å€¤ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å¤‰æ•°ã«ä»£å…¥
             self._exc_info = sys.exc_info()
             pass
     
     def reraise(self):
         if self._exc_info:
             type, value, trace = self.exc_info()
-            raise type, value, trace
+            raise value.with_traceback(trace)  # æ–°ã—ã„æ§‹æ–‡
 
 
 class SubModel(QObject):
@@ -821,8 +822,8 @@ class SubModel(QObject):
     @contextmanager
     def _updating(self):
         """
-        data‚É•ÏX‚ğ‰Á‚¦‚é‚æ‚¤‚È‘€ì‚ğwith x._updating():‚ÅˆÍ‚Ş‚ÆA
-        with •¶‚ğ”²‚¯‚é‚Æ‚«‚ÉƒTƒuƒ‚ƒfƒ‹‚É•ÏX‚ª‚ ‚Á‚½‚±‚Æ‚ğ’Ê’m‚·‚éB
+        dataï¿½É•ÏXï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½È‘ï¿½ï¿½ï¿½ï¿½with x._updating():ï¿½ÅˆÍ‚Ş‚ÆA
+        with ï¿½ï¿½ï¿½ğ”²‚ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ÉƒTï¿½uï¿½ï¿½ï¿½fï¿½ï¿½ï¿½É•ÏXï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½Ê’mï¿½ï¿½ï¿½ï¿½B
         """
         
         try:
@@ -971,7 +972,7 @@ class SubModel(QObject):
         except EnvironmentError as e:
             self.cannotOpenFileMsg(filename)
             return
-        except StandardError as e:
+        except Exception as e:
             self.invaildFormatMsg(filename)
             return
         
@@ -1097,7 +1098,8 @@ class Sff(SubModel):
             self._dir = dir
             self.dirChanged.emit(self._dir)
     
-    exec def_qgetter("isCharSff")
+    # exec def_qgetter("isCharSff")
+    exec(def_qgetter("isCharSff"))
     def setIsCharSff(self, v):
         if self.isCharSff() == v:
             return
@@ -1331,18 +1333,18 @@ class Sff(SubModel):
         methodname = name[0].lower() + name[1:] + "Sprs_"
         getattr(self, methodname)(sprs, **kw)
     
-    exec def_method_for_plural_sprs(
+    exec(def_method_for_plural_sprs(
         'autoCrop',
         'allocBg',
         'invert',
         'eraseRects',
         'eraseRectsColors',
-    )
+    ))
     
-    exec def_colortable_method_for_plural_sprs(
+    exec(def_colortable_method_for_plural_sprs(
         'cleanColorTable',
         'replaceColorTable',
-    )
+    ))
     
     def getColorTableForOperation(self, x):
         type = x[0]
@@ -1395,7 +1397,7 @@ class SffPalette(Palette):
             self.updated.emit()
     
     def title(self):
-        return u"SFF‚ÌƒpƒŒƒbƒg"
+        return u"SFFï¿½Ìƒpï¿½ï¿½ï¿½bï¿½g"
     
     def __eq__(self, other):
         return False
@@ -1531,11 +1533,11 @@ class _Model(QObject):
         self.imageUsedColorIndexes = UsedColorIndexes()
         self.registerUsedColorIndexes = self.imageUsedColorIndexes
         
-    exec def_qgetter("closing")
-    exec def_qgetter("sff", "air", "act")
+    exec(def_qgetter("closing"))
+    exec(def_qgetter("sff", "air", "act"))
     
-    exec def_delegate("_sff", "Spr")
-    exec def_delegate("_air", "Anim", "Elm")
+    exec(def_delegate("_sff", "Spr"))
+    exec(def_delegate("_air", "Anim", "Elm"))
     
     def actColorTable(self):
         return self._palette.colorTable()

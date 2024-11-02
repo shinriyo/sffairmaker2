@@ -1,17 +1,17 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from itertools import starmap, product
 from sffairmaker.qutil import *
 from sffairmaker.mm import multimethod
 
-from itertools import imap, chain, product, starmap
+from itertools import chain, product, starmap
 from iterutils import grouper
-
+from io import StringIO
 import PIL.Image
     
 def pilimage_to_qimage(pilimage):
-    fp = cStringIO.StringIO()
+    fp = StringIO()
     pilimage.save(fp, "BMP")
     qimage = QImage()
     qimage.loadFromData(fp.getvalue(), "BMP")
@@ -22,7 +22,7 @@ def qimage_to_pilimage(qimage):
     buffer.open(QIODevice.WriteOnly)
     qimage.save(buffer, "BMP")
     
-    fp = cStringIO.StringIO()
+    fp = StringIO()
     fp.write(buffer.data())
     buffer.close()
     fp.seek(0)
@@ -103,8 +103,8 @@ def Image256(im):
     return im
     
 @multimethod(str)
-@multimethod(unicode)
-@multimethod(QString)
+# @multimethod(str)
+# @multimethod(str)
 def Image256(filename):
     im = QImage(filename)
     if im.isNull():
@@ -137,7 +137,7 @@ def rectToCrop(image):
     def emptyHLine(y):
         return all(image.pixelIndex(x, y) == 0 for x in xrange(image.width()))
     
-    #¶’[
+    #ï¿½ï¿½ï¿½[
     for x in xrange(image.width() - 1):
         if not emptyVLine(x):
             left = x
@@ -145,7 +145,7 @@ def rectToCrop(image):
     else:
         left = image.width() - 1
     
-    #‰E’[
+    #ï¿½Eï¿½[
     for x in xrange(image.width() - 1, left, -1):
         if not emptyVLine(x):
             right = x
@@ -153,7 +153,7 @@ def rectToCrop(image):
     else:
         right = left
     
-    #ã’[
+    #ï¿½ï¿½[
     for y in xrange(image.height() - 1):
         if not emptyHLine(y):
             top = y
@@ -161,7 +161,7 @@ def rectToCrop(image):
     else:
         top = image.height() - 1
     
-    #‰º’[
+    #ï¿½ï¿½ï¿½[
     for y in xrange(image.height() - 1, top, -1):
         if not emptyHLine(y):
             bottom = y
@@ -203,7 +203,7 @@ def ipixelIndex(image):
     scanLine = image.scanLine
     for y in xrange(image.height()):
         p = scanLine(y)
-        for x, i in enumerate(imap(ord, p.asstring(w))):
+        for x, i in enumerate(map(ord, p.asstring(w))):
             yield QPoint(x, y), i
 
 
@@ -239,7 +239,7 @@ def deleteUnusedColors(image):
 class NoUnusedColorError(ValueError):pass
     
 def allocBgColor(image, bg=qRgb(255, 0, 255)):
-    #ƒpƒŒƒbƒg‚Ì0”Ô‚ğ”wŒi—p‚ÉŠm•Û‚µ‚Ü‚·B
+    #ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½ï¿½0ï¿½Ô‚ï¿½wï¿½iï¿½pï¿½ÉŠmï¿½Û‚ï¿½ï¿½Ü‚ï¿½ï¿½B
     
     used = usedColorIndexes(image)
     unused = set(xrange(256)) - used
@@ -373,7 +373,7 @@ def usedColorIndexes(image):
     w = image.width()
     h = image.height()
     scanLine = image.scanLine
-    return frozenset(chain.from_iterable(imap(ord, scanLine(y).asstring(w))
+    return frozenset(chain.from_iterable(map(ord, scanLine(y).asstring(w))
                 for y in xrange(h)))
 
 def addImageColors(colorTable, usedIndexes, image):
@@ -384,7 +384,7 @@ def addImageColors(colorTable, usedIndexes, image):
     lastUsedIndexes = max(chain(usedIndexes, [0]))
     spaces = [k for k in xrange(lastUsedIndexes + 1, 256) if k not in usedIndexes] + \
              [k for k in xrange(1, lastUsedIndexes) if k not in usedIndexes]
-    #0”Ô‚É‚Í—á‚¦(0, 0, 0)‚Å‚à’Ç‰Á‚µ‚È‚¢
+    #0ï¿½Ô‚É‚Í—á‚¦(0, 0, 0)ï¿½Å‚ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½È‚ï¿½
     
     print(spaces)
     

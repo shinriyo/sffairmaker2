@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -17,7 +17,7 @@ class ChoiceMenu(QMenu):
                 a.triggered.connect(lambda _, i=i:self.setValue(i))
                 i += 1
         self.addSeparator()
-        self.addAction(u"ƒLƒƒƒ“ƒZƒ‹")
+        self.addAction(u"ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½")
     exec def_qaccessor("value")
     
 def choiceMenu(values, pos, *a, **kw):
@@ -30,8 +30,8 @@ def main():
     
     class Test(QWidget):
         def mousePressEvent(self, evt):
-            v = choiceMenu(u"spam egg - ham".split(), evt.globalPos(), u"‘I‘ð", self)
-            QMessageBox.information(self, u"Œ‹‰Ê", str(v))
+            v = choiceMenu(u"spam egg - ham".split(), evt.globalPos(), u"ï¿½Iï¿½ï¿½", self)
+            QMessageBox.information(self, u"ï¿½ï¿½ï¿½ï¿½", str(v))
     
     t = Test()
     t.resize(200, 200)

@@ -1,11 +1,12 @@
-#encoding:shift-jis
+# coding: utf-8
 """
 A Implementation of multidict (multimap).
 multidict in this module has novel methods - get1, pop1, asdict1 and ***_m.
 """
-import itertools
+# import itertools
 import copy
-from UserDict import DictMixin
+# from UserDict import DictMixin
+from collections.abc import MutableMapping
 
 def def_deligators(locals, member_str, method_names):
     """
@@ -19,7 +20,7 @@ def def_deligators(locals, member_str, method_names):
         
         defstr = defstr0 % {"method":method, 
                             "member":member_str}
-        exec defstr in {}, locals
+        exec(defstr) in {}, locals
 
 def throws(t, f, *a, **kw):
     """
@@ -41,7 +42,8 @@ def throws(t, f, *a, **kw):
     else:
         return False
 
-class multidict(DictMixin):
+# class multidict(DictMixin):
+class multidict(MutableMapping):
     def __init__(self, items=()):
         self._dict = {}
         for k, v in items:
@@ -201,7 +203,7 @@ class multidict(DictMixin):
         """
         
         from operator import itemgetter
-        return itertools.imap(itemgetter(0), self.iteritems_m())
+        return map(itemgetter(0), self.iteritems_m())
     
     def itervalues_m(self):
         """
@@ -211,7 +213,7 @@ class multidict(DictMixin):
         ['a', 'b', 'd', 'c']
         """
         from operator import itemgetter
-        return itertools.imap(itemgetter(1), self.iteritems_m())
+        return map(itemgetter(1), self.iteritems_m())
     
     def items_m(self):
         return list(self.iteritems_m())

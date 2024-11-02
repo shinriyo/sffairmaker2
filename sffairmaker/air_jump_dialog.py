@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -52,7 +52,7 @@ class AnimIndexSelector(QComboBox):
 class AirJumpDialog(QDialog):
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"ˆÚ“®æ")
+        self.setWindowTitle(u"ï¿½Ú“ï¿½ï¿½ï¿½")
         
         scroll = AnimScrollBar(Qt.Horizontal)
         self._selector = selector = AnimIndexSelector()

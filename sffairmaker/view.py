@@ -1,11 +1,11 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 
 import os
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 from sffairmaker.qutil import *
 from sffairmaker import (
@@ -136,7 +136,7 @@ class Dialog:
         ret = QMessageBox.question(
                   self.mainWindow(),
                   version.name,
-                  name + u"‚Ì•ÏX‚ğ•Û‘¶‚µ‚Ü‚·‚©H",
+                  name + u"ï¿½Ì•ÏXï¿½ï¿½Û‘ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½H",
                   QMessageBox.Save | QMessageBox.Discard
                                    | QMessageBox.Cancel,
                   QMessageBox.Save)
@@ -214,21 +214,21 @@ class Dialog:
         lines = []
         for e in errors:
             if isinstance(e, const.OpeningSffErrorInfo):
-                msg = u"{0.number}”Ô–Ú‚Ì‰æ‘œ({0.group}, {0.index})‚ğ“Ç‚İ‚ß‚Ü‚¹‚ñ‚Å‚µ‚½B"\
+                msg = u"{0.number}ï¿½Ô–Ú‚Ì‰æ‘œ({0.group}, {0.index})ï¿½ï¿½Ç‚İï¿½ï¿½ß‚Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½B"\
                         .format(e)
             elif isinstance(e, const.OpeningCsvErrorInfo):
                 if const.OpeningCsvErrorType.Image == e.type:
-                    msg = u"{0.lineno}s–Ú‚Ì‰æ‘œ{0.path}‚ğ“Ç‚İ‚ß‚Ü‚¹‚ñ‚Å‚µ‚½B" \
+                    msg = u"{0.lineno}ï¿½sï¿½Ú‚Ì‰æ‘œ{0.path}ï¿½ï¿½Ç‚İï¿½ï¿½ß‚Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½B" \
                             .format(e)
                 else:
                     name = {
-                        const.OpeningCsvErrorType.Group:u"ƒOƒ‹[ƒv",
-                        const.OpeningCsvErrorType.Index:u"”Ô†",
-                        const.OpeningCsvErrorType.X:u"XÀ•W",
-                        const.OpeningCsvErrorType.Y:u"YÀ•W",
-                        const.OpeningCsvErrorType.UseAct:u"Act“K—p",
+                        const.OpeningCsvErrorType.Group:u"ï¿½Oï¿½ï¿½ï¿½[ï¿½v",
+                        const.OpeningCsvErrorType.Index:u"ï¿½Ôï¿½",
+                        const.OpeningCsvErrorType.X:u"Xï¿½ï¿½ï¿½W",
+                        const.OpeningCsvErrorType.Y:u"Yï¿½ï¿½ï¿½W",
+                        const.OpeningCsvErrorType.UseAct:u"Actï¿½Kï¿½p",
                     }[e.type]
-                    msg = u"{0.lineno}s–Ú‚Ì{1}‚ğ“Ç‚İ‚ß‚Ü‚¹‚ñ‚Å‚µ‚½B"\
+                    msg = u"{0.lineno}ï¿½sï¿½Ú‚ï¿½{1}ï¿½ï¿½Ç‚İï¿½ï¿½ß‚Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½B"\
                             .format(e, name)
             else:
                 msg = str(e)
@@ -248,27 +248,27 @@ class Dialog:
             return paths[index]
     
     def selectSffPath(self, paths):
-        return self._selectPath(u"Sff‚ğŠJ‚­", paths)
+        return self._selectPath(u"Sffï¿½ï¿½ï¿½Jï¿½ï¿½", paths)
     
     def selectAirPath(self, paths):
-        return self._selectPath(u"AIR‚ğŠJ‚­", paths)
+        return self._selectPath(u"AIRï¿½ï¿½ï¿½Jï¿½ï¿½", paths)
     
     def progress(self, text):
         return MyProgressDialog(text, parent=self._mainWindow)
     
     def openingProgress(self):
-        text = u"ŠJ‚¢‚Ä‚¢‚Ü‚·"
+        text = u"ï¿½Jï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½"
         return self.progress(text)
     
     def savingProgress(self):
-        text = u"•Û‘¶‚µ‚Ä‚¢‚Ü‚·"
+        text = u"ï¿½Û‘ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½"
         return self.progress(text)
     
     def waitExternalEditing(self):
         QMessageBox.information(
             None, 
-            u"ŠO•”•ÒW",
-            u"•ÒW‚ªI‚í‚Á‚½‚çOK‚ğ‰Ÿ‚µ‚Ä‚­‚¾‚³‚¢",
+            u"ï¿½Oï¿½ï¿½ï¿½ÒW",
+            u"ï¿½ÒWï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½OKï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
         )
         return True
     

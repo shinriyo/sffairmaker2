@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type 
 from sffairmaker.qutil import *
@@ -8,7 +8,7 @@ class LineEditWithBrowse(QWidget):
         QWidget.__init__(self, parent)
         
         self._lineEdit = QLineEdit(self)
-        @commandButton(u"éQè∆")
+        @commandButton(u"ÔøΩQÔøΩÔøΩ")
         def browseButton():
             t = self.browse()
             if not t:
