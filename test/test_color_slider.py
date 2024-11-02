@@ -12,7 +12,7 @@ def test():
     log = []
     s.valueChanged.connect(log.append)
     
-    for i in xrange(3):
+    for i in range(3):
         s.setValue(QColor(0, 0, 0))
         log[:] = []
         s._scrs[i].setValue(255)
@@ -23,7 +23,7 @@ def test():
     
     s.setValue(QColor(0, 0, 0))
     rgb = [0, 0, 0]
-    for i in xrange(3):
+    for i in range(3):
         assert s._scrs[i].value() == 0
         rgb[i] = 255
         s.setValue(QColor(*rgb))

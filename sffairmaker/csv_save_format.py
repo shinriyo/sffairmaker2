@@ -156,7 +156,7 @@ class CsvSaveFormatDialog(QDialog):
     
     def names(self):
         return [str(self._name.itemText(i))
-                for i in xrange(self._name.count())]
+                for i in range(self._name.count())]
     
     def setNames(self, names):
         self._name.clear()

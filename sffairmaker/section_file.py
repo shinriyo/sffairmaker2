@@ -19,7 +19,7 @@ _ReSectionHead = re.compile(r"^\s* \[ \s* (.*?) \s* \] \s*$" , re.I|re.X)
 _ReSectionHead_match = _ReSectionHead.match
 
 def get_match_function(x):
-    if isinstance(x, basestring):
+    if isinstance(x, str):
         return re.compile(x, re.I).match
     if x is None:
         return lambda _:True

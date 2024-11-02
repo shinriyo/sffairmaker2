@@ -190,7 +190,7 @@ class ClsnImageViewMixin:
         rects = []
         for k, c in self._clsns().items():
             if k not in self._drawingClsn:continue
-            for i in xrange(len(c.clsn)):
+            for i in range(len(c.clsn)):
                 rects.append(RectIndex(k, i))
         return rects
     

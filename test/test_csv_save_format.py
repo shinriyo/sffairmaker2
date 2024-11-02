@@ -10,7 +10,7 @@ def test():
     sff = model._Model().sff()
     
     sff.create()
-    for group, index in product(xrange(5), xrange(5)):
+    for group, index in product(range(5), range(5)):
         sff.newSpr(group=group, index=index)
     
     d = CsvSaveFormatDialog()

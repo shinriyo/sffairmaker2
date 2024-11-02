@@ -43,7 +43,7 @@ class AnimIndexSelector(QComboBox):
             return
         with blockSignals(self):
             itemText = {}
-            for i in xrange(self.count()):
+            for i in range(self.count()):
                 t = str(self.itemText(i))
                 itemText[t] = i
             index = str(self._anim.index())

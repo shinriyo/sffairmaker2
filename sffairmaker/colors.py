@@ -137,11 +137,11 @@ class RectGroup(QObject):
     
     def setColorList(self, colorList):
         self._colorList = list(colorList)
-        for i in xrange(len(colorList), len(self._rects)):
+        for i in range(len(colorList), len(self._rects)):
             r = self._rects.pop(-1)
             sip.delete(r)
         
-        for i in xrange(len(self._rects), len(colorList)):
+        for i in range(len(self._rects), len(colorList)):
             r = Rect(self.parent())
             r.selected.connect(lambda f,i=i:self.selected.emit((f, i)))
             self._rects.append(r)

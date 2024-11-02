@@ -74,7 +74,7 @@ def test_remove_last_spr():
 
 
 def test_open_empty_file():
-    #‹óƒtƒ@ƒCƒ‹‚ğŠJ‚¢‚½ê‡AƒfƒtƒHƒ‹ƒg‚ÌSpr‚ª’Ç‰Á‚³‚ê‚Ä‚¢‚é
+    #ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½Aï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½ï¿½Sprï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
     import tempfile
     from os.path import join, dirname
 
@@ -120,7 +120,7 @@ def testCopyCommonPaletteToSprUseAct():
 
 
 def testIncompleteSff():
-    "9000, 0‚ª–³‚¢"
+    "9000, 0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
     app  = QApplication([])
     from os.path import join
     import tempfile
@@ -133,7 +133,7 @@ def testIncompleteSff():
 
 
 def testImageOriginalPalette():
-    #‰æ‘œ–{—ˆ‚ÌƒpƒŒƒbƒg‚ª•Û‚³‚ê‚é‚©
+    #ï¿½æ‘œï¿½{ï¿½ï¿½ï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½Ûï¿½ï¿½ï¿½ï¿½ï¿½é‚©
     from cStringIO import StringIO
     fp = StringIO()
     
@@ -162,7 +162,7 @@ def testImageOriginalPalette():
     
     for group, index, useAct in group_index_list:
         image = Image256(16, 16)
-        image.setColorTable([qRgb(group, index, i) for i in xrange(256)])
+        image.setColorTable([qRgb(group, index, i) for i in range(256)])
         sff.newSpr(group=group, index=index, useAct=useAct, image=image)
     
     sff.save("*")

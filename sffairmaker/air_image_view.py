@@ -230,7 +230,7 @@ class AirImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
         
         elms = elm.anim().elms()
         indexInAnim = elms.index(elm)
-        for k in xrange(indexInAnim - self.onion().count(), indexInAnim):
+        for k in range(indexInAnim - self.onion().count(), indexInAnim):
             if k < 0: continue
             self._drawAElm(painter, elms[k], QPoint(0, 0), 128, frame=False)
         

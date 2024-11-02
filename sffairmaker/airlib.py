@@ -228,7 +228,7 @@ def join_if_need(delimiter, items):
     >>>
     """
     items = list(map(str, items))
-    for i in xrange(len(items) - 1, -1, -1):
+    for i in range(len(items) - 1, -1, -1):
         if items[i]:
             break
     return delimiter.join(items[:i + 1])

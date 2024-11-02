@@ -94,7 +94,7 @@ class ColorSlider(QWidget):
         
         self._edit  = ColorLineEdit(self)
         self._scrs = []
-        for i in xrange(3):
+        for i in range(3):
             scr = QScrollBar(Qt.Horizontal, parent=self)
             self._scrs.append(scr)
             scr.setRange(0, 255)

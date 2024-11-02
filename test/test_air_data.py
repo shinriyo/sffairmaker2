@@ -24,11 +24,11 @@ def test_anim_new():
 def test_air_move():
     a = Air.create()
     animId = a.animIds()[0]
-    for i in xrange(4):
+    for i in range(4):
         a.copyElm(animId, -1, a.elmIds(animId)[0])
     assert len(a.elms(animId)) == 5, len(a.elms(animId))
     
-    for i in xrange(5):
+    for i in range(5):
         elmId = a.elmIds(animId)[i]
         a.changeElm(elmId, group=i)
     
@@ -45,7 +45,7 @@ def test_air_move():
     assert len(a.elms(animId)) == 5, len(a.elms(animId))
 
 def test_open_empty_file():
-    #‹óƒtƒ@ƒCƒ‹‚ğŠJ‚¢‚½ê‡AƒfƒtƒHƒ‹ƒg‚ÌAnim‚ª’Ç‰Á‚³‚ê‚Ä‚¢‚é
+    #ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½Aï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½ï¿½Animï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
     import tempfile
     from os.path import join, dirname
     filename = join(tempfile.gettempdir(), "test.air")
@@ -83,20 +83,20 @@ def test_remove_last_elm():
 
 
 def testChangeAnimFromString():
-    #ƒAƒjƒ‚ÌƒeƒLƒXƒg•ÒW‚ÅA•ÒW‘O‚Æ“à—e‚ª•Ï‚í‚ç‚È‚©‚Á‚½‚çAƒAƒ“ƒhƒD‚É“o˜^‚µ‚È‚¢
+    #ï¿½Aï¿½jï¿½ï¿½ï¿½Ìƒeï¿½Lï¿½Xï¿½gï¿½ÒWï¿½ÅAï¿½ÒWï¿½Oï¿½Æ“ï¿½ï¿½eï¿½ï¿½ï¿½Ï‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Aï¿½ï¿½ï¿½hï¿½Dï¿½É“oï¿½^ï¿½ï¿½ï¿½È‚ï¿½
     a = AirData()
     animId, = a.animIds()
-    for index in xrange(10):
+    for index in range(10):
         a.newElm(
             animId,
             -1,
             index=index,
-            clsn1=Clsn((i,i*3,i*5,i*9) for i in xrange(7)),
+            clsn1=Clsn((i,i*3,i*5,i*9) for i in range(7)),
         )
     a.changeAnim(
         animId,
         loop=5,
-        clsn1=Clsn((i,i*3,i*5,i*9)for i in xrange(7))
+        clsn1=Clsn((i,i*3,i*5,i*9)for i in range(7))
     )
     
     ss = a.animToString(animId)

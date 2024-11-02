@@ -339,7 +339,7 @@ class Sff:
         id = self._new_id()
         if "image" not in kw:
             kw["image"] = self.getDummyImage()
-        
+
         assert kw["image"].format() == Format_Indexed8, kw["image"].format()
         
         self._sprs[id] = Spr(**kw)

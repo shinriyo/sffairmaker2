@@ -10,18 +10,18 @@ def testIntComboBox():
     log = []
     c.valueChanged.connect(log.append)
     
-    #Å‰‚Ì’l‚ÍNone
+    #ï¿½Åï¿½ï¿½Ì’lï¿½ï¿½None
     assert c.isEditable()
     assert c.count() == 0
     assert c.value() is None
     
-    #setItems‚·‚é‚ÆAitems‚ÌÅ‰‚Ì’l‚ªvalue‚É‚È‚é
-    c.setItems(xrange(5))
+    #setItemsï¿½ï¿½ï¿½ï¿½ÆAitemsï¿½ÌÅï¿½ï¿½Ì’lï¿½ï¿½valueï¿½É‚È‚ï¿½
+    c.setItems(range(5))
     assert c.count() == 5, c
     assert c.currentText() == "0", c.currentText()
     assert c.value() == 0, str(c.value())
     assert log == [0], log
-    items = [int(c.itemText(i)) for i in xrange(c.count())] 
+    items = [int(c.itemText(i)) for i in range(c.count())] 
     assert items == range(5), items
     
     log[:] = []
@@ -31,27 +31,27 @@ def testIntComboBox():
     assert log == [3], log
     
     log[:] = []
-    c.setItems(xrange(5, 10))
+    c.setItems(range(5, 10))
     assert c.currentText() == "5", c.currentText()
     assert c.value() == 5, c.value()
     assert log == [5], log
     
     log[:] = []
     c.setEditText("+5")
-    #•¶Žš—ñ‚ª•Ï‚í‚Á‚Ä‚àA•\Œ»‚·‚é®”‚ª“¯‚¶‚È‚çAemit‚³‚ê‚È‚¢
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ñ‚ª•Ï‚ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Aï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½é®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½Aemitï¿½ï¿½ï¿½ï¿½È‚ï¿½
     assert c.currentText() == "+5", c.currentText()
     assert c.value() == 5
     assert log == []
     
-    #•s³‚È•¶Žš—ñ‚Ì‚Æ‚«A’l‚ÍNone
-    #None‚É•Ï‚í‚Á‚½‚Æ‚«‚àAemit‚³‚ê‚é
+    #ï¿½sï¿½ï¿½ï¿½È•ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Æ‚ï¿½ï¿½Aï¿½lï¿½ï¿½None
+    #Noneï¿½É•Ï‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½Aemitï¿½ï¿½ï¿½ï¿½ï¿½
     log[:] = []
     c.setEditText("spamegg")
     assert c.currentText() == "spamegg"
     assert c.value() is None
     assert log == [None], log
     
-    #None‚ðsetValue‚·‚é‚ÆA•¶Žš—ñ‚Í‹ó‚É
+    #Noneï¿½ï¿½setValueï¿½ï¿½ï¿½ï¿½ÆAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‹ï¿½ï¿½
     c.setValue(1)
     c.setValue(None)
     assert c.currentText() == "", c.currentText()
@@ -72,7 +72,7 @@ def testGroupIndexSelector():
     sff.newSpr(group=1, index=1)
     sff.sprByIndex(-1, -1).remove()
     
-    #SFF‚Ì’†g -> (0, 0), (0, 1), (0, 2), (1, 0), (1, 1)
+    #SFFï¿½Ì’ï¿½ï¿½g -> (0, 0), (0, 1), (0, 2), (1, 0), (1, 1)
     
     s = GroupIndexSelector(sprs=m)
     assert s.value() == (0, 0), s.value()
@@ -80,15 +80,15 @@ def testGroupIndexSelector():
     log = []
     s.valueChanged.connect(log.append)
     
-    #group‚©index‚ÉNone‚ðÝ’è‚·‚é‚ÆAvalue‚Í(None, *)‚Å‚Í‚È‚­None
+    #groupï¿½ï¿½indexï¿½ï¿½Noneï¿½ï¿½Ý’è‚·ï¿½ï¿½ÆAvalueï¿½ï¿½(None, *)ï¿½Å‚Í‚È‚ï¿½None
     
-    #group‚ÉNone
+    #groupï¿½ï¿½None
     log[:] = []
     s.setGroup(None)
     assert s.value() is None
     assert log == [None]
     
-    #index‚ÉNone
+    #indexï¿½ï¿½None
     log[:] = []
     s.setGroup(0)
     assert s.value() == (0, 0)
@@ -98,7 +98,7 @@ def testGroupIndexSelector():
     assert s.value() is None
     assert log == [None]
     
-    #Œ³‚©‚çvalue‚ªNone‚Ì‚Æ‚«‚ÉAsetGroup(None)‚µ‚Ä‚à‰½‚à‹N‚«‚È‚¢
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½valueï¿½ï¿½Noneï¿½Ì‚Æ‚ï¿½ï¿½ÉAsetGroup(None)ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½È‚ï¿½
     log[:] = []
     s.setGroup(None)
     assert s.value() is None
@@ -106,32 +106,32 @@ def testGroupIndexSelector():
     
     s.setValue((0, 2))
     log[:] = []
-    #group‚ð•Ï‚¦‚é‚ÆAindex‚ÍŽ©“®“I‚É‚»‚Ìgroup‚ÌÅ¬‚Ìindex‚É‚È‚é
+    #groupï¿½ï¿½Ï‚ï¿½ï¿½ï¿½ÆAindexï¿½ÍŽï¿½ï¿½ï¿½ï¿½Iï¿½É‚ï¿½ï¿½ï¿½groupï¿½ÌÅï¿½ï¿½ï¿½indexï¿½É‚È‚ï¿½
     s.setGroup(1)
     assert s.value() == (1, 0)
     assert log == [(1, 0)]
     
-    #‚µ‚©‚µAindex‚Ì’l‚ª•Ï‰»‚¹‚¸Agroup‚Ì’l‚¾‚¯‚ª•Ï‚í‚Á‚½‚Æ‚«‚àA‚µ‚Á‚©‚è’Ê’m‚³‚ê‚é
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aindexï¿½Ì’lï¿½ï¿½ï¿½Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Agroupï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê’mï¿½ï¿½ï¿½ï¿½ï¿½
     log[:] = []
     s.setGroup(0)
     assert s.value() == (0, 0)
     assert log == [(0, 0)]
     
-    #group‚É–³‚¢A•s³‚Èindex‚ðÝ’è‚·‚é‚±‚Æ‚ào—ˆ‚é
+    #groupï¿½É–ï¿½ï¿½ï¿½ï¿½Aï¿½sï¿½ï¿½ï¿½ï¿½indexï¿½ï¿½Ý’è‚·ï¿½é‚±ï¿½Æ‚ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½
     log[:] = []
     s.setIndex(10)
     assert s.value() == (0, 10)
     assert log == [(0, 10)]
     assert s._indexbox.currentText() == "10"
     
-    #setValue‚Ígroup‚Æindex‚ðatomic‚É•ÏX‚µ‚È‚¢‚Æ‚¢‚¯‚È‚¢
-    #‚·‚È‚í‚¿A’Ê’m‚Ígroup‚Æindex‚ª—¼•û•ÏX‚³‚ê‚½ŒãA‚P‰ñ‚¾‚¯’Ê’m‚³‚ê‚é
+    #setValueï¿½ï¿½groupï¿½ï¿½indexï¿½ï¿½atomicï¿½É•ÏXï¿½ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½
+    #ï¿½ï¿½ï¿½È‚í‚¿ï¿½Aï¿½Ê’mï¿½ï¿½groupï¿½ï¿½indexï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏXï¿½ï¿½ï¿½ê‚½ï¿½ï¿½Aï¿½Pï¿½ñ‚¾‚ï¿½ï¿½Ê’mï¿½ï¿½ï¿½ï¿½ï¿½
     log[:] = []
     s.setValue((1, 1))
     assert s.value() == (1, 1)
     assert log == [(1, 1)]
     
-    #None‚ðsetValue‚·‚é‚ÆAgroup‚àindex‚àNone
+    #Noneï¿½ï¿½setValueï¿½ï¿½ï¿½ï¿½ÆAgroupï¿½ï¿½indexï¿½ï¿½None
     log[:] = []
     s.setValue(None)
     assert s.value() == None
@@ -153,7 +153,7 @@ def testSprSelector():
     sff.newSpr(group=1, index=0)
     sff.newSpr(group=1, index=1)
     sff.sprByIndex(-1, -1).remove()
-    #SFF‚Ì’†g -> (0, 0), (0, 1), (0, 2), (1, 0), (1, 1)
+    #SFFï¿½Ì’ï¿½ï¿½g -> (0, 0), (0, 1), (0, 2), (1, 0), (1, 1)
     
     s = SprSelector(sprs=m)
     assert s.spr().group_index() == (0, 0)

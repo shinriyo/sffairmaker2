@@ -11,27 +11,27 @@ def testIndexesToErase():
     
 
 def testMoveRgb():
-    colorTable = [qRgb(i,i,i) for i in xrange(12)]
-    rgbMap = dict((i, qRgb(i,i,i)) for i in xrange(5, 10))
+    colorTable = [qRgb(i,i,i) for i in range(12)]
+    rgbMap = dict((i, qRgb(i,i,i)) for i in range(5, 10))
     
     colorTable1 = moveRgb(colorTable, 20, 5, rgbMap)
     
-    assert colorTable1[:5] == [qRgb(i,i,i) for i in xrange(5)]
-    assert colorTable1[5:10] == [qRgb(0,0,0) for i in xrange(5,10)]
-    assert colorTable1[10:12] == [qRgb(i,i,i) for i in xrange(10,12)]
-    assert colorTable1[12:20] == [qRgb(0,0,0) for i in xrange(12,20)]
-    assert colorTable1[20:25] == [qRgb(i,i,i) for i in xrange(5, 10)]
-    assert colorTable1[25:] == [qRgb(0,0,0) for i in xrange(25, 256)]
+    assert colorTable1[:5] == [qRgb(i,i,i) for i in range(5)]
+    assert colorTable1[5:10] == [qRgb(0,0,0) for i in range(5,10)]
+    assert colorTable1[10:12] == [qRgb(i,i,i) for i in range(10,12)]
+    assert colorTable1[12:20] == [qRgb(0,0,0) for i in range(12,20)]
+    assert colorTable1[20:25] == [qRgb(i,i,i) for i in range(5, 10)]
+    assert colorTable1[25:] == [qRgb(0,0,0) for i in range(25, 256)]
 
 def testCopyRgb():
-    colorTable = [qRgb(i,i,i) for i in xrange(256)]
-    rgbMap = dict((i, qRgb(i,i,i)) for i in xrange(5, 10))
+    colorTable = [qRgb(i,i,i) for i in range(256)]
+    rgbMap = dict((i, qRgb(i,i,i)) for i in range(5, 10))
     
     colorTable1 = copyRgb(colorTable, 20, 5, rgbMap)
     
-    assert colorTable1[:20] == [qRgb(i,i,i) for i in xrange(20)]
-    assert colorTable1[20:25] == [qRgb(i,i,i) for i in xrange(5, 10)]
-    assert colorTable1[25:] == [qRgb(i,i,i) for i in xrange(25, 256)]
+    assert colorTable1[:20] == [qRgb(i,i,i) for i in range(20)]
+    assert colorTable1[20:25] == [qRgb(i,i,i) for i in range(5, 10)]
+    assert colorTable1[25:] == [qRgb(i,i,i) for i in range(25, 256)]
     
    
 def testSwapRgb():
@@ -54,10 +54,10 @@ def testCrop():
 
 
 def testAllocBgColor():
-    #–¢g—pF‚ª–³‚¢‚ÆƒGƒ‰[
+    #ï¿½ï¿½ï¿½gï¿½pï¿½Fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆƒGï¿½ï¿½ï¿½[
     image = Image256(1, 256)
-    image.setColorTable([qRgb(i, i, i) for i in xrange(256)])
-    for i in xrange(256):
+    image.setColorTable([qRgb(i, i, i) for i in range(256)])
+    for i in range(256):
         image.setPixel(0, i, i)
     
     try:
@@ -67,12 +67,12 @@ def testAllocBgColor():
     else:
         assert False
     
-    #–¢g—pF‚ª
-    #Å‰‚Ì–¢g—pF‚æ‚è‘O‚ğAˆê‚Â‚¸‚ç‚µA
-    #Å‰‚Ì–¢g—pF‚æ‚èŒã‚Í•s“®B
+    #ï¿½ï¿½ï¿½gï¿½pï¿½Fï¿½ï¿½
+    #ï¿½Åï¿½ï¿½Ì–ï¿½ï¿½gï¿½pï¿½Fï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Aï¿½ï¿½Â‚ï¿½ï¿½ç‚µï¿½A
+    #ï¿½Åï¿½ï¿½Ì–ï¿½ï¿½gï¿½pï¿½Fï¿½ï¿½ï¿½ï¿½Í•sï¿½ï¿½ï¿½B
     image = Image256(1, 16)
-    image.setColorTable([qRgb(i, i, i) for i in xrange(16)])
-    for i in xrange(16):
+    image.setColorTable([qRgb(i, i, i) for i in range(16)])
+    for i in range(16):
         if i % 5 == 0:
             image.setPixel(0, i, 0)
         else:
@@ -81,12 +81,12 @@ def testAllocBgColor():
     image1 = allocBgColor(image, bg=qRgb(1, 2, 3))
     assert image is not image1
     
-    # ƒsƒNƒZƒ‹‚Ìƒ`ƒFƒbƒN
-    # •ÏŠ·‘O: 0, 1, 2, 3, 4, 0, 6, 7, 8, 9, 0, 11, 12, 13, 14, 0, 16
-    # •ÏŠ·Œã: 1, 2, 3, 4, 5, 1, 6, 7, 8, 9, 1, 11, 12, 13, 14, 1, 16
-    pixels = [image1.pixelIndex(0, i) for i in xrange(16)]
+    # ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Ìƒ`ï¿½Fï¿½bï¿½N
+    # ï¿½ÏŠï¿½ï¿½O: 0, 1, 2, 3, 4, 0, 6, 7, 8, 9, 0, 11, 12, 13, 14, 0, 16
+    # ï¿½ÏŠï¿½ï¿½ï¿½: 1, 2, 3, 4, 5, 1, 6, 7, 8, 9, 1, 11, 12, 13, 14, 1, 16
+    pixels = [image1.pixelIndex(0, i) for i in range(16)]
     expectedPixels = []
-    for i in xrange(16):
+    for i in range(16):
         if i < 5:
             expectedPixels.append(i + 1)
         elif i % 5 == 0:
@@ -95,12 +95,12 @@ def testAllocBgColor():
             expectedPixels.append(i)
     assert pixels == expectedPixels
     
-    #ƒpƒŒƒbƒg‚Ìƒ`ƒFƒbƒN
-    # •ÏŠ·‘O: #000, #111, ..., #FFF
-    # •ÏŠ·Œã: #123, #000, #111, #222, #333, #444, #666, #777, ..., #FFF, #000, #000, ...
+    #ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½Ìƒ`ï¿½Fï¿½bï¿½N
+    # ï¿½ÏŠï¿½ï¿½O: #000, #111, ..., #FFF
+    # ï¿½ÏŠï¿½ï¿½ï¿½: #123, #000, #111, #222, #333, #444, #666, #777, ..., #FFF, #000, #000, ...
     
     expectedColorTable = [qRgb(1, 2, 3)]
-    for i in xrange(256):
+    for i in range(256):
         if i < 16:
             if i != 5:
                 expectedColorTable.append(qRgb(i, i, i))
@@ -108,7 +108,7 @@ def testAllocBgColor():
             expectedColorTable.append(qRgb(0, 0, 0))
     
     if image1.colorTable() != expectedColorTable:
-        for i in xrange(256):
+        for i in range(256):
             if i < len(image1.colorTable()):
                 x = QColor(image1.colorTable()[i])
                 c1 = (x.red(), x.green(), x.blue())
@@ -126,10 +126,10 @@ def testAllocBgColor():
         
 
 def testImmutable():
-    # input ‚Ì QImage ‚Æ output‚ÌQImage‚ª•ÊƒIƒuƒWƒFƒNƒg‚Å‚ ‚é‚©‚ÌŒŸ¸
+    # input ï¿½ï¿½ QImage ï¿½ï¿½ outputï¿½ï¿½QImageï¿½ï¿½ï¿½ÊƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Å‚ï¿½ï¿½é‚©ï¿½ÌŒï¿½ï¿½ï¿½
     im = Image256(16, 16)
     
-    pal = [qRgb(i,i,i) for i in xrange(256)]
+    pal = [qRgb(i,i,i) for i in range(256)]
     assert im is not autoCrop(im)[0]
     assert im is not eraseRects(im, [QRect(0, 0, 5, 5)])
     assert im is not eraseRectsColors(im, [QRect(0, 0, 5, 5)])
@@ -142,7 +142,7 @@ def testFullColorTable():
     # len(colorTable) == 256
     
     im = Image256(16, 16)
-    pal = [qRgb(i,i,i) for i in xrange(256)]
+    pal = [qRgb(i,i,i) for i in range(256)]
     assert len(autoCrop(im)[0].colorTable()) == 256
     assert len(eraseRects(im, [QRect(0, 0, 5, 5)]).colorTable()) == 256
     assert len(eraseRectsColors(im, [QRect(0, 0, 5, 5)]).colorTable()) == 256
@@ -153,39 +153,39 @@ def testFullColorTable():
 
 
 def testAddImageColors():
-    #Œ„ŠÔ‚ª–³‚¢ê‡
+    #ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
     colorTable = [qRgb(1, 1, 1)] * 256
     try:
-        addImageColors(colorTable, set(xrange(256)), Image256(16, 1))
+        addImageColors(colorTable, set(range(256)), Image256(16, 1))
     except ValueError: pass
     else: assert False
     
-    #Œ„ŠÔ‚ª–³‚¢ê‡
-    colorTable = [qRgb(i,0,0) for i in xrange(128)] + [qRgb(0,0,0)]*128
+    #ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
+    colorTable = [qRgb(i,0,0) for i in range(128)] + [qRgb(0,0,0)]*128
     im = Image256(256, 1)
-    im.setColorTable([qRgb(i,i,i) for i in xrange(256)])
-    for x in xrange(256):
+    im.setColorTable([qRgb(i,i,i) for i in range(256)])
+    for x in range(256):
         im.setPixel(x, 0, x)
     try:
-        addImageColors(colorTable, set(xrange(256)), im)
+        addImageColors(colorTable, set(range(256)), im)
     except ValueError: pass
     else: assert False
     
-    #Œ„ŠÔ‚ª–³‚¢‚¯‚ÇA‘S•”‚ÌF‚ªŠù‚É‚ ‚éê‡
-    colorTable = [qRgb(i,0,0) for i in xrange(256)]
+    #ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÇAï¿½Sï¿½ï¿½ï¿½ÌFï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ê‡
+    colorTable = [qRgb(i,0,0) for i in range(256)]
     im = Image256(256, 1)
-    im.setColorTable([qRgb(i,0,0) for i in xrange(256)])
-    for x in xrange(256):
+    im.setColorTable([qRgb(i,0,0) for i in range(256)])
+    for x in range(256):
         im.setPixel(x, 0, x)
-    colorTable1, im1 = addImageColors(colorTable, set(xrange(256)), im)
+    colorTable1, im1 = addImageColors(colorTable, set(range(256)), im)
     assert colorTable1 == colorTable
     assert im == im1
     
-    #Œ„ŠÔ‚ª‚ ‚éê‡
-    colorTable = [qRgb(0, 0, 0) for i in xrange(256)]
+    #ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
+    colorTable = [qRgb(0, 0, 0) for i in range(256)]
     im = Image256(16, 1)
-    im.setColorTable([qRgb(i,0,0) for i in xrange(256)])
-    for x in xrange(16):
+    im.setColorTable([qRgb(i,0,0) for i in range(256)])
+    for x in range(16):
         im.setPixel(x, 0, x)
     colorTable1, im1= addImageColors(colorTable, set(), im)
     
@@ -193,7 +193,7 @@ def testAddImageColors():
     assert pixelMap(im) == pixelMap(im1)
     
     
-    #’Ç‰ÁæƒpƒŒƒbƒg‚ÉA–¢g—p‚¾‚ª“¯‚¶F‚ª‚ ‚Á‚½ê‡
+    #ï¿½Ç‰ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½bï¿½gï¿½ÉAï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
     colorTable = [qRgb(0, 0, 0), qRgb(255, 0, 0)]
     im = Image256(3, 1)
     im.setPixel(0, 0, 0)
@@ -211,10 +211,10 @@ def testDeleteUnusedColors():
     import nose.tools
     
     im0 = Image256(256, 1)
-    im0.setColorTable([QColor(i, 0, 1).rgb() for i in xrange(256)])
-    for i in xrange(16):
+    im0.setColorTable([QColor(i, 0, 1).rgb() for i in range(256)])
+    for i in range(16):
         im0.setPixel(i, 0, i)
-    for i in xrange(16, 256):
+    for i in range(16, 256):
         im0.setPixel(i, 0, 0)
     
     im1 = deleteUnusedColors(im0)
@@ -224,17 +224,17 @@ def testDeleteUnusedColors():
         list(ipixelIndex(im1))
     )
     
-    expected_color_table = [QColor(i,0,1).rgb() for i in xrange(16)] + \
-                           [QColor(0,0,0).rgb() for i in xrange(16, 256)]
+    expected_color_table = [QColor(i,0,1).rgb() for i in range(16)] + \
+                           [QColor(0,0,0).rgb() for i in range(16, 256)]
     nose.tools.assert_equal(im1.colorTable(), expected_color_table)
 
 def testCleanColorTable():
     im = Image256(256, 1)
-    im.setColorTable([qRgb(2, 2, 2), qRgb(1, 0, 0), qRgb(1,1,1)] + [qRgb(i,0,0) for i in xrange(3, 256)])
-    for x in xrange(256):
+    im.setColorTable([qRgb(2, 2, 2), qRgb(1, 0, 0), qRgb(1,1,1)] + [qRgb(i,0,0) for i in range(3, 256)])
+    for x in range(256):
         im.setPixel(x, 0, x)
     
-    colorTable = [qRgb(i, i, i) for i in xrange(256)]
+    colorTable = [qRgb(i, i, i) for i in range(256)]
     im1 = cleanColorTable(im, colorTable)
     
     assert im1.colorTable() == colorTable
@@ -243,10 +243,10 @@ def testCleanColorTable():
     im.pixelIndex(1, 0) == 0
     im.pixelIndex(2, 0) == 1
     
-    for x in xrange(3, 256):
+    for x in range(3, 256):
         assert im.pixelIndex(x, 0) == x, x
 
-#‚±‚±‚©‚çƒeƒXƒg
+#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½Xï¿½g
 
 def imageForTest(size, rect):
     im = Image256(size.width(), size.height())

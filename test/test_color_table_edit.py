@@ -8,9 +8,9 @@ def testCurrentColorChanged():
     app = QApplication([])
     xmodel = model._Model()
     image = image_op.Image256(128, 1)
-    for x in xrange(128):
+    for x in range(128):
         image.setPixel(x, 0, x)
-    colorTable = [qRgb(i, 0, 0) for i in xrange(256)]
+    colorTable = [qRgb(i, 0, 0) for i in range(256)]
     image.setColorTable(colorTable)
     
     s = SprColorTableEdit(xmodel=xmodel)
@@ -29,12 +29,12 @@ def testCurrentColorChanged():
     assert log == [QColor(1, 0, 0)]
 
     log[:] = []
-    colorTable = [qRgb(0, i, 0) for i in xrange(256)]
+    colorTable = [qRgb(0, i, 0) for i in range(256)]
     s.setColorTable(colorTable)
     assert log == [QColor(0, 1, 0)], log
     
     log[:] = []
-    colorTable = [qRgb(0, 0, i) for i in xrange(256)]
+    colorTable = [qRgb(0, 0, i) for i in range(256)]
     spr.setColorTable(colorTable)
     assert log == [QColor(0, 0, 1)], log
     

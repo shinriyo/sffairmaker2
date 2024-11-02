@@ -55,7 +55,7 @@ class IntComboBox(QComboBox):
     def sizeHint(self):
         fm = self.fontMetrics()
         
-        w = max(fm.width(str(i)*4) for i in xrange(10))
+        w = max(fm.width(str(i)*4) for i in range(10))
         h = max(fm.height(), 14) + 2
         
         sh = QSize(w, h)

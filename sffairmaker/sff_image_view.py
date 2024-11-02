@@ -55,7 +55,11 @@ class NoDragging(DraggingType):
         return False
 
 
-ImageOpMode = Enum("Pos", "EraseRects", "EraseRectsColors", "CropRectColors")
+class ImageOpMode(Enum):
+    Pos = 1
+    EraseRects = 2
+    EraseRectsColors = 3
+    CropRectColors = 4
 
 class DraggingPos(DraggingType):
     def type(self):
@@ -223,7 +227,7 @@ class SffImageViewCore(AbstractImageViewCore):
     def _drawRelativeOnion(self, painter):
         if not self.spr().isValid(): return
         
-        for index in xrange(self.spr().index() - self.onion().count(), self.spr().index()):
+        for index in range(self.spr().index() - self.onion().count(), self.spr().index()):
             if index < 0:continue
             self._drawASpr(painter,
                 self.xmodel().sff().sprByIndex(self.spr().group(), index),

@@ -46,7 +46,7 @@ class ClsnTextEdit(QPlainTextEdit):
         rects = []
         for line in lines:
             items = line.split(",")
-            left, top, right, bottom = [int0(list_get(items, i, 0)) for i in xrange(4)]
+            left, top, right, bottom = [int0(list_get(items, i, 0)) for i in range(4)]
             rects.append(QRect(QPoint(left, top), QPoint(right, bottom)))
         
         return Clsn(rects)

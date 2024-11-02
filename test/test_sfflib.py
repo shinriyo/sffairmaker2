@@ -10,7 +10,7 @@ import PIL.Image
 
 
 def test_read_with_error():
-    # ‰æ‘œƒf[ƒ^‚ª”j‘¹‚µ‚Ä‚¢‚éê‡‚Ì“Ç‚İ‚İ
+    # ï¿½æ‘œï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Ì“Ç‚İï¿½ï¿½ï¿½
     
     from cStringIO import StringIO
     fp = StringIO()
@@ -28,7 +28,7 @@ def test_read_with_error():
     ]
     for group, index, dependentPalette in group_index_list:
         image = PIL.Image.new("P", (16, 16))
-        image.putpalette([x for i in xrange(256) for x in [group%256, index%256, i]])
+        image.putpalette([x for i in range(256) for x in [group%256, index%256, i]])
         
         spr = ExternalSpr()
         spr.group=group
@@ -41,7 +41,7 @@ def test_read_with_error():
     writeSffHeader(fp, exSprList)
 
     def writeSffSubFile1(fp, exSpr, last=False):
-        #‚í‚´‚Æ•sŠ®‘S‚Èƒf[ƒ^‚ğ‘‚«‚Ş
+        #ï¿½í‚´ï¿½Æ•sï¿½ï¿½ï¿½Sï¿½Èƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if exSpr.link is not None:
             pcxData = ""
             length = 0
@@ -72,7 +72,7 @@ def test_read_with_error():
 
 
 def testImageOriginalPalette():
-    #‰æ‘œ–{—ˆ‚ÌƒpƒŒƒbƒg‚ª•Û‚³‚ê‚é‚©
+    #ï¿½æ‘œï¿½{ï¿½ï¿½ï¿½Ìƒpï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½Ûï¿½ï¿½ï¿½ï¿½ï¿½é‚©
     from cStringIO import StringIO
     fp = StringIO()
     
@@ -89,7 +89,7 @@ def testImageOriginalPalette():
     ]
     for group, index, useAct in group_index_list:
         image = PIL.Image.new("P", (16, 16))
-        image.putpalette([x for i in xrange(256) for x in [group%256, index%256, i]])
+        image.putpalette([x for i in range(256) for x in [group%256, index%256, i]])
         
         spr = InternalSpr()
         spr.group=group
@@ -106,7 +106,7 @@ def testImageOriginalPalette():
     assert not errorList, errorList
     
     from operator import attrgetter
-    from itertools import izip
+    from itertools import zip
     
     sprDict0 = dict((s.group_index, s) for s in sprList0)
     sprDict1 = dict((s.group_index, s) for s in sprList1)
@@ -125,9 +125,9 @@ def test_palette():
     
     images = []
     colorTables = []
-    for i in xrange(1, 5):
+    for i in range(1, 5):
         im = PIL.Image.new("P", (1, 1))
-        ct = [qRgb(k, 0, i) for k in xrange(256)]
+        ct = [qRgb(k, 0, i) for k in range(256)]
         im.putpalette(qcolortable_to_pilpalette(ct))
         
         colorTables.append(ct)

@@ -515,7 +515,7 @@ class Anim(Proxy):
         
         if self.loop() is not None:
             for e, t in elms[self.loop():]:
-                for _ in xrange(t):
+                for _ in range(t):
                     yield e
     
     def timeLineBeforeLoop(self):
@@ -525,7 +525,7 @@ class Anim(Proxy):
             yield e
         else:
             for e, t in elms:
-                for _ in xrange(t):
+                for _ in range(t):
                     yield e
     
     #��������A���ߍ\���I�E�⏕�I���\�b�h�̒�`

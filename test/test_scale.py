@@ -33,7 +33,7 @@ def test():
         assert vlog == [2, 3, 4]
         assert ilog == [2, 3, 4]
         
-        for i in xrange(6):
+        for i in range(6):
             sp.zoomOut()
         
         assert vlog == [2, 3, 4, 3, 2, 1, F(1,2), F(1,3), F(1, 4)], vlog

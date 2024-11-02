@@ -8,7 +8,7 @@ class DefaultList(list):
         self.default = default
     
     def __getitem__(self, i):
-        if i in xrange(len(self)):
+        if i in range(len(self)):
             return list.__getitem__(self, i)
         else:
             return self.default

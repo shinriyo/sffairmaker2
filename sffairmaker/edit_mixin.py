@@ -58,7 +58,7 @@ class ImageLabel(QLabel):
         QLabel.__init__(self, parent)
         
         self.setFixedSize(100, 100)
-        self.setMargin(0)
+        self.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを0に設定
         self.setAlignment(Qt.AlignCenter | Qt.AlignJustify)
         
         self._target = model.Null()

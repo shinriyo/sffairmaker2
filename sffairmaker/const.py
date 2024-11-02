@@ -12,13 +12,13 @@ IniDir  = "%APPDATA%"
 AlphaSourceRange = AlphaBlend.SourceRange
 AlphaDestRange = AlphaBlend.DestRange
 
-AnimIndexRange = (-32767, 32767)
+AnimInderange = (-32767, 32767)
 ElmTimeRange = (-1, 32767)
 
 ElmGroupRange = SprGroupRange = (-32767, 32767)
-ElmIndexRange = SprIndexRange = (-32767, 32767)
-SprXRange = SprYRange = (-32767, 32767)
-ElmXRange = ElmYRange = (-32767, 32767)
+ElmInderange = SprInderange = (-32767, 32767)
+Sprrange = SprYRange = (-32767, 32767)
+Elmrange = ElmYRange = (-32767, 32767)
 
 class ClsnKeys(Enum):
     _1 = "clsn1"

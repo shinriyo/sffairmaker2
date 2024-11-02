@@ -208,7 +208,7 @@ class SprListWidgetBase(QListView):
         sizes = [
             self.itemDelegate().sizeHint(option),
         ]
-        for row in xrange(self.model().rowCount()):
+        for row in range(self.model().rowCount()):
             index = self.model().index(row)
             sizes.append(self.itemDelegate().sizeHint(option, index))
         

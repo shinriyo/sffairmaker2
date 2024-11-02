@@ -8,7 +8,7 @@ from tempfile import gettempdir
 import os.path
 
 def test1():
-    colorTable = [qRgb(i, (i*5)%256, (i*17)%256) for i in xrange(256)]
+    colorTable = [qRgb(i, (i*5)%256, (i*17)%256) for i in range(256)]
     for open_, save_, ext in [(open, save, ".act"),
                               (openText, saveToText, ".txt"),
                               (openImage, saveToImage, ".bmp"),]:

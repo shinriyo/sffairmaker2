@@ -47,7 +47,7 @@ class Proxy(QObject):
             if __debug__:
                 print("compareted to {0}".format(other))
                 import inspect
-                for i in xrange(5):
+                for i in range(5):
                     f = inspect.currentframe(i)
                     print("  ", f.f_globals["__file__"], f.f_lineno)
             return False

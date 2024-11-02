@@ -30,7 +30,7 @@ class RadioGroup(QGroupBox):
             Qt.Vertical:QBoxLayout.TopToBottom,
         }[orientation]
         layout = QBoxLayout(direction)
-        layout.setMargin(1)
+        layout.setContentsMargins(1, 1, 1, 1)  # マージンを1ピクセルに設定
         for b in self._buttons.values():
             layout.addWidget(b)
         

@@ -119,7 +119,7 @@ from sffairmaker.image_op import ipixelIndex
 def allPixels(image):
     w = image.width()
     scanLine = image.scanLine
-    for y in xrange(image.height()):
+    for y in range(image.height()):
         p = scanLine(y)
         for x, i in enumerate(imap(ord, p.asstring(w))):
             yield QPoint(x, y), i
@@ -136,7 +136,7 @@ def imageDataChanks(image):
          [qRed(c), qGreen(c), qBlue(c), 255 if i else 0])
         for i, c in enumerate(image.colorTable()))
     
-    for y in xrange(image.height()):
+    for y in range(image.height()):
         data.append(0)
         extend(chain.from_iterable(pixelTable[i] for i in scanLine(y).asstring(w)))
     
@@ -144,7 +144,7 @@ def imageDataChanks(image):
     
     from math import ceil
     chank_size = 64*1024
-    for i in xrange(int(ceil(len(cpdata) / chank_size))):
+    for i in range(int(ceil(len(cpdata) / chank_size))):
         yield cpdata[i*chank_size : (i + 1)*chank_size]
     
     

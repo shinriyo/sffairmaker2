@@ -34,7 +34,7 @@ def pilpalette_to_qcolortable(palette):
 
 def qcolortable_to_pilpalette(colorTable):
     """
-    >>> palette = [i % 256  for i in xrange(256*3)]
+    >>> palette = [i % 256  for i in range(256*3)]
     >>> palette1 = qcolortable_to_pilpalette(pilpalette_to_qcolortable(palette))
     >>> palette == palette1
     True
@@ -44,8 +44,8 @@ def qcolortable_to_pilpalette(colorTable):
 
 def rectPixels(rect):
     rect = rect.normalized()
-    for y in xrange(rect.top(), rect.bottom() + 1):
-        for x in xrange(rect.left(), rect.right() + 1):
+    for y in range(rect.top(), rect.bottom() + 1):
+        for x in range(rect.left(), rect.right() + 1):
             yield QPoint(x, y)
             
 def imagePixels(image):
@@ -82,7 +82,7 @@ def eraseRectsColors(image, rects):
         if i != 0 and i < len(colorTable):
             colorTable[i] = qRgb(0, 0, 0)
     old2new = {}
-    for i in xrange(256):
+    for i in range(256):
         if i in indexes:
             old2new[i] = 0
         else:
@@ -132,13 +132,13 @@ def NullImage():
 
 def rectToCrop(image):
     def emptyVLine(x):
-        return all(image.pixelIndex(x, y) == 0 for y in xrange(image.height()))
+        return all(image.pixelIndex(x, y) == 0 for y in range(image.height()))
     
     def emptyHLine(y):
-        return all(image.pixelIndex(x, y) == 0 for x in xrange(image.width()))
+        return all(image.pixelIndex(x, y) == 0 for x in range(image.width()))
     
     #���[
-    for x in xrange(image.width() - 1):
+    for x in range(image.width() - 1):
         if not emptyVLine(x):
             left = x
             break
@@ -146,7 +146,7 @@ def rectToCrop(image):
         left = image.width() - 1
     
     #�E�[
-    for x in xrange(image.width() - 1, left, -1):
+    for x in range(image.width() - 1, left, -1):
         if not emptyVLine(x):
             right = x
             break
@@ -154,7 +154,7 @@ def rectToCrop(image):
         right = left
     
     #��[
-    for y in xrange(image.height() - 1):
+    for y in range(image.height() - 1):
         if not emptyHLine(y):
             top = y
             break
@@ -162,7 +162,7 @@ def rectToCrop(image):
         top = image.height() - 1
     
     #���[
-    for y in xrange(image.height() - 1, top, -1):
+    for y in range(image.height() - 1, top, -1):
         if not emptyHLine(y):
             bottom = y
             break
@@ -201,7 +201,7 @@ def transformImagePixel(image, colorTable, old2new):
 def ipixelIndex(image):
     w = image.width()
     scanLine = image.scanLine
-    for y in xrange(image.height()):
+    for y in range(image.height()):
         p = scanLine(y)
         for x, i in enumerate(map(ord, p.asstring(w))):
             yield QPoint(x, y), i
@@ -217,7 +217,7 @@ def deleteColors(image, indexes):
     for i in indexes:
         colorTable[i] = qRgb(0, 0, 0)
     
-    old2new = dict((i, i) for i in xrange(256))
+    old2new = dict((i, i) for i in range(256))
     old2new.update((i, 0) for i in indexes)
     return transformImagePixel(image, colorTable, old2new)
 
@@ -242,7 +242,7 @@ def allocBgColor(image, bg=qRgb(255, 0, 255)):
     #�p���b�g��0�Ԃ�w�i�p�Ɋm�ۂ��܂��B
     
     used = usedColorIndexes(image)
-    unused = set(xrange(256)) - used
+    unused = set(range(256)) - used
     
     if not unused:
         raise NoUnusedColorError(u"There is no unused color.")
@@ -255,9 +255,9 @@ def allocBgColor(image, bg=qRgb(255, 0, 255)):
     
     newColorTable = colorTable256(newColorTable)
     
-    for k in xrange(firstUnused):
+    for k in range(firstUnused):
         old2new[k] = k + 1
-    for k in xrange(firstUnused, 256):
+    for k in range(firstUnused, 256):
         old2new[k] = k
     
     return transformImagePixel(image, newColorTable, old2new)
@@ -298,7 +298,7 @@ def moveRgb(colorTable, targetIndex, startIndex, srcs):
     if not srcs or targetIndex == startIndex:
         return colorTable1
     
-    assert all(k in xrange(len(colorTable)) for k in srcs), srcs
+    assert all(k in range(len(colorTable)) for k in srcs), srcs
     
     for i in srcs:
         k = (targetIndex - startIndex + i) % len(colorTable1)
@@ -314,7 +314,7 @@ def copyRgb(colorTable, targetIndex, startIndex, rgbMap):
     startIndex %= len(colorTable1)
     targetIndex%= len(colorTable1)
     
-    assert all(k in xrange(len(colorTable)) for k in rgbMap), list(rgbMap.keys())
+    assert all(k in range(len(colorTable)) for k in rgbMap), list(rgbMap.keys())
     
     for i, c in rgbMap.items():
         k = (targetIndex - startIndex + i) % len(colorTable1)
@@ -330,7 +330,7 @@ def swapRgb(colorTable, targetIndex, startIndex, srcs):
     if not srcs or targetIndex == startIndex:
         return colorTable1
     
-    assert all(k in xrange(len(colorTable1)) for k in srcs), srcs
+    assert all(k in range(len(colorTable1)) for k in srcs), srcs
     
     for i in srcs:
         k = (targetIndex - startIndex + i) % len(colorTable1)
@@ -342,14 +342,14 @@ def swapRgb(colorTable, targetIndex, startIndex, srcs):
 def swapImageColor(image, targetIndex, startIndex, srcs):
     """
     >>> im = Image256(16, 1)
-    >>> im.setColorTable(colorTable256([QColor(i, 0, 0).rgba() for i in xrange(16)]))
-    >>> for i in xrange(16):
+    >>> im.setColorTable(colorTable256([QColor(i, 0, 0).rgba() for i in range(16)]))
+    >>> for i in range(16):
     ...     im.setPixel(i, 0, i)
     ...
     >>> im1 = swapImageColor(im, 5, 0, [0, 1])
     >>> [qRed(i) for i in im1.colorTable()[:20]]
     [5, 6, 2, 3, 4, 0, 1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0, 0, 0, 0]
-    >>> [im1.pixelIndex(i, 0) for i in xrange(16)]
+    >>> [im1.pixelIndex(i, 0) for i in range(16)]
     [5, 6, 2, 3, 4, 0, 1, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     """
     
@@ -374,7 +374,7 @@ def usedColorIndexes(image):
     h = image.height()
     scanLine = image.scanLine
     return frozenset(chain.from_iterable(map(ord, scanLine(y).asstring(w))
-                for y in xrange(h)))
+                for y in range(h)))
 
 def addImageColors(colorTable, usedIndexes, image):
     old2new = {}
@@ -382,8 +382,8 @@ def addImageColors(colorTable, usedIndexes, image):
     
     from itertools import chain
     lastUsedIndexes = max(chain(usedIndexes, [0]))
-    spaces = [k for k in xrange(lastUsedIndexes + 1, 256) if k not in usedIndexes] + \
-             [k for k in xrange(1, lastUsedIndexes) if k not in usedIndexes]
+    spaces = [k for k in range(lastUsedIndexes + 1, 256) if k not in usedIndexes] + \
+             [k for k in range(1, lastUsedIndexes) if k not in usedIndexes]
     #0�Ԃɂ͗Ⴆ(0, 0, 0)�ł��ǉ����Ȃ�
     
     print(spaces)

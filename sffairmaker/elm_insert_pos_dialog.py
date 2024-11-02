@@ -14,7 +14,7 @@ class InsertPosWidget(QWidget):
         
         self._insertPos = 0
         L = QHBoxLayout()
-        L.setMargin(0)
+        L.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを0に設定
         L.setSpacing(0)
         
         L.addSpacing(self._spacingSize)
@@ -111,7 +111,7 @@ class InsertPosDialog(QDialog):
         area.event = event
         
         L = QVBoxLayout()
-        L.setMargin(0)
+        L.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを0に設定
         L.setSpacing(0)
         L.addWidget(area, 1)
         L.addWidget(buttons)
@@ -134,7 +134,7 @@ class Thumb(QFrame):
         self.setStyleSheet("Thumb{border:1px solid black;}")
         
         L = QGridLayout()
-        L.setMargin(0)
+        L.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを0に設定
         L.setSpacing(0)
         
         label = ElmImageLabel(self)

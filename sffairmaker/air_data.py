@@ -324,7 +324,7 @@ class Air:
         >>> animId = a.animIds()[0]
         >>> a.changeElm(a.elmIds(animId)[0], group=0)
         True
-        >>> for i in xrange(4):
+        >>> for i in range(4):
         ...     _ = a.newElm(animId, len(a.elmIds(animId)), group=i+1)
         ...
         >>> a.changeAnim(animId, loop=4)
@@ -352,7 +352,7 @@ class Air:
         """
         >>> a = Air.create()
         >>> animId = a.animIds()[0]
-        >>> for i in xrange(4):
+        >>> for i in range(4):
         ...     _ = a.newElm(animId, len(a.elmIds(animId)), group=i, index=2*i+1)
         ...
         >>> [e.group() for e in a.elms(animId)]
@@ -571,17 +571,17 @@ def main():
     #�A�j���̃e�L�X�g�ҏW�ŁA�ҏW�O�Ɠ��e���ς��Ȃ�������A�A���h�D�ɓo�^���Ȃ�
     a = AirData()
     animId, = a.animIds()
-    for index in xrange(10):
+    for index in range(10):
         a.newElm(
             animId,
             -1,
             index=index,
-            clsn1=Clsn((i,i*3,i*5,i*9) for i in xrange(7)),
+            clsn1=Clsn((i,i*3,i*5,i*9) for i in range(7)),
         )
     a.changeAnim(
         animId,
         loop=5,
-        clsn1=Clsn((i,i*3,i*5,i*9)for i in xrange(7))
+        clsn1=Clsn((i,i*3,i*5,i*9)for i in range(7))
     )
     
     ss = a.animToString(animId)

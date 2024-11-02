@@ -5,7 +5,7 @@ import os
 from fnmatch import fnmatch
     
 def pattern_to_filt(pat):
-    if isinstance(pat, basestring):
+    if isinstance(pat, str):
         def filt(filename):
             name = os.path.basename(filename)
             return fnmatch(name, pat)

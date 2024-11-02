@@ -380,8 +380,8 @@ class ColorTableEditBase(ColorTableView):
         self.setCurrentIndex(self.index(0, 0))
         self.resizeColumnsToContents()
         self.resizeRowsToContents()
-        w = sum(self.sizeHintForRow(r) for r in xrange(self.model().rowCount()))
-        h = sum(self.sizeHintForColumn(r) for r in xrange(self.model().columnCount()))
+        w = sum(self.sizeHintForRow(r) for r in range(self.model().rowCount()))
+        h = sum(self.sizeHintForColumn(r) for r in range(self.model().columnCount()))
         self.setFixedSize(w+4, h+4)
         
         self.setShowGrid(True)
@@ -577,10 +577,10 @@ def main():
     m = model.Model()
     m.sff().open(join(debugDataDir(), "kfm.sff"))
 ##        image = image_op.Image256(128, 1)
-##        for x in xrange(128):
+##        for x in range(128):
 ##            image.setPixel(x, 0, x)
 ##        colorTable = []
-##        for i in xrange(256):
+##        for i in range(256):
 ##            colorTable.append(qRgb(i, i, i))
 ##        image.setColorTable(colorTable)
     

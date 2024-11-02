@@ -30,7 +30,7 @@ def list_get(alist, i, default=None):
     return default
 
 def list_range(alist):
-    return xrange(len(alist))
+    return range(len(alist))
 
 def def_alias(newname, oldname):
     return """
@@ -148,7 +148,7 @@ def settings(self):
 
 def cycle_pairwise(alist):
     alist = list(alist)
-    return izip(alist, alist[1:] + [alist[0]])
+    return zip(alist, alist[1:] + [alist[0]])
 
 def syncAttr(obj1, obj2, *names):
     _syncAttr(obj1, obj2, True, *names)
@@ -173,7 +173,7 @@ def _syncAttr(obj1, obj2, both, *names):
         signal(x1, name1).connect(setter(x2, name2))
     
     for name in names:
-        if isinstance(name, basestring):
+        if isinstance(name, str):
             n1 = n2 = name
         else:
             n1, n2 = name

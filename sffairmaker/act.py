@@ -14,7 +14,7 @@ def open(filename):
 
 def read(fp):
     colorTable = colorTable256([])
-    for i in xrange(255, -1, -1):
+    for i in range(255, -1, -1):
         chars = fp.read(3)
         assert isinstance(chars, str), "file object passd for 'act.read' must be 'binary mode'"
         if len(chars) < 3:
@@ -25,11 +25,11 @@ def read(fp):
 
 def write(fp, colorTable):
     colorTable = colorTable256(colorTable)
-    for i in xrange(255, -1, -1):
+    for i in range(255, -1, -1):
         x = colorTable[i]
         for f in (qRed, qGreen, qBlue):
             i = f(x)
-            assert i in xrange(256)
+            assert i in range(256)
             fp.write(chr(i))
     
 def save(filename, colorTable):

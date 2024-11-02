@@ -99,10 +99,10 @@ class AddSprsDialog(QDialog):
         self._group = QSpinBox()
         self._index = QSpinBox()
         
-        self._x.setRange(*const.SprXRange)
+        self._x.setRange(*const.Sprrange)
         self._y.setRange(*const.SprYRange)
         self._group.setRange(*const.SprGroupRange)
-        self._index.setRange(*const.SprIndexRange)
+        self._index.setRange(*const.SprInderange)
         
         self._useAct = ValueCheckBox(u"Act�K�p")
         self._withBgColor = ValueCheckBox(u"�w�i�F�w��ς�")

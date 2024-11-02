@@ -36,11 +36,11 @@ class SprGroupEdit(SprEditSpinBox):
     
 class SprIndexEdit(SprEditSpinBox):
     _field = "index"
-    _range = const.SprIndexRange
+    _range = const.SprInderange
     
 class SprXEdit(SprEditSpinBox):
     _field = "x"
-    _range = const.SprXRange
+    _range = const.Sprrange
 class SprYEdit(SprEditSpinBox):
     _field = "y"
     _range = const.SprYRange

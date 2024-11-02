@@ -139,7 +139,7 @@ class AnimLoopEdit(LoopEdit, AirEditMixin):
 
 class AnimIndexSpinBox(EditSpinBox, AirEditMixin):
     _field = "index"
-    _range = const.AnimIndexRange
+    _range = const.AnimInderange
     def __init__(self, *a, **kw):
         EditSpinBox.__init__(self, *a, **kw)
         self.setup()

@@ -1,4 +1,4 @@
-# coding: utf-8
+#encoding:utf-8
 from __future__ import division, with_statement, print_function
 __metaclass__ = type
 
@@ -31,12 +31,12 @@ def screenPos(p, scale):
 
 def dataRect(rc, scale):
     """
-    screen���Rect -> SFF��AIR�Ȃǂ�data���ł�Rect
+    screen上のRect -> SFFやAIRなどのdata内でのRect
     
-    data�̃s�N�Z��(0, 0)�́Ascreen���QRect(0, 0, scale, scale)�Ƃ��ĕ`�悳���B
+    dataのピクセル(0, 0)は、screen上でQRect(0, 0, scale, scale)として描画される。
     
-    ���̊֐��ł́Ascreen���rc�������ł����悤��data�̃s�N�Z���́A
-    dataRect�Ɋ܂܂��Ƃ���B
+    この関数では、screen上でrcが少しでも被るようなdataのピクセルは、
+    dataRectに含まれるとする。
     
     >>> dataRect(QRect(QPoint(0, 0), QPoint(0, 0)), 1)
     PyQt4.QtCore.QRect(0, 0, 1, 1)
@@ -52,7 +52,7 @@ def dataRect(rc, scale):
     
 def screenRect(rc, scale):
     """
-    SFF��AIR�Ȃǂ�data���ł�Rect -> screen���Rect
+    SFFやAIRなどのdata内でのRect -> screen上のRect
     >>> rc = QRect(0, 0, 1, 1)
     >>> s = 5
     >>> dataRect(screenRect(rc, s), s)
@@ -153,7 +153,7 @@ def tilling(left, right, size, leftOverflow=False):
         ileft = math.floor(left / size)
     
     iright = math.ceil(right / size)
-    for i in xrange(int(ileft), int(iright)):
+    for i in range(int(ileft), int(iright)):
         yield i, i * size
     
 
@@ -165,21 +165,23 @@ def gridLines(rect, size):
 
 
 class AbstractImageViewCore(QWidget):
-##    ImageView�̕����ʂ�j�B
-##    AbstractImageViewCore�̃T�u�N���X��createImageViewClass�ɓn���A
-##    ImageView�̃T�u�N���X�����B
+##    ImageViewの文字通り核。
+##    AbstractImageViewCoreのサブクラスをcreateImageViewClassに渡し、
+##    ImageViewのサブクラスを作る。
     
-##    Drag&Drop ��ǉ��������Ƃ��́A
-##    mousePressEvent�Ȃǂ��I�[�o�[���C�h����̂ł͂Ȃ��A
-##    _draggingType���I�[�o�[���C�h����B
-##    _draggingType�̓}�E�X�́iaxis�Ɋ�Â��������I�ȁj�ʒu��mouseEvent�����ɁA
-##    DraggingType�̃T�u�N���X��Ԃ��B
+##    Drag&Drop を追加したいときは、
+##    mousePressEventなどをオーバーライドするのではなく、
+##    _draggingTypeをオーバーライドする。
+##    _draggingTypeはマウスの（axisに基づいた内部的な）位置とmouseEventを元に、
+##    DraggingTypeのサブクラスを返す。
     
-##    DraggingType��mousePress mouseMove mouseRelease���ɂ��������������������N���X�ł���B
+##    DraggingTypeはmousePress mouseMove mouseRelease時にしたい何かを実装したクラスである。
     
     
     axisDeltaChanged = pyqtSignal(QPoint)
-    AxisOrigin = Enum("Center", "TopLeft")
+    class AxisOrigin(Enum):
+        Center = 1
+        TopLeft = 2
     
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
@@ -471,7 +473,7 @@ class AbstractImageViewCore(QWidget):
     def _moveDelta(self):
         return QPoint(self._dragDelta() / self.scale())
     
-    # ��������virtual���\�b�h
+    # ここからvirtualメソッド
     def _draggingType(self, event, pos):
         raise NotImplementedError
     
@@ -485,8 +487,8 @@ class AbstractImageViewCore(QWidget):
 
 class ImageView(QWidget):
     """
-    �`��֌W���g���������Ƃ��A���̃N���X�͒��ڌp������ׂ��ł͂Ȃ��B
-    AbstractImageView���p�����AcreateImageViewClass�ŃT�u�N���X�����ׂ��B
+    描画関係を拡張したいとき、このクラスは直接継承するべきではない。
+    AbstractImageViewを継承し、createImageViewClassでサブクラスを作るべし。
     """
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
@@ -530,7 +532,7 @@ class ImageView(QWidget):
         layout.addWidget(self._core, 1, 1)
         
         layout.setSpacing(0)
-        layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを設定
+        layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを0に設定
         layout.setColumnStretch(1, 1)
         layout.setRowStretch(1, 1)
         

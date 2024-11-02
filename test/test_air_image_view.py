@@ -27,7 +27,7 @@ def testAppendingClsn():
     
     v.setElm(elm)
     
-    clsn = Clsn([QRect(i*7, i*7, 7, 7) for i in xrange(10)])
+    clsn = Clsn([QRect(i*7, i*7, 7, 7) for i in range(10)])
     elm.change(clsn1=clsn)
     
     v.resize(300, 300)

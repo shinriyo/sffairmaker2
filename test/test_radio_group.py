@@ -6,7 +6,7 @@ from sffairmaker.radio_group import *
 
 def test():
     app = QApplication([])
-    t = RadioGroup("test", [(i, str(i)) for i in xrange(4)])
+    t = RadioGroup("test", [(i, str(i)) for i in range(4)])
     assert t.value() == 0
     assert t._buttons[0].isChecked()
     

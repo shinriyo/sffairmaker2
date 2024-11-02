@@ -16,7 +16,7 @@ def testCharSff():
     sff = Sff(None)
     sff.setIsCharSff(False)
     
-    assert not sff.hasChanged() #ƒLƒƒƒ‰SFF‚Ö‚Ìİ’è‚Í‰½‚à•Ï‰»‚³‚¹‚È‚¢
+    assert not sff.hasChanged() #ï¿½Lï¿½ï¿½ï¿½ï¿½SFFï¿½Ö‚Ìİ’ï¿½Í‰ï¿½ï¿½ï¿½ï¿½Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
     
     spr_other  = sff.sprs()[0]
     spr_0_0    = sff.newSpr(group=0, index=0, useAct=False)
@@ -50,7 +50,7 @@ def testCharSff():
     assert spr_0_0.isUseActFixed()
     assert spr_9000_0.isUseActFixed()
     
-    #char—pSFF‚Ì‚Æ‚«‚ÍA(0, 0), (9000, 0)‚ÌUseAct‚ğ•ÏX‚µ‚æ‚¤‚Æ‚µ‚Ä‚à–³‹
+    #charï¿½pSFFï¿½Ì‚Æ‚ï¿½ï¿½ÍA(0, 0), (9000, 0)ï¿½ï¿½UseActï¿½ï¿½ÏXï¿½ï¿½ï¿½æ‚¤ï¿½Æ‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½
     spr_0_0.change(useAct=False)
     assert updated_count.value == 1, updated_count.value
     assert spr_0_0.useAct()
@@ -59,12 +59,12 @@ def testCharSff():
     assert updated_count.value == 1, updated_count.value
     assert spr_9000_0.useAct()
     
-    #‚à‚¿‚ë‚ñA‚»‚êˆÈŠO‚Í•ÏX‰Â”\
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ÈŠOï¿½Í•ÏXï¿½Â”\
     spr_other.change(useAct=True)
     assert updated_count.value == 2, updated_count.value
     assert spr_other.useAct()
     
-    #group, index‚ğ•ÏX‚·‚ê‚ÎAuUseAct•ÏX•s‰Â”\v‚ÌŒø—Í‚Í–³‚µ
+    #group, indexï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½ÎAï¿½uUseActï¿½ÏXï¿½sï¿½Â”\ï¿½vï¿½ÌŒï¿½ï¿½Í‚Í–ï¿½ï¿½ï¿½
     spr_9000_0.change(group=1000, index=1000)
     assert updated_count.value == 3, updated_count.value
     assert spr_9000_0.group_index() == (1000, 1000)
@@ -72,7 +72,7 @@ def testCharSff():
     
     
 def testOpenMissingFile():
-    #‘¶İ‚µ‚È‚¢ƒtƒ@ƒCƒ‹‚ğŠJ‚±‚¤‚Æ‚µ‚½‚Æ‚«
+    #ï¿½ï¿½ï¿½İ‚ï¿½ï¿½È‚ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
     
     app = QApplication([])
     class Model_(_Model):
@@ -103,14 +103,14 @@ def testOpenMissingFile():
         x = getattr(m, name)()
         assert_equals(x._model, m)
         
-        x.open(u"*‘¶İ‚µ‚È‚¢ƒtƒ@ƒCƒ‹*")
+        x.open(u"*ï¿½ï¿½ï¿½İ‚ï¿½ï¿½È‚ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½*")
         assert_equal(m.cannotOpenFileMsgCalled, i, name)
         
         filename = join(gettempdir(), u"some-invalid-file")
         with open(filename, "w") as fp:
-            fp.write("‚­‚Ÿ‚—‚¹‚„‚’‚†‚”‚‡‚™‚Ó‚¶‚±‚Œ‚")
+            fp.write("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
         
-        x.open(filename) #ƒoƒO‚Á‚½ƒtƒ@ƒCƒ‹‚àA‚Æ‚è‚ ‚¦‚¸“Ç‚İ‚Ş
+        x.open(filename) #ï¿½oï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Æ‚è‚ ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
         assert_equal(m.invalidFormatMsgCalled, 0, name)
     
     
@@ -142,10 +142,10 @@ def testAnimTextEdit():
     
     a = m.air().anims()[0]
     
-    #¬Œ÷‚·‚éê‡
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
     a.textEdit()
     
-    #ƒZƒNƒVƒ‡ƒ“–¼‚ª‚¨‚©‚µ‚¢ê‡
+    #ï¿½Zï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
     m._text = """\
 [begin spamegg ]
 -1, -1, 0, 0, 1, , AS255D0
@@ -154,7 +154,7 @@ def testAnimTextEdit():
     assert m._actionParsingSectionNameErrorMsg == 1
     assert m._actionParsingErrorMsg == 0
     
-    #ƒZƒNƒVƒ‡ƒ“–¼ˆÈŠO‚ª‚¨‚©‚µ‚¢ê‡
+    #ï¿½Zï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÈŠOï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡
     m._text = """\
 [begin action 0]
 -1, -1, *****0, 0, 1, , AS255D0
@@ -164,18 +164,18 @@ def testAnimTextEdit():
     assert m._actionParsingErrorMsg == 1
     
     
-    #ƒRƒ}‚ª‹ó‚È
+    #ï¿½Rï¿½}ï¿½ï¿½ï¿½ï¿½Èï¿½
     m._text = """\
 [begin action 0]
 """
     elms = a.elms()
     
     a.textEdit()
-    #—áŠO‚Í”­¶‚µ‚È‚¢
+    #ï¿½ï¿½Oï¿½Í”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
     assert m._actionParsingSectionNameErrorMsg == 1
     assert m._actionParsingErrorMsg == 1
     
-    #‚µ‚©‚µA©“®‚ÅƒRƒ}‚ª‘}“ü‚³‚ê‚é
+    #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ÅƒRï¿½}ï¿½ï¿½ï¿½}ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     assert len(a.elms()) == 1
     assert elms != a.elms(), (elms, a.elms())
 
@@ -223,18 +223,18 @@ def testSaveSprError():
     
     m.sff().create()
     
-    #’P‘Ì•Û‘¶
+    #ï¿½Pï¿½Ì•Û‘ï¿½
     m.sff().sprs()[0].save("*some-invalid-path*")
     assert m._saveImageErrorMsg == 1
     
-    #ƒOƒ‹[ƒv
-    #csv‚É•Û‘¶‚Å‚«‚È‚¢
+    #ï¿½Oï¿½ï¿½ï¿½[ï¿½v
+    #csvï¿½É•Û‘ï¿½ï¿½Å‚ï¿½ï¿½È‚ï¿½
     m.sff().sprs()[0].saveGroup("*some-invalid-path*")
     assert m._saveErrorMsg == 1
     m.sff().saveCsv("*some-invalid-path*")
     assert m._saveErrorMsg == 2
     
-    #‰æ‘œ‚ğ•Û‘¶‚Å‚«‚È‚¢
+    #ï¿½æ‘œï¿½ï¿½Û‘ï¿½ï¿½Å‚ï¿½ï¿½È‚ï¿½
     import tempfile
     from os.path import join
     import os
@@ -247,7 +247,7 @@ def testSaveSprError():
     m.sff().saveCsv(csvPath)
     assert m._saveImageErrorMsg == 3, m._saveImageErrorMsg
     
-    #ƒfƒBƒŒƒNƒgƒŠ‚ğì‚ê‚È‚¢
+    #ï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
     m.askCsvSaveFormat = lambda *a,**kw:sff_data.CsvSaveFormat("{name}\***\spam", "png")
     m.sff().sprs()[0].saveGroup(csvPath)
     assert m._saveImageErrorMsg == 4
@@ -262,15 +262,15 @@ def testUsedColorIndexes():
     sff = m.sff()
     
     im1 = Image256(100, 1)
-    for x in xrange(100):
+    for x in range(100):
         im1.setPixel(x, 0, x)
         
     im2 = Image256(100, 1)
-    for x in xrange(100):
+    for x in range(100):
         im2.setPixel(x, 0, 0)
     
     spr = sff.newSpr(image=im1)
-    assert set(xrange(100)) == spr.usedColorIndexes()
+    assert set(range(100)) == spr.usedColorIndexes()
     
     spr.change(image=im2)
     assert set([0]) == spr.usedColorIndexes()
@@ -279,10 +279,10 @@ def testUsedColorIndexes():
 def testExternalEdit():
     app = QApplication([])
     im1 = Image256(100, 1)
-    for x in xrange(100):
+    for x in range(100):
         im1.setPixel(x, 0, x)
     im2 = Image256(100, 1)
-    for x in xrange(100):
+    for x in range(100):
         im2.setPixel(x, 0, 0)
     
     testAir = u"""

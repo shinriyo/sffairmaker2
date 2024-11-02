@@ -86,7 +86,7 @@ class RecentFileMenu(QMenu):
         self._files = files
         
         self._actions = self._actions[:len(self._files)]
-        for i in xrange(len(self._files) - len(self._actions)):
+        for i in range(len(self._files) - len(self._actions)):
             a = self.addAction("")
             a.triggered.connect(self._onActionTriggered)
             self._actions.append(a)
@@ -253,7 +253,7 @@ class MainWindow(QMainWindow):
         "anim", "setAnim", "elm", "setElm"))
 
     def _tabs(self):
-        for i in xrange(self.count()):
+        for i in range(self.count()):
             yield self._tab.widget(i)
     
     def currentTab(self):
@@ -274,7 +274,7 @@ class MainWindow(QMainWindow):
         def action(text, statusTip, callback):
             a = QAction(text, self)
             a.setStatusTip(statusTip)
-            if isinstance(callback, basestring):
+            if isinstance(callback, str):
                 callback = eval("lambda self=self:" + callback)
             a.triggered.connect(lambda _:callback())
             return a
