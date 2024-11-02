@@ -83,41 +83,50 @@ class ImagePathPreview(QTextEdit):
         
 
 class CsvSaveFormatDialog(QDialog):
-    formatChanged = pyqtSignal(CsvSaveFormat)
+    # formatChanged = pyqtSignal('CsvSaveFormat')  # CsvSaveFormatが適切に定義されていることを確認してください。
+    formatChanged = pyqtSignal(str)  # ここを基本型に変更
+
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
         self.setWindowTitle(u"画像の形式")
         
         self._name = QComboBox()
-        self._name.setAutoCompletion(True)
-        self._name.setEditable(True)
+        self._name.setEditable(True)  # QComboBoxを編集可能に設定
         self._name.setInsertPolicy(QComboBox.NoInsert)
         self._name.setEditText("{name}_{group}_{index}")
-        
+
+        # QLineEditを取得してCompleterを設定
+        line_edit = self._name.lineEdit()
+        completer = QCompleter(self._name.model(), self)  # QComboBoxのモデルを使用
+        line_edit.setCompleter(completer)
+
         self._ext = QComboBox()
-        self._ext.addItems(ExtValues)
+        self._ext.addItems(ExtValues)  # ExtValuesは事前に定義されている必要があります
         self._ext.setCurrentIndex(0)
         
-        self._buttons = dialogButtons(self)
+        self._buttons = dialogButtons(self)  # dialogButtonsが適切に定義されていることを確認してください
         
-        self._preview = ImagePathPreview(self)
+        self._preview = ImagePathPreview(self)  # ImagePathPreviewが適切に定義されていることを確認してください
+
         def setPreviewFormat(*_a, **_kw):
-            self._preview.setFormat(CsvSaveFormat(self.name(), self.ext()))
+            self._preview.setFormat(CsvSaveFormat(self.name(), self.ext()))  # CsvSaveFormatが適切に定義されていることを確認してください
             self._buttons.okButton().setEnabled(self._preview.isValid())
             
         self._name.editTextChanged.connect(setPreviewFormat)
-        self._ext.editTextChanged.connect(setPreviewFormat)
+        self._ext.currentTextChanged.connect(setPreviewFormat)  # 変更: editTextChangedではなくcurrentTextChangedを使用
         setPreviewFormat()
         
-        #レイアウトここから
-        self.setLayout(vBoxLayout(
-            hBoxLayout(
-                (self._name, 1),
-                self._ext
-            ),
-            (groupBox(u"プレビュー", self._preview), 1),
-            self._buttons,
-        ))
+        # レイアウトここから
+        layout = QVBoxLayout()
+        h_layout = QHBoxLayout()
+        h_layout.addWidget(self._name)
+        h_layout.addWidget(self._ext)
+
+        layout.addLayout(h_layout)
+        layout.addWidget(groupBox(u"プレビュー", self._preview))  # groupBoxが適切に定義されていることを確認してください
+        layout.addWidget(self._buttons)
+        
+        self.setLayout(layout)
         self.setMinimumWidth(300)
     
     def setCsvPath(self, csvPath):

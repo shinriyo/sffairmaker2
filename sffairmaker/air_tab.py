@@ -247,7 +247,7 @@ class AirTab(QWidget):
         for (caption, c, key) in items:
             groupBox = QGroupBox(caption, self)
             layout = QGridLayout()
-            layout.setMargin(0)
+            layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを設定
             layout.setSpacing(0)
             
             layout.addWidget(c, 0, 0, 1, 2)

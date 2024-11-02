@@ -28,7 +28,8 @@ class AlphaEdit(QWidget):
         layout = QHBoxLayout()
         self.setLayout(layout)
         layout.setSpacing(0)
-        layout.setMargin(0)
+        # layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを設定
+        layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを設定
         
         self.src = QSpinBox(self)
         self.src.setRange(*const.AlphaSourceRange)
@@ -84,7 +85,7 @@ class LoopEdit(QWidget):
         QWidget.__init__(self, parent)
         
         layout = QHBoxLayout()
-        layout.setMargin(0)
+        layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを設定
         self.setLayout(layout)
         
         self._hasLoop = QCheckBox(self)

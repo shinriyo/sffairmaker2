@@ -308,8 +308,17 @@ class RecentStrings(QObject):
     
     def __init__(self, parent=None):
         QObject.__init__(self, parent)
+        
+        # 設定値を取得
         v = Settings().value(self._keys())
-        self._strings = [str(i.toString()) for i in v.toList()]
+        
+        # vがNoneの場合をチェック
+        if v is None:
+            self._strings = list(self._default())  # デフォルト値を使用
+        else:
+            self._strings = [str(i.toString()) for i in v.toList()]  # toList()を使用
+        
+        # もし_stringsが空ならデフォルトを再度使用
         if not self._strings:
             self._strings = list(self._default())
     
@@ -417,12 +426,19 @@ class BgImageHolder(QObject):
     Key = "BgImageFilename"
     def __init__(self, parent=None):
         QObject.__init__(self, parent=parent)
+        
+        # 設定値を取得
         v = self.settings().value(self.Key)
-        if v.isValid():
+
+        # vがNoneの場合をチェック
+        if v is None:
+            self._image = QImage()  # デフォルトのQImageを設定
+            self._filename = ""  # デフォルトのファイル名を設定
+        elif v.isValid():
             self._filename = str(v.toString())
             self._image = QImage(self._filename)
         else:
-            self._image = QImage()
+            self._image = QImage()  # 何かの理由でisValidがFalseの場合
             self._filename = ""
     
     def settings(self):
@@ -452,13 +468,12 @@ class _View(QObject, Dialog, Message):
     
     def __init__(self, parent=None):
         QObject.__init__(self, parent=parent)
-        Dialog.__init__(self)
+        QDialog.__init__(self)  # QDialogの初期化
         
         self._mainWindow = None
         self._optionWindow = None
         
         self._colorsHolder = SettingColorsHolder(parent=self)
-        
         self._scaleObject = ScaleObject()
         
         opt = const.GridOption(const.ImageZOrder.Middle, True, True)
@@ -471,23 +486,28 @@ class _View(QObject, Dialog, Message):
         self._bgImage = BgImageHolder()
         self.setupHolder("bgImageDelta", QPoint(0, 0))
         self.setupHolder("bgImageTile", False)
+        
         BgImageDelta = "BgImageDelta"
         BgImageTile = "BgImageTile"
         
-        self.setBgImageDelta(QPoint(self.settings().value(BgImageDelta).toPoint()))
-        self.setBgImageTile(bool(self.settings().value(BgImageTile).toBool()))
+        # QSettingsからの値取得時にNoneチェック
+        bg_image_delta_value = self.settings().value(BgImageDelta)
+        bg_image_tile_value = self.settings().value(BgImageTile)
+        
+        self.setBgImageDelta(bg_image_delta_value.toPoint() if bg_image_delta_value is not None else QPoint(0, 0))
+        self.setBgImageTile(bool(bg_image_tile_value) if bg_image_tile_value is not None else False)
         
         self.bgImageDeltaChanged.connect(
-            lambda v:self.settings().setValue(BgImageDelta, QPoint(v)))
+            lambda v: self.settings().setValue(BgImageDelta, QPoint(v)))
         self.bgImageTileChanged.connect(
-            lambda v:self.settings().setValue(BgImageTile, bool(v)))
-        
-        
+            lambda v: self.settings().setValue(BgImageTile, bool(v)))
         
         self._recentSff = RecentFiles("Sff")
         self._recentAir = RecentFiles("Air")
-    
-    
+
+    def settings(self):
+        return QSettings()  # 適切なQSettingsインスタンスを返すように実装
+
     
     def sff(self):
         return self.mainWindow().sff()

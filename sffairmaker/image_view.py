@@ -530,7 +530,7 @@ class ImageView(QWidget):
         layout.addWidget(self._core, 1, 1)
         
         layout.setSpacing(0)
-        layout.setMargin(0)
+        layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを設定
         layout.setColumnStretch(1, 1)
         layout.setRowStretch(1, 1)
         

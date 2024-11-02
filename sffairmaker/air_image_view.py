@@ -439,7 +439,7 @@ class AirImageViewCore2(AirImageViewCore):
         self.elmChanged.connect(curElm.setElm)
         
         layout = QHBoxLayout()
-        layout.setMargin(0)
+        layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを設定
         
         flag = Qt.AlignLeft | Qt.AlignTop
         layout.addWidget(play, 0, flag)

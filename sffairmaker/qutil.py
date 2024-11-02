@@ -317,7 +317,7 @@ def boxLayout(orientation, *items, **kw):
     else:
         layout = QVBoxLayout()
         lineClass = VLine
-    layout.setMargin(0)
+    layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを設定
     layout.setSpacing(0)
     
     lastStretch=kw.pop("stretch", False)

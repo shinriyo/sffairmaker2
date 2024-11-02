@@ -983,7 +983,7 @@ class SubModel(QObject):
         if filename is not None:
             return os.path.dirname(str(filename))
         else:
-            return os.getcwdu()
+            return os.getcwd()
     
     def dir(self):
         return self.getdir(self._data.filename())

@@ -137,7 +137,7 @@ class PaletteSetting(QWidget):
         self._spr.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         
         layout = QVBoxLayout()
-        layout.setMargin(0)
+        layout.setContentsMargins(0, 0, 0, 0)  # 左, 上, 右, 下のマージンを設定
         layout.setSpacing(0)
         layout.addWidget(self._sffPalette)
         layout.addWidget(self._actPalette)

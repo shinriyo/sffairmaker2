@@ -29,8 +29,8 @@ class _Settings(QSettings):
     def __init__(self):
         from os.path import join, expandvars 
         
-        s = QSettings(join(os.getcwdu(), "inidir.ini"), QSettings.IniFormat)
-        iniPath = join(expandvars(str(s.value("iniDir", const.IniDir).toString())), const.IniName)
+        s = QSettings(join(os.getcwd(), "inidir.ini"), QSettings.IniFormat)
+        iniPath = join(expandvars(str(s.value("iniDir", const.IniDir))), const.IniName)
         QSettings.__init__(self, iniPath, QSettings.IniFormat)
     
     def externalSprEditingCommand(self):
