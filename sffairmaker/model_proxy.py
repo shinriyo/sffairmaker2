@@ -39,7 +39,7 @@ class Proxy(QObject):
     def isValid(self):
         return self._subject() is not None
     
-    exec def_qgetter("id")
+    exec(def_qgetter("id"))
     def __eq__(self, other):
         if (not isinstance(other, (Proxy, NullProxy)) or 
             not hasattr(other, "_id")
