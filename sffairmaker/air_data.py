@@ -202,7 +202,7 @@ class Air:
         >>> a.animIdOfElm("not a elmId") == animId
         False
         """
-        for animId, anim in self._anims.iteritems():
+        for animId, anim in self._anims.items():
             if elmId in anim.elmIds:
                 return animId
         return None

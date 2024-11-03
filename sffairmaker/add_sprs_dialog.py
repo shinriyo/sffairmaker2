@@ -92,7 +92,7 @@ class AddSprsDialog(QDialog):
     
     def __init__(self, image=None, parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"�摜�̒ǉ�")
+        self.setWindowTitle(u"画像の追加")
         
         self._x = QSpinBox()
         self._y = QSpinBox()
@@ -102,21 +102,21 @@ class AddSprsDialog(QDialog):
         self._x.setRange(*const.Sprrange)
         self._y.setRange(*const.SprYRange)
         self._group.setRange(*const.SprGroupRange)
-        self._index.setRange(*const.SprInderange)
+        self._index.setRange(*const.SprIndexRange)
         
-        self._useAct = ValueCheckBox(u"Act�K�p")
-        self._withBgColor = ValueCheckBox(u"�w�i�F�w��ς�")
+        self._useAct = ValueCheckBox(u"Act適用")
+        self._withBgColor = ValueCheckBox(u"背景色指定済み")
         self._withBgColor.setValue(True)
         
         items = [
-            (const.CropType.NoCrop, u"Crop���Ȃ�"),
-            (const.CropType.CropPosAfter,  u"Crop����iCrop�����Ɉʒu�w��j"),
-            (const.CropType.CropPosBefore, u"Crop����iCrop�O����Ɉʒu�w��j")
+            (const.CropType.NoCrop, u"Cropしない"),
+            (const.CropType.CropPosAfter,  u"Cropする（Crop後を基準に位置指定）"),
+            (const.CropType.CropPosBefore, u"Cropする（Crop前を基準に位置指定）")
         ]
         
         self._cropType = RadioGroup(u"Crop", items, Qt.Vertical)
         
-        self._sequential = ValueCheckBox(u"�ȍ~�͘A��")
+        self._sequential = ValueCheckBox(u"以降は連番")
         
         for name in """x y group index useAct cropType sequential withBgColor""".split():
             setattr(self, name,
@@ -172,10 +172,10 @@ class AddSprsDialog(QDialog):
         
         buttonBox = dialogButtons(self)
         
-        #���C�A�E�g��������
+        #レイアウトここから
         leftLayout = vBoxLayout(
-            hGroupBox(u"�o�^��", self._group, self._index),
-            hGroupBox(u"�ʒu", self._x, self._y),
+            hGroupBox(u"登録先", self._group, self._index),
+            hGroupBox(u"位置", self._x, self._y),
             self._withBgColor,
             self._useAct,
             self._cropType,
@@ -183,7 +183,7 @@ class AddSprsDialog(QDialog):
             ("stretch", 1)
         )
         
-        scaleBox = hGroupBox(u"�{��", self._scale)
+        scaleBox = hGroupBox(u"倍率", self._scale)
         scaleBox.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         rightLayout = vBoxLayout(
             scaleBox,

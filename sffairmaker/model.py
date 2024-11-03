@@ -42,6 +42,7 @@ import types
 
 from sffairmaker.trash import trash
 from sffairmaker import spr_display
+import hashlib
 
 
 def editExternal_(tempFileNameMetName, startEditingMetName):
@@ -181,7 +182,7 @@ class Spr(Proxy):
         if not filename:
             return
         
-        filename = unicode(filename)
+        filename = str(filename)
         try:
             image = Image256(filename)
         except (IOError, OSError):
@@ -295,7 +296,7 @@ class Spr(Proxy):
     
     def save(self, filename=None):
         filename = filename or self._submodel.askSprSavePath()
-        filename = unicode(filename)
+        filename = str(filename)
         if not filename:
             return False
         
@@ -316,7 +317,7 @@ class Spr(Proxy):
     
     def saveGroup(self, filename=None):
         filename = filename or self.askCsvSavePath()
-        filename = unicode(filename)
+        filename = str(filename)
         if not filename:
             return
         
@@ -430,7 +431,7 @@ class Anim(Proxy):
         s = self.textDialog(self.toString())
         if s.isNull():
             return
-        s = unicode(s)
+        s = str(s)
         
         try:
             self.changeFromString(s)
@@ -515,7 +516,7 @@ class Anim(Proxy):
         
         if self.loop() is not None:
             for e, t in elms[self.loop():]:
-                for _ in xrange(t):
+                for _ in range(t):
                     yield e
     
     def timeLineBeforeLoop(self):
@@ -525,7 +526,7 @@ class Anim(Proxy):
             yield e
         else:
             for e, t in elms:
-                for _ in xrange(t):
+                for _ in range(t):
                     yield e
     
     #ここから、糖衣構文的・補助的メソッドの定義
@@ -982,7 +983,7 @@ class SubModel(QObject):
         
     def getdir(self, filename):
         if filename is not None:
-            return os.path.dirname(unicode(filename))
+            return os.path.dirname(str(filename))
         else:
             return os.getcwd()
     
@@ -1034,11 +1035,11 @@ class UsedColorIndexes:
     def __init__(self):
         self._d = WeakKeyDictionary()
     
+    # shinriyo完全置き換え
     def __call__(self, image):
-        if image not in self._d:
-            self._d[image] = image_op.usedColorIndexes(image)
-        return self._d[image]
-
+        hashable_image = image_op.usedColorIndexes(image)
+        if hashable_image not in self._d:
+            self._d[hashable_image] = image_op.usedColorIndexes(image)
 
 def def_method_for_plural_sprs(*methodNames):
     execstrs = []

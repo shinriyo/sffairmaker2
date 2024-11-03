@@ -30,7 +30,11 @@ from sffairmaker.clsn_image_view_mixin import (
 )
 
 
-ClsnDragMode = Enum("Normal", "Group", "All", "AllPos")
+class ClsnDragMode(Enum):
+    Normal = "Normal"
+    Group = "Group"
+    All = "All"
+    AllPos = "AllPos"
 
 class NoDragging(DraggingType):
     def mousePress(self, event):

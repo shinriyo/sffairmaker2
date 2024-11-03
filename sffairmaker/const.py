@@ -16,9 +16,9 @@ AnimInderange = (-32767, 32767)
 ElmTimeRange = (-1, 32767)
 
 ElmGroupRange = SprGroupRange = (-32767, 32767)
-ElmInderange = SprInderange = (-32767, 32767)
+ElmIndexRange = SprIndexRange = (-32767, 32767)
 Sprrange = SprYRange = (-32767, 32767)
-Elmrange = ElmYRange = (-32767, 32767)
+ElmXRange = ElmYRange = (-32767, 32767)
 
 class ClsnKeys(Enum):
     _1 = "clsn1"
@@ -106,7 +106,11 @@ def TitleFormat(type, filename, hasChanged):
         return t
 
 
-ColorTableType = Enum("Sff", "Act", "File", "Spr")
+class ColorTableType(Enum):
+    Sff = "Sff"
+    Act = "Act"
+    File = "File"
+    Spr = "Spr"
 
 MaxDisplayActMenuLength = 20
 

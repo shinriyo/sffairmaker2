@@ -233,7 +233,11 @@ class SprColorTableModel(ColorTableModelBase):
             return
         self._spr = spr
         self.setColorTable(self._spr.colorTable())
-        self.setUsedColorNumbers(self._spr.usedColorIndexes())
+        used_colors = self._spr.usedColorIndexes()
+        # self.setUsedColorNumbers(self._spr.usedColorIndexes())
+        if used_colors is None:
+            used_colors = frozenset()  # Noneの場合は空のfrozensetを代入
+        self.setUsedColorNumbers(used_colors)
     
     def setColorTable(self, *a, **kw):
         r = ColorTableModelBase.setColorTable(self, *a, **kw)
@@ -362,7 +366,8 @@ class ColorTableView(QTableView):
         self.verticalHeader().setMinimumSectionSize(1)
 
 
-ColorTableDragMode = Enum("Move", "Copy", "Swap", "SwapImageColor")
+# ColorTableDragMode = Enum("Move", "Copy", "Swap", "SwapImageColor")
+ColorTableDragMode = Enum('ColorTableDragMode', ('Move', 'Copy', 'Swap', 'SwapImageColor'))
 
 class ColorTableEditBase(ColorTableView):
     dragModeChanged = pyqtSignal("PyQt_PyObject")
@@ -541,12 +546,12 @@ class CommonColorTableEdit(ColorTableEditBase):
 
 
 class ColorTableDragModeRadio(RadioGroup):
-    def __init__(self, title=u"�h���b�O���̑���", *a, **kw):
+    def __init__(self, title=u"ドラッグ時の操作", *a, **kw):
         items = [
-            (ColorTableDragMode.Move, u"�ړ�"),
-            (ColorTableDragMode.Copy, u"�R�s�["),
-            (ColorTableDragMode.Swap, u"����"),
-            (ColorTableDragMode.SwapImageColor, u"�F�ʒu�̓���"),
+            (ColorTableDragMode.Move, u"移動"),
+            (ColorTableDragMode.Copy, u"コピー"),
+            (ColorTableDragMode.Swap, u"交換"),
+            (ColorTableDragMode.SwapImageColor, u"色位置の入替"),
         ]
         RadioGroup.__init__(self, title, items, *a, **kw)
     

@@ -10,7 +10,8 @@ from sffairmaker.sff_jump_dialog import SffJumpButton
 from sffairmaker.spr_selector import SffGroupIndexSelector
 
 
-OnionType = Enum("Relative", "Fixed")
+# OnionType = Enum("Relative", "Fixed")
+OnionType = Enum("OnionType", ["Relative", "Fixed"])
 
 class NeMixin:
     def __nq__(self, other):

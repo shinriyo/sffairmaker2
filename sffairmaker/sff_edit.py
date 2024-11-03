@@ -36,7 +36,7 @@ class SprGroupEdit(SprEditSpinBox):
     
 class SprIndexEdit(SprEditSpinBox):
     _field = "index"
-    _range = const.SprInderange
+    _range = const.SprIndexRange
     
 class SprXEdit(SprEditSpinBox):
     _field = "x"

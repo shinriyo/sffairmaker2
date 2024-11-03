@@ -7,7 +7,7 @@ from sffairmaker.mm import multimethod
 
 from itertools import chain, product, starmap
 from iterutils import grouper
-
+import ctypes
 import PIL.Image
     
 def pilimage_to_qimage(pilimage):
@@ -369,12 +369,40 @@ def swapImageColor(image, targetIndex, startIndex, srcs):
             image1.setPixel(p, indexMap[i])
     return image1
 
-def usedColorIndexes(image):
-    w = image.width()
-    h = image.height()
-    scanLine = image.scanLine
-    return frozenset(chain.from_iterable(map(ord, scanLine(y).asstring(w))
-                for y in range(h)))
+# shinriyo完全置き換え
+def usedColorIndexes(image: QImage) -> frozenset:
+    colors = set()
+    
+    # 画像の幅と高さを取得
+    width = image.width()
+    height = image.height()
+    
+    # 画像データを取得
+    ptr = image.bits()  # QImageのポインタを取得
+    ptr.setsize(image.byteCount())  # ポインタのサイズを設定
+
+    # バイトデータからRGBを抽出
+    for y in range(height):
+        for x in range(width):
+            # ピクセルのオフセットを計算（RGB形式のため、3バイトずつ）
+            offset = (y * image.bytesPerLine()) + (x * 3)  # bytesPerLineで行のオフセットを考慮
+            
+            # オフセットが範囲内か確認
+            if offset + 2 < image.byteCount():
+                # RGBの値を取得
+                red = ptr[offset]       # 赤
+                green = ptr[offset + 1] # 緑
+                blue = ptr[offset + 2]  # 青
+                
+                # RGBタプルをセットに追加
+                colors.add((red, green, blue))
+            # else:
+            #     print(f"Offset out of bounds: {offset}")
+    
+    # ユニークな色の集合をfrozensetとして返す
+    # return frozenset(colors)
+    # ユニークな色の集合をfrozensetとして返す
+    return frozenset(colors) if colors else frozenset()  # 空のfrozensetを返す
 
 def addImageColors(colorTable, usedIndexes, image):
     old2new = {}
