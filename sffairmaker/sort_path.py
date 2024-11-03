@@ -3,6 +3,7 @@ from __future__ import division, print_function
 import sys
 __metaclass__ = type 
 import ctypes
+import re
 
 def cmp_to_key(cmpf):
     '''
