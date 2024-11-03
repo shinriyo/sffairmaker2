@@ -1,4 +1,4 @@
-#encoding:shift-jis
+# coding: utf-8
 from __future__ import division, print_function
 __metaclass__ = type
 import nose, nose.tools
@@ -25,7 +25,7 @@ def test():
     assert r.text() == t
     
     log[:] = []
-    # texts‚ª•Ï‚í‚Á‚Ä‚à•\Œ»‚·‚érects‚ª“¯‚¶‚È‚çAƒVƒOƒiƒ‹‚Í”­s‚³‚ê‚È‚¢
+    # textsãŒå¤‰ã‚ã£ã¦ã‚‚è¡¨ç¾ã™ã‚‹rectsãŒåŒã˜ãªã‚‰ã€ã‚·ã‚°ãƒŠãƒ«ã¯ç™ºè¡Œã•ã‚Œãªã„
     t = "2, +3, 5, 7  ;spam\n\n11, 13,17,19"
     r.setText(t)
     assert log == []
@@ -33,7 +33,7 @@ def test():
     assert r.value() == Clsn([rect(2, 3, 5, 7), rect(11, 13, 17, 19)])
     
     log[:] = []
-    # rects‚ª•Ï‚í‚ç‚È‚¯‚ê‚ÎAtext‚ÍXV‚³‚ê‚È‚¢B
+    # rectsãŒå¤‰ã‚ã‚‰ãªã‘ã‚Œã°ã€textã¯æ›´æ–°ã•ã‚Œãªã„ã€‚
     r.setValue(Clsn([rect(2, 3, 5, 7), rect(11, 13, 17, 19)]))
     assert log == []
     assert r.text() == t
