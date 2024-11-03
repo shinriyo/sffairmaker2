@@ -25,6 +25,9 @@ class ClsnKeys(Enum):
     _2 = "clsn2"
     _1d = "clsn1Default"
     _2d = "clsn2Default"
+    @classmethod
+    def get_all_values(cls):
+        return [key.value for key in cls]
 
 MaxRecentFiles = 10
 
@@ -89,7 +92,8 @@ class ImageZOrder(Enum):
 GridOption = namedtuple("GridOption", "imageZOrder axis grid")
 
 MaxCsvNameFormat = 5
-DefaultCsvNameFormats = [u"{name}\{group:04}-{index:04}"]
+# DefaultCsvNameFormats = [u"{name}\{group:04}-{index:04}"]
+DefaultCsvNameFormats = [u"{name}\\{group:04}-{index:04}"]
 
 def TitleFormat(type, filename, hasChanged):
     from os.path import abspath, basename

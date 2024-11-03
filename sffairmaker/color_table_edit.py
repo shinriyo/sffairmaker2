@@ -222,7 +222,11 @@ class SprColorTableModel(ColorTableModelBase):
             if not self._spr.isValid():
                 return
             self.setColorTable(self.spr().colorTable())
-            self.setUsedColorNumbers(self.spr().usedColorIndexes())
+            # self.setUsedColorNumbers(self.spr().usedColorIndexes())
+            used_colors = self.spr().usedColorIndexes()
+            if used_colors is None:
+                used_colors = frozenset()  # Noneの場合は空のfrozensetを代入
+            self.setUsedColorNumbers(used_colors)
         self.xmodel().sff().updated.connect(setValue)
         setValue()
     

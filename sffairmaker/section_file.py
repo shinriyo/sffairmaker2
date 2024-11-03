@@ -54,7 +54,7 @@ def _isection_from_fp(fp, match=None):
         yield (name, match(name), members)
 
 def isection_from_fp(*a, **kw):
-    return ifilter(itemgetter(1), _isection_from_fp(*a, **kw))
+    return filter(itemgetter(1), _isection_from_fp(*a, **kw))
     
 def isection(filename, *a, **kw):
     return isection_from_fp(bufferedFileIO(filename), *a, **kw)

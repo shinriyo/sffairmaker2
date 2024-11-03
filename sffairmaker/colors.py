@@ -6,6 +6,7 @@ from sffairmaker.qutil import *
 from collections import namedtuple, defaultdict
 import copy
 import sip
+import pickle
 
 Colors = namedtuple("Colors", "bg axis grid1 grid2")
 ColorIndexes = namedtuple("ColorIndexes", "bg axis grid1 grid2")
@@ -16,7 +17,7 @@ class ColorIndexes(ColorIndexes):
     
     @classmethod
     def fromVariant(cls, v):
-        s = str(v.toString())
+        s = str(v)
         try:
             return cls(*pickle.loads(s))
         except Exception:

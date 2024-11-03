@@ -343,10 +343,20 @@ class Air:
         animAttrs, elmIds = self._anims[animId]
         elmIds1 = removed(elmIds, elmId)
         del self._elms[elmId]
+
+        loop_value = animAttrs.loop()
         
-        if len(elmIds1) <= animAttrs.loop():
-            animAttrs = animAttrs._replace(loop=None)
-        self._anims[animId] = Anim(animAttrs, elmIds1)
+        if loop_value is None:
+            # loop_valueがNoneの場合の処理を追加
+            animAttrs = animAttrs._replace(loop=None)  # ここは必要ないかもしれませんが、保持します。
+        else:
+            if len(elmIds1) <= loop_value:
+                animAttrs = animAttrs._replace(loop=None)
+        
+        self._anims[animId] = Anim(animAttrs, elmIds1)        
+        # if len(elmIds1) <= animAttrs.loop():
+        #     animAttrs = animAttrs._replace(loop=None)
+        # self._anims[animId] = Anim(animAttrs, elmIds1)
         
     def moveElm(self, animId, pos, elmId):
         """

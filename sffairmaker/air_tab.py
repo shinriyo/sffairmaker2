@@ -226,12 +226,21 @@ class AirTab(QWidget):
         self._clsnDragMode = ClsnDragModeGroup(imageView, parent=self)
         
         def wheelEvent(event):
-            if event.orientation() != Qt.Vertical:
-                return
-            if event.delta() < 0:
-                self.xview().scaleZoomOut()
-            elif event.delta() > 0:
-                self.xview().scaleZoomIn()
+            # if event.orientation() != Qt.Vertical:
+            #     return
+            # if event.delta() < 0:
+            #     self.xview().scaleZoomOut()
+            # elif event.delta() > 0:
+            #     self.xview().scaleZoomIn()
+            # 縦方向のスクロールかどうかを確認
+            if event.angleDelta().y() == 0:
+                return  # 縦方向のスクロールでなければ終了
+            
+            # スクロール量に応じてズームイン/ズームアウトを実行
+            if event.angleDelta().y() < 0:
+                self.xview().scaleZoomOut()  # ズームアウト
+            elif event.angleDelta().y() > 0:
+                self.xview().scaleZoomIn()   # ズームイン
         imageView.wheelEvent = wheelEvent
         
         self._sprDisplayMode = SprDisplayModeWidget(parent=self)

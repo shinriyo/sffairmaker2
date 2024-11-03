@@ -158,12 +158,20 @@ class AddSprsDialog(QDialog):
             self._scale.zoomOut()
         
         def wheelEvent(event):
-            if event.orientation() != Qt.Vertical:
-                return
-            if event.delta() < 0:
-                self._scale.zoomOut()
-            elif event.delta() > 0:
-                self._scale.zoomIn()
+            # if event.orientation() != Qt.Vertical:
+            #     return
+            # if event.delta() < 0:
+            #     self._scale.zoomOut()
+            # elif event.delta() > 0:
+            #     self._scale.zoomIn()
+            if event.angleDelta().y() == 0:
+                return  # 縦方向のスクロールでなければ終了
+            
+            # スクロール量に応じてズームイン/ズームアウトを実行
+            if event.angleDelta().y() < 0:
+                self.xview().scaleZoomOut()  # ズームアウト
+            elif event.angleDelta().y() > 0:
+                self.xview().scaleZoomIn()   # ズームイン
         self._imageView.wheelEvent = wheelEvent
         
         def sizeHint():

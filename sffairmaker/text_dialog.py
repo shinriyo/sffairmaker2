@@ -32,13 +32,13 @@ class TextDialog(QDialog):
         if dlg.exec_():
             return dlg.text()
         else:
-            return QString()
+            return str()
     
 def main():
     app = QApplication([])
     s = u"""\
-���������������������ӂ�������
-���������よ�����������ł�����"""
+くぁｗせｄｒｆｔｇｙふじこｌｐ
+ｐぉきじゅｈｙｇｔｆｒですぁｑ"""
     print(TextDialog.get(s))
     
     

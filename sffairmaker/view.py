@@ -214,21 +214,21 @@ class Dialog:
         lines = []
         for e in errors:
             if isinstance(e, const.OpeningSffErrorInfo):
-                msg = u"{0.number}�Ԗڂ̉摜({0.group}, {0.index})��ǂݍ��߂܂���ł����B"\
+                msg = u"{0.number}番目の画像({0.group}, {0.index})を読み込めませんでした。"\
                         .format(e)
             elif isinstance(e, const.OpeningCsvErrorInfo):
                 if const.OpeningCsvErrorType.Image == e.type:
-                    msg = u"{0.lineno}�s�ڂ̉摜{0.path}��ǂݍ��߂܂���ł����B" \
+                    msg = u"{0.lineno}行目の画像{0.path}を読み込めませんでした。" \
                             .format(e)
                 else:
                     name = {
-                        const.OpeningCsvErrorType.Group:u"�O���[�v",
-                        const.OpeningCsvErrorType.Index:u"�ԍ�",
-                        const.OpeningCsvErrorType.X:u"X���W",
-                        const.OpeningCsvErrorType.Y:u"Y���W",
-                        const.OpeningCsvErrorType.UseAct:u"Act�K�p",
+                        const.OpeningCsvErrorType.Group:u"グループ",
+                        const.OpeningCsvErrorType.Index:u"番号",
+                        const.OpeningCsvErrorType.X:u"X座標",
+                        const.OpeningCsvErrorType.Y:u"Y座標",
+                        const.OpeningCsvErrorType.UseAct:u"Act適用",
                     }[e.type]
-                    msg = u"{0.lineno}�s�ڂ�{1}��ǂݍ��߂܂���ł����B"\
+                    msg = u"{0.lineno}行目の{1}を読み込めませんでした。"\
                             .format(e, name)
             else:
                 msg = str(e)
@@ -248,27 +248,27 @@ class Dialog:
             return paths[index]
     
     def selectSffPath(self, paths):
-        return self._selectPath(u"Sff���J��", paths)
+        return self._selectPath(u"Sffを開く", paths)
     
     def selectAirPath(self, paths):
-        return self._selectPath(u"AIR���J��", paths)
+        return self._selectPath(u"AIRを開く", paths)
     
     def progress(self, text):
         return MyProgressDialog(text, parent=self._mainWindow)
     
     def openingProgress(self):
-        text = u"�J���Ă��܂�"
+        text = u"開いています"
         return self.progress(text)
     
     def savingProgress(self):
-        text = u"�ۑ����Ă��܂�"
+        text = u"保存しています"
         return self.progress(text)
     
     def waitExternalEditing(self):
         QMessageBox.information(
             None, 
-            u"�O���ҏW",
-            u"�ҏW���I�������OK�������Ă�������",
+            u"外部編集",
+            u"編集が終わったらOKを押してください",
         )
         return True
     

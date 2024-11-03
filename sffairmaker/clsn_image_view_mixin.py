@@ -259,7 +259,9 @@ class ClsnImageViewMixin:
             if key != self.appendingClsn():
                 drawClsn(key, c.clsn, c.color)
         if self.appendingClsn() is not None:
-            c = self._displayClsns()[self.appendingClsn()]
+            # c = self._displayClsns()[self.appendingClsn()]
+            key = self.appendingClsn().value  # 'clsn1'を取得
+            c = self._displayClsns()[key]
             drawClsn(self.appendingClsn(), c.clsn, c.color)
         
 

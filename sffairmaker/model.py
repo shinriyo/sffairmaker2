@@ -429,7 +429,8 @@ class Anim(Proxy):
     
     def textEdit(self):
         s = self.textDialog(self.toString())
-        if s.isNull():
+        # if s.isNull():
+        if s is None:
             return
         s = str(s)
         
@@ -1242,7 +1243,8 @@ class Sff(SubModel):
         return errors
         
     def addSprs(self, filenames=None):
-        if isinstance(filenames, types.StringTypes):
+        # if isinstance(filenames, types.StringTypes):
+        if isinstance(filenames, str):  # Python 3では str を使う
             filenames = [filenames]
         
         filenames = filenames or self.askSprAddPaths()

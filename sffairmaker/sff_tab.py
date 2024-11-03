@@ -129,12 +129,20 @@ class SffTab(QWidget):
         self.sprChanged.connect(size.setSpr)
         
         def wheelEvent(event):
-            if event.orientation() != Qt.Vertical:
-                return
-            if event.delta() < 0:
-                self.xview().scaleZoomOut()
-            elif event.delta() > 0:
-                self.xview().scaleZoomIn()
+            # if event.orientation() != Qt.Vertical:
+            #     return
+            # if event.delta() < 0:
+            #     self.xview().scaleZoomOut()
+            # elif event.delta() > 0:
+            #     self.xview().scaleZoomIn()
+            if event.angleDelta().y() == 0:
+                return  # 縦方向のスクロールでなければ終了
+            
+            # スクロール量に応じてズームイン/ズームアウトを実行
+            if event.angleDelta().y() < 0:
+                self.xview().scaleZoomOut()  # ズームアウト
+            elif event.angleDelta().y() > 0:
+                self.xview().scaleZoomIn()   # ズームイン
         self._imageView.wheelEvent = wheelEvent
         
         self._sprColorTable = SprColorTableEdit(self)

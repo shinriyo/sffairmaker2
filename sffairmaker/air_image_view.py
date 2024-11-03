@@ -264,18 +264,21 @@ class AirImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
             elm = self.elm()
         
         o = OrderedDict()
-        for k, color in zip(const.ClsnKeys._values, "#F00 #00F #880 #088".split()):
+        # for k, color in zip(const.ClsnKeys._values, "#F00 #00F #880 #088".split()):
+        for k, color in zip(const.ClsnKeys.get_all_values(), "#F00 #00F #880 #088".split()):
             color = QColor(color)
             
             def change(clsn, k=k):
                 if not elm.isValid():
                     return
-                self.elm().change(**{k.name:clsn})
+                # self.elm().change(**{k.name:clsn})
+                self.elm().change(**{k: clsn})  # k をそのまま使う
             if not elm.isValid():
                 continue
             
             o[k] = ClsnData(
-                clsn=getattr(elm, k.name)(),
+                # clsn=getattr(elm, k.name)(),
+                clsn=getattr(elm, k)(),
                 change=change,
                 color=color,
             )
@@ -358,7 +361,8 @@ class AirImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
     
     def setDrawingAllClsn(self, v=True):
         if v:
-            self.setDrawingClsn(frozenset(const.ClsnKeys._values))
+            # self.setDrawingClsn(frozenset(const.ClsnKeys._values))
+            self.setDrawingClsn(frozenset(const.ClsnKeys.get_all_values()))
         else:
             self.setDrawingClsn(frozenset())
             

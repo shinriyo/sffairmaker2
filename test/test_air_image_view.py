@@ -44,8 +44,10 @@ def testAppendingClsn():
         v.setDrawingClsn(frozenset())
         v.setAppendingClsn(k)
         assert log1[-1] == k
-        assert log2[-1] == frozenset(const.ClsnKeys._values)
-        assert v.drawingClsn() == frozenset(const.ClsnKeys._values)
+        # assert log2[-1] == frozenset(const.ClsnKeys._values)
+        # assert v.drawingClsn() == frozenset(const.ClsnKeys._values)
+        assert log2[-1] == frozenset(const.ClsnKeys.get_all_values())
+        assert v.drawingClsn() == frozenset(const.ClsnKeys.get_all_values())
         
         for scale in [1, 3, 9]:
             v._core.setScale(scale)

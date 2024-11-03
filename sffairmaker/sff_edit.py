@@ -47,7 +47,7 @@ class SprYEdit(SprEditSpinBox):
 
 class SprUseActEdit(SprEditCheckBox):
     _field = "useAct"
-    _label = u"Act�K�p"
+    _label = u"Act適用"
     def _updateValue(self):
         SprEditCheckBox._updateValue(self)
         self.setEnabled(not self.target().isUseActFixed())
