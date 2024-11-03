@@ -226,17 +226,14 @@ def mySetter(emit=False, signal=None):
 
 @contextmanager
 def blockSignals(*widgets):
-    # �������������������
     contexts = [_blockAWidgetSignals(w) for w in widgets]
     try:
-        # ��������������������
         for context in contexts:
-            context.__enter__()  # ��������������
-        yield  # ��������������
+            context.__enter__()
+        yield
     finally:
-        # ����������������������
         for context in reversed(contexts):
-            context.__exit__(None, None, None)  # ��������������
+            context.__exit__(None, None, None)
 
 @contextmanager
 def _blockAWidgetSignals(widget):

@@ -66,10 +66,10 @@ class Palette(QObject):
         self._model = model
     
     def setColorTable(self, colorTable):
-        raise NotImplimentedError
+        raise NotImplementedError
     
     def colorTable(self):
-        raise NotImplimentedError
+        raise NotImplementedError
     
     def open(self, filename):
         _, ext = os.path.splitext(filename)

@@ -21,7 +21,7 @@ class LineEditWithBrowse(QWidget):
         ))
     
     def browse(self):
-        raise NotImplimentedError
+        raise NotImplementedError
     
     def __getattr__(self, name):
         return getattr(self._lineEdit, name)

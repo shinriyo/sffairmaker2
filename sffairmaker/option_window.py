@@ -181,7 +181,7 @@ class BgImageEdit(QWidget):
         
         self._filename = BgImagePathLineEdit(parent=self)
         
-        self._tile = ValueCheckBox(u"�J��Ԃ�", parent=self)
+        self._tile = ValueCheckBox(u"繰り返し", parent=self)
         
         self._deltaX = QSpinBox(self)
         self._deltaX.setRange(-300, 300)
@@ -205,7 +205,7 @@ class BgImageEdit(QWidget):
         self.setLayout(vBoxLayout(
             (self._filename, 0),
             (self._tile, 0),
-            (hGroupBox("�ʒu", self._deltaX, self._deltaY), 0),
+            (hGroupBox("位置", self._deltaX, self._deltaY), 0),
             (self._bgView , 1),
         ))
     exec(def_xview())
