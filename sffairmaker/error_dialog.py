@@ -6,7 +6,7 @@ from sffairmaker.qutil import *
 class ErrorDialog(QDialog):
     def __init__(self, message="", parent=None):
         QDialog.__init__(self, parent=parent)
-        self.setWindowTitle(u"�G���[")
+        self.setWindowTitle(u"?G???[")
         
         self._text = QPlainTextEdit(message, parent=self)
         self._text.setReadOnly(True)

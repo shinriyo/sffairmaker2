@@ -129,19 +129,19 @@ class ClsnImageViewMixin:
             k, i = rectIndex
             c = self._clsns()[k]
             rect = c.clsn[i]
-            drc = self._screenRect(rect) #�\�����Rect
+            drc = self._screenRect(rect) #表示上のRect
             
-            #���Ɋ܂߂邩�ǂ����́A�덷���邢�͋��e�͈�
-            #Rect�̊O���ւ̌덷
+            #隅に含めるかどうかの、誤差あるいは許容範囲
+            #Rectの外側への誤差
             errorMargin = self.ClsnDragErrorMargin * self.scale()
             
-            #Rect�̓����ւ̌덷�i�c�Ӂj
+            #Rectの内側への誤差（縦辺）
             vErrorMargin = min(errorMargin, abs(drc.height()) // 3)
             
-            #Rect�̓����ւ̌덷�i���Ӂj
+            #Rectの内側への誤差（横辺）
             hErrorMargin = min(errorMargin, abs(drc.width()) // 3)
             
-            on = {} #�㉺���E�̊e�ӂ̉�������ɂ��邩�H
+            on = {} #上下左右の各辺の延長線上にあるか？
             on["left"]   = -errorMargin <= pos.x()-drc.left()  <= hErrorMargin
             on["right"]  = -hErrorMargin<= pos.x()-drc.right() <= errorMargin
             on["top"]    = -errorMargin <= pos.y()-drc.top()   <= vErrorMargin
@@ -155,7 +155,7 @@ class ClsnImageViewMixin:
                     dragType = (v, h)
                     dragClsns.append((diff, dragType, rectIndex))
             
-            #Rect�̏�ɂ��邩
+            #Rectの上にあるか
             onRect = drc.left() - errorMargin <= pos.x() <= drc.right() + errorMargin and \
                      drc.top() - errorMargin <= pos.y() <= drc.bottom() + errorMargin
             
@@ -263,7 +263,7 @@ class ClsnImageViewMixin:
             drawClsn(self.appendingClsn(), c.clsn, c.color)
         
 
-    #��������virtual���\�b�h
+    #ここからvirtualメソッド
     def _clsns(self):
         raise NotImplementedError
     

@@ -147,7 +147,7 @@ class Air:
     
     @classmethod
     def open(cls, filename):
-        # �t�@�C����������Ȃ��ꍇ�AIOError��Ԃ��\��������
+        # ファイルが見つからない場合、IOErrorを返す可能性がある
         ins = cls()
         for i, a in airlib.open(filename).items():
             ins._addAnimFromAirlib(i, a)
@@ -568,7 +568,7 @@ class AirData(QObject):
     
 
 def main():
-    #�A�j���̃e�L�X�g�ҏW�ŁA�ҏW�O�Ɠ��e���ς��Ȃ�������A�A���h�D�ɓo�^���Ȃ�
+    #アニメのテキスト編集で、編集前と内容が変わらなかったら、アンドゥに登録しない
     a = AirData()
     animId, = a.animIds()
     for index in range(10):

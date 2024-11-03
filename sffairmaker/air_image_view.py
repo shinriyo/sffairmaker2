@@ -309,11 +309,11 @@ class AirImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
         return NoDragging(self)
     
     def _draggingType(self, event, pos):
-        ##M    : �\���ʒu�ړ�
-        ##S-C-L: �\���ʒu�ړ�
-        ##S-L  : �摜�̈ړ��iPos�ύX�j
-        ##C-L  : CLSN�̈ړ��E���T�C�Y
-        ##L    : CLSN�ǉ� or �摜�̈ړ�
+        ##M    : 表示位置移動
+        ##S-C-L: 表示位置移動
+        ##S-L  : 画像の移動（Pos変更）
+        ##C-L  : CLSNの移動・リサイズ
+        ##L    : CLSN追加 or 画像の移動
         
         left  = event.buttons() & Qt.LeftButton
         mid   = event.buttons() & Qt.MidButton

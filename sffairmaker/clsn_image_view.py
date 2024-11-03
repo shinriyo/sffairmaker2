@@ -28,11 +28,11 @@ class NoDragging(DraggingType):
         pass
     
     def mouseMove(self, event):
-        ##M    : �\���ʒu�ړ�
-        ##S-C-L: �\���ʒu�ړ�
-        ##S-L  : �摜�̈ړ��iPos�ύX�j
-        ##C-L  : CLSN�̈ړ��E���T�C�Y
-        ##L    : CLSN�ǉ� or �摜�̈ړ�
+        ##M    : 表示位置移動
+        ##S-C-L: 表示位置移動
+        ##S-L  : 画像の移動（Pos変更）
+        ##C-L  : CLSNの移動・リサイズ
+        ##L    : CLSN追加 or 画像の移動
         ctrl  = event.modifiers() & Qt.ControlModifier
         shift = event.modifiers() & Qt.ShiftModifier
         
@@ -108,7 +108,7 @@ class ClsnImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
         delta = QPoint(0, 0)
         self._drawASpr(painter, self.spr(), delta, 255)
     
-    #��������virtual���\�b�h
+    #ここからvirtualメソッド
     def _clsns(self):
         o = OrderedDict()
         o[ClsnKeys._0] = ClsnData(
@@ -127,10 +127,10 @@ class ClsnImageViewCore(AbstractImageViewCore, ClsnImageViewMixin):
         return rectIndex == self._dragging.dragTarget()
 
     def _draggingType(self, event, pos):
-        ##M    : �\���ʒu�ړ�
-        ##S-C-L: �\���ʒu�ړ�
-        ##C-L  : CLSN�̈ړ��E���T�C�Y
-        ##L    : CLSN�ǉ�
+        ##M    : 表示位置移動
+        ##S-C-L: 表示位置移動
+        ##C-L  : CLSNの移動・リサイズ
+        ##L    : CLSN追加
         
         left  = event.buttons() & Qt.LeftButton
         mid   = event.buttons() & Qt.MidButton

@@ -172,7 +172,7 @@ class ColorTableModelBase(QAbstractTableModel):
     def deleteColors(self, indexes):
         raise NotImplementedError
 
-    #��������AQAbstractTableModel�̎�������K�v������virtual���\�b�h
+    #ここから、QAbstractTableModelの実装する必要があるvirtualメソッド
     def rowCount(self, parent=None):
         return 16
     
@@ -449,7 +449,7 @@ class ColorTableEditBase(ColorTableView):
         globalPos = self.mapToGlobal(pos)
         
         actions = [
-            (u"�I��F�̍폜", self.deleteSelectedColors)
+            (u"選択色の削除", self.deleteSelectedColors)
         ]
         
         v = choiceMenu([t for t, _ in actions], globalPos, parent=self)
