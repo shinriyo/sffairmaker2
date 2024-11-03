@@ -44,9 +44,15 @@ class ColorLineEdit(QLineEdit):
     def sizeHint(self):
         size = []
         for c in string.hexdigits:
-            s = self.fontMetrics().size(Qt.TextSingleLine, c*8)
+            s = self.fontMetrics().size(Qt.TextSingleLine, c * 8)
             size.append(QSize(s.width(), s.height()))
-        return max(size)
+            
+        # Find the maximum size based on width and height
+        max_size = QSize(0, 0)
+        for sz in size:
+            max_size = max(max_size, sz, key=lambda x: (x.width(), x.height()))
+            
+        return max_size
     
     @emitSetter
     def setValue(self):
@@ -75,8 +81,8 @@ class ColorLabel(QWidget):
         
         t = str(self._currentNumber)
         rc = self.fontMetrics().boundingRect(t)
-        rc.setWidth(rc.width() * 1.3)
-        rc.setHeight(rc.height() * 1.3)
+        rc.setWidth(int(rc.width() * 1.3))  # Convert to int
+        rc.setHeight(int(rc.height() * 1.3))  # Convert to int
         rc.moveCenter(self.rect().center())
         
         painter.eraseRect(rc)

@@ -380,7 +380,7 @@ class Sff:
     
     def changeColors(self, colors):
         changed = False
-        for i, color in colors.iteritems():
+        for i, color in colors.items():
             if self.changeColor(i, color):
                 changed = True
         return changed

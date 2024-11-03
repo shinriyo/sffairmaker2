@@ -67,7 +67,7 @@ class multidict(MutableMapping):
             self[key] = v
     
     def updatelist(self, **kw):
-        for k, v in kw.iteritems():
+        for k, v in kw.items():
             self.addlist(k, v)
     
     def remove(self, key, val):
@@ -173,7 +173,7 @@ class multidict(MutableMapping):
         if choice is not None, dictionary[key] = choice(md, key, values).
         """
         d = {}
-        for key, values in self.iteritems():
+        for key, values in self.items():
             if len(values) == 1:
                 d[key] = values[0]
             else:
@@ -191,7 +191,7 @@ class multidict(MutableMapping):
         [(0, 'a'), (0, 'b'), (1, 'd'), (2, 'c')]
         """
         return ((key, value) 
-                    for key, values in self.iteritems()
+                    for key, values in self.items()
                         for value in values)
     
     def iterkeys_m(self):

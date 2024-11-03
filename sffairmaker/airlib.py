@@ -58,7 +58,7 @@ class AIR(dict):
     def to_string(self):
         lines = []
         append = lines.append
-        for index, action in sorted(self.iteritems()):
+        for index, action in sorted(self.items()):
             append(action.to_string(index))
         return "\n\n".join(lines)
     
@@ -192,7 +192,7 @@ class Action(object):
         if index is not None:
             append("[Begin Action {0}]".format(index))
         
-        for clsnindex, clsns in self.clsnDefault.iteritems():
+        for clsnindex, clsns in self.clsnDefault.items():
             if not clsns:
                 continue
             
@@ -255,7 +255,7 @@ class Elem(object):
     def to_string(self):
         lines = []
         append = lines.append
-        for index, clsns in self.clsn.iteritems():
+        for index, clsns in self.clsn.items():
             if not clsns:
                 continue
             

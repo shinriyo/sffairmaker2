@@ -121,9 +121,9 @@ class Rect(QWidget):
             "grid1" :("G",  r.x(), r.bottom()),
             "grid2":("G2", c.x(), r.bottom()),
         }
-        for t, (text, x, y) in d.iteritems():
+        for t, (text, x, y) in d.items():  # Change items() to items()
             if t in self._selection:
-                painter.drawText(QPoint(x+1, y-2), text)
+                painter.drawText(QPoint(x + 1, y - 2), text)
 
 
 class RectGroup(QObject):
