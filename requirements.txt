@@ -1,0 +1,11 @@
+future==1.0.0
+iterutils==0.1.6
+pillow==11.0.0
+PyQt5==5.15.11
+PyQt5-Qt5==5.15.15
+PyQt5_sip==12.15.0
+PyQt6==6.7.1
+PyQt6-Qt6==6.7.3
+PyQt6_sip==13.8.0
+Send2Trash==1.8.3
+setuptools==75.3.0
