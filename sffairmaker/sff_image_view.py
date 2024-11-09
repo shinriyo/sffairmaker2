@@ -24,11 +24,11 @@ class NoDragging(DraggingType):
         self.setCursor(Qt.ArrowCursor)
     
     def mouseMove(self, event):
-        ##M    : �\���ʒu�ړ�
-        ##S-C-L: �\���ʒu�ړ�
-        ##S-L  : �摜�̈ړ��iPos�ύX�j
-        ##C-L  : �������Ȃ�
-        ##L    : �摜����i�摜�̈ړ��E�����E�F�̏����j
+        ##M    : 表示位置移動
+        ##S-C-L: 表示位置移動
+        ##S-L  : 画像の移動（Pos変更）
+        ##C-L  : 何もしない
+        ##L    : 画像操作（画像の移動・消去・色の除去）    
         ctrl  = event.modifiers() & Qt.ControlModifier
         shift = event.modifiers() & Qt.ShiftModifier
         
@@ -138,11 +138,11 @@ class SffImageViewCore(AbstractImageViewCore):
         return NoDragging(self)
     
     def _draggingType(self, event, pos):
-        ##M    : �\���ʒu�ړ�
-        ##S-C-L: �\���ʒu�ړ�
-        ##S-L  : �摜�̈ړ��iPos�ύX�j
-        ##C-L  : �������Ȃ�
-        ##L    : �摜����i�摜�̈ړ��E�����E�F�̏����j
+        ##M    : 表示位置移動
+        ##S-C-L: 表示位置移動
+        ##S-L  : 画像の移動（Pos変更）
+        ##C-L  : 何もしない
+        ##L    : 画像操作（画像の移動・消去・色の除去）
         
         left  = event.buttons() & Qt.LeftButton
         mid   = event.buttons() & Qt.MidButton

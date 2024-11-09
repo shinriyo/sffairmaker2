@@ -136,7 +136,7 @@ class Dialog:
         ret = QMessageBox.question(
                   self.mainWindow(),
                   version.name,
-                  name + u"�̕ύX��ۑ����܂����H",
+                  name + u"の変更を保存しますか？",
                   QMessageBox.Save | QMessageBox.Discard
                                    | QMessageBox.Cancel,
                   QMessageBox.Save)

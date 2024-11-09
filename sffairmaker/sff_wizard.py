@@ -60,9 +60,9 @@ class TaskBase:
 class NoSetting(QWidget):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
-        groupBox = QGroupBox(u"�ݒ�")
+        groupBox = QGroupBox(u"設定")
         layout = QHBoxLayout()
-        layout.addWidget(QLabel(u"�ݒ荀�ڂ͂���܂���"))
+        layout.addWidget(QLabel(u"設定項目はありません"))
         groupBox.setLayout(layout)
         
         self.setLayout(hBoxLayout(
@@ -78,23 +78,24 @@ class NoSetting(QWidget):
     
 @TaskType
 class AutoCropTask(TaskBase):
-    _text = u"�]���̍폜"
+    _text = u"余白の削除"
     _widgetClass = NoSetting
     
 @TaskType
 class AllocBgTask(TaskBase):
-    _text = u"�w�i�F�̊m��"
+    _text = u"背景色の確保"
     _widgetClass = NoSetting
+
 
 class InvertSetting(QWidget):
     def __init__(self, parent=None):
         TaskBase.__init__(self, parent)
         items = [
-            ((True, False), u"���E"),
-            ((False, True), u"�㉺"),
-            ((True, True), u"�㉺���E"),
+            ((True, False), u"左右"),
+            ((False, True), u"上下"),
+            ((True, True), u"上下左右"),
         ]
-        self._direction = RadioGroup(u"���]���������", items, parent=self)
+        self._direction = RadioGroup(u"反転させる方向", items, parent=self)
         self.setLayout(hBoxLayout(
             self._direction
         ))
@@ -105,7 +106,7 @@ class InvertSetting(QWidget):
     
 @TaskType
 class InvertTask(TaskBase):
-    _text = u"���]"
+    _text = u"反転"
     _widgetClass = NoSetting
 
     
@@ -120,11 +121,11 @@ class PaletteSetting(QWidget):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         
-        self._sffPalette = QRadioButton(u"Sff�S�̂̃p���b�g")
+        self._sffPalette = QRadioButton(u"Sff全体のパレット")
         self._sffPalette.setChecked(True)
-        self._actPalette = QRadioButton(u"Act�̃p���b�g")
-        self._filePalette = QRadioButton(u"�t�@�C���̃p���b�g")
-        self._sprPalette = QRadioButton(u"�w�肵���摜�̃p���b�g")
+        self._actPalette = QRadioButton(u"Actのパレット")
+        self._filePalette = QRadioButton(u"ファイルのパレット")
+        self._sprPalette = QRadioButton(u"指定した画像のパレット")
         
         self._filePath = ActFileLineEdit(self)
         self._filePalette.toggled.connect(self._filePath.setEnabled)
@@ -147,7 +148,7 @@ class PaletteSetting(QWidget):
         layout.addWidget(self._spr, 0, Qt.AlignRight)
         
         self.setLayout(vBoxLayout(
-            groupBox(u"�g�p����p���b�g", layout),
+            groupBox(u"使用するパレット", layout),
             ("stretch", 1)
         ))
     
@@ -169,17 +170,17 @@ class PaletteSetting(QWidget):
         
 @TaskType
 class CleanColorTableTask(TaskBase):
-    _text = u"�p���b�g�̃N���[��"
+    _text = u"パレットのクリーン"
     _widgetClass = PaletteSetting
 
 @TaskType
 class ReplaceColorTableTask(TaskBase):
-    _text = u"�p���b�g�̒u��"
+    _text = u"パレットの置換"
     _widgetClass = PaletteSetting
 
 ##@TaskType
 ##class UnifyColorTableTask(PaletteTaskBase):
-##    _text = u"�p���b�g�̓���"
+##    _text = u"パレットの統合"
 
 class RectsSetting(QWidget):
     def __init__(self, parent=None):
@@ -238,10 +239,10 @@ class RectsSetting(QWidget):
         
         self.setLayout(hBoxLayout(
             hGroupBox(
-                u"��������",
+                u"消す部分",
                 vBoxLayout(
                     hBoxLayout(
-                        vGroupBox(u"�{��", self._scale),
+                        vGroupBox(u"倍率", self._scale),
                         ("stretch", 1),
                     ),
                     (self._clsnEdit, 1), 
@@ -256,17 +257,17 @@ class RectsSetting(QWidget):
     
 @TaskType
 class EraseRectsTask(TaskBase):
-    _text = u"����"
+    _text = u"消去"
     _widgetClass = RectsSetting
 
 @TaskType
 class EraseRectsColorsTask(TaskBase):
-    _text = u"�F�̏���"
+    _text = u"色の除去"
     _widgetClass = RectsSetting
 
 ##@TaskType
 ##class CropRectTask(TaskBase):
-##    _text = u"�؂蔲��"
+##    _text = u"切り抜き"
 ##    _widgetClass = RectsSetting
 
 
@@ -274,7 +275,7 @@ class SffWizard(QDialog):
     sprChanged = pyqtSignal("PyQt_PyObject")
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"�ꊇ����")
+        self.setWindowTitle(u"一括操作")
         
         self._spr = NullSpr()
         self._lastSprs = []
@@ -283,12 +284,12 @@ class SffWizard(QDialog):
         self._sprList = SprListWidget(self)
         add    = AddSprButton(self._sprList, self._allSprList)
         remove = RemoveSprButton(self._sprList)
-        
-        @commandButton(u"�S�Ēǉ�")
+
+        @commandButton(u"全て追加")
         def all():
             self._sprList.addSprs(self._allSprList.sprs())
         
-        @commandButton(u"�O��Ɠ���")
+        @commandButton(u"前回と同じ")
         def sameAsLast():
             self._sprList.clear()
             self._sprList.addSprs(spr for spr in self._lastSprs if spr.isValid())
