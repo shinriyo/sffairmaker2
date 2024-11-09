@@ -49,12 +49,15 @@ if sys.platform == "win32":
 
 else:
     # Macまたは他のOSの場合
+    # 自然順でソートするためのキーを生成
     def natural_keys(text):
         return [int(chunk) if chunk.isdigit() else chunk.lower() for chunk in re.split(r'(\d+)', text)]
 
+    # 比較関数
     def cmp_path(f1, f2):
         return (natural_keys(str(f1)) > natural_keys(str(f2))) - (natural_keys(str(f1)) < natural_keys(str(f2)))
 
+    # キーを生成
     def key_path(path):
         return cmp_to_key(cmp_path)(str(path))
 # SHLWAPI = ctypes.windll.LoadLibrary("SHLWAPI.dll")

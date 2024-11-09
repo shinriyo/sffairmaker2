@@ -430,7 +430,7 @@ class Anim(Proxy):
     def textEdit(self):
         s = self.textDialog(self.toString())
         # if s.isNull():
-        if s is None:
+        if s == '':
             return
         s = str(s)
         
@@ -1092,7 +1092,9 @@ class Sff(SubModel):
         update = indexes.update
         for spr in self.sprs():
             if spr.useAct():
-                update(spr.usedColorIndexes())
+                used_color_indexes = spr.usedColorIndexes()
+                if used_color_indexes is not None:
+                    update(spr.usedColorIndexes())
         return indexes
     
     def onModelFilenameChanged(self, f):

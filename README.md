@@ -21,6 +21,12 @@ source myenv/bin/activate
 ```
 
 ```
+pip install -r requirements.txt
+```
+
+今後これで吐き出す
+
+```
 pip freeze > requirements.txt
 ```
 
