@@ -6,7 +6,7 @@ from sffairmaker.qutil import *
 class TextDialog(QDialog):
     def __init__(self, text="", parent=None):
         QDialog.__init__(self, parent)
-        self.setWindowTitle(u"�e�L�X�g�ҏW")
+        self.setWindowTitle(u"テキスト編集")
         
         self._textEdit = QTextEdit(self)
         self._textEdit.setText(text)

@@ -253,7 +253,7 @@ class ClsnImageViewMixin:
                     elif t == 1:
                         drawRect(painter, rc, color, self.scale())
                     else:
-                        drawRect(painter, rc, color.light(), self.scale())
+                        drawRect(painter, rc, color.lighter(), self.scale())
         
         for key, c in self._displayClsns().items():
             if key != self.appendingClsn():
